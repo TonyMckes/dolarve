@@ -1,0 +1,10 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+.container {
+  background-color: blueviolet;
+}
+.item-card {
+  background-color: aqua;
+}
