@@ -7,7 +7,7 @@ const formatter = new Intl.NumberFormat("es-VE", {
   currency: "VES",
 });
 
-fetchData(offline);
+fetchData(vcoudUrl);
 
 async function fetchData(url) {
   //* call loading animation
