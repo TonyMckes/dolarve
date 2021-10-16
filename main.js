@@ -1,13 +1,13 @@
 // const url = "https://s3.amazonaws.com/dolartoday/data.json";
 const vcoudUrl = "https://exchange.vcoud.com/coins/";
-// const offline = "offline.json";
+const offline = "offline.json";
 
 const formatter = new Intl.NumberFormat("es-VE", {
   style: "currency",
   currency: "VES",
 });
 
-fetchData(vcoudUrl);
+fetchData(offline);
 
 async function fetchData(url) {
   //* call loading animation
@@ -38,10 +38,10 @@ function processData(data) {
 
   function drawElements(obj) {
     // Create HTML elements
-    const tableRow = document.createElement("tr");
+    const tableRow = document.createElement("section");
     const tableImg = document.createElement("img");
-    const tableName = document.createElement("td");
-    const tablePrice = document.createElement("td");
+    const tableName = document.createElement("h3");
+    const tablePrice = document.createElement("p");
 
     tableRow.className = `item-card ${obj.slug}`;
 
