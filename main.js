@@ -7,6 +7,7 @@ const formatter = new Intl.NumberFormat("es-VE", {
   currency: "VES",
 });
 
+<<<<<<< HEAD
 const btn = document.querySelector("button");
 btn.addEventListener("click", refresh);
 
@@ -15,6 +16,8 @@ function refresh() {
   fetchData(vcoudUrl);
 }
 
+=======
+>>>>>>> 9dd3ffccea9037328fd8cfa8ea0ddd1e407ffe78
 fetchData(vcoudUrl);
 
 async function fetchData(url) {
