@@ -7,7 +7,15 @@ const formatter = new Intl.NumberFormat("es-VE", {
   currency: "VES",
 });
 
-fetchData(offline);
+const btn = document.querySelector("button");
+btn.addEventListener("click", refresh);
+
+function refresh() {
+  //TODO: Show notification or animation
+  fetchData(vcoudUrl);
+}
+
+fetchData(vcoudUrl);
 
 async function fetchData(url) {
   //* call loading animation
@@ -30,6 +38,15 @@ function processData(data) {
 
   // Select container in html
   const table = document.querySelector(".container");
+
+  refreshElements();
+
+  function refreshElements() {
+    // remove the previous contents of the table element
+    while (table.firstChild) {
+      table.removeChild(table.firstChild);
+    }
+  }
 
   // Loop over dataInfo(array) and call the function each time
   dataInfo.forEach((obj) => {
