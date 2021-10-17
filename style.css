@@ -48,6 +48,7 @@ input {
   position: absolute;
   right: 0px;
   width: 80px;
+  display: none;
 }
 .container {
   margin-left: auto;
