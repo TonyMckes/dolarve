@@ -47,10 +47,17 @@ function processData(data) {
     }
   }
 
+  // Select input and add event
+  const input = document.querySelector("#input-box");
+  input.addEventListener("input", calc);
+
   // Loop over dataInfo(array) and call the function each time
   dataInfo.forEach((obj) => {
     drawElements(obj);
   });
+
+  // Set "#input-box" to display
+  input.style.display = "inline-block";
 
   function drawElements(obj) {
     // Create HTML elements
@@ -69,10 +76,28 @@ function processData(data) {
     tableName.innerText = obj.name;
 
     // Process currency value
-    tablePrice.innerText = formatter.format(obj.price);
+    tablePrice.innerText = formatter.format(obj.price); //* Update this text for each element.
+    tablePrice.className = "calcValue";
 
     // Append to DOM
     table.appendChild(tableRow);
     tableRow.append(tableImg, tableName, tablePrice);
+  }
+
+  // Calculation function
+  function calc(e) {
+    // Value(numbers) of the input box
+    let myValue = "";
+
+    // Select ALL classes ".calcValue"
+    const prices = document.querySelectorAll(".calcValue");
+
+    // Value(numbers) typed in the input box
+    myValue = e.target.value;
+
+    // Update text with results
+    for (let i = 0; i < dataInfo.length; i++) {
+      prices[i].innerText = formatter.format(dataInfo[i].price * input.value);
+    }
   }
 }
