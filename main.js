@@ -46,12 +46,7 @@ function processData(data) {
   const table = document.querySelector(".container");
 
   // Check if ".container" doesn't have any child elements
-  if (!table.firstChild) {
-    // Loop over dataInfo(array) and call the function each time
-    dataInfo.forEach((obj) => drawElements(obj));
-  } else {
-    calc();
-  }
+  table.firstChild ? calc() : drawElements();
 
   // Set "#input-box" to display
   input.style.display = "inline-block";
@@ -67,28 +62,31 @@ function processData(data) {
   }
 
   // This function only runs once
-  function drawElements(obj) {
-    // Create HTML elements
-    const tableRow = document.createElement("section");
-    const tableImg = document.createElement("img");
-    const tableName = document.createElement("h3");
-    const tablePrice = document.createElement("p");
+  function drawElements() {
+    // Loop over dataInfo(array) and call the function each time
+    dataInfo.forEach((obj) => {
+      // Create HTML elements
+      const tableRow = document.createElement("section");
+      const tableImg = document.createElement("img");
+      const tableName = document.createElement("h3");
+      const tablePrice = document.createElement("p");
 
-    tableRow.className = `item-card ${obj.slug}`;
+      tableRow.className = `item-card ${obj.slug}`;
 
-    // Process image
-    tableImg.src = obj.icon;
-    tableImg.alt = obj.name;
+      // Process image
+      tableImg.src = obj.icon;
+      tableImg.alt = obj.name;
 
-    // Process name
-    tableName.innerText = obj.name;
+      // Process name
+      tableName.innerText = obj.name;
 
-    // Process currency value
-    tablePrice.innerText = formatter.format(obj.price); //* Update this text for each element.
-    tablePrice.className = "calcValue";
+      // Process currency value
+      tablePrice.innerText = formatter.format(obj.price); //* Update this text for each element.
+      tablePrice.className = "calcValue";
 
-    // Append to DOM
-    table.appendChild(tableRow);
-    tableRow.append(tableImg, tableName, tablePrice);
+      // Append to DOM
+      table.appendChild(tableRow);
+      tableRow.append(tableImg, tableName, tablePrice);
+    });
   }
 }
