@@ -11,18 +11,21 @@ document.querySelector("button").addEventListener("click", refresh);
 
 function refresh() {
   //TODO: Show notification or animation
+
   fetchData(vcoudUrl);
 }
 
 fetchData(vcoudUrl);
 
 async function fetchData(url) {
-  //* call loading animation
+  //TODO: Show notification or animation
+
   try {
     const response = await fetch(url);
     const data = await response.json();
     processData(data);
-    //* remove loading animation
+
+    //TODO: remove loading animation
   } catch (error) {
     console.warn(error);
   }
@@ -35,30 +38,35 @@ function processData(data) {
   // Filter process
   const dataInfo = data.filter((arg, index) => filterElem.includes(index));
 
-  // Select container in html
-  const table = document.querySelector(".container");
-
-  refreshElements();
-
-  function refreshElements() {
-    // remove the previous contents of the table element
-    while (table.firstChild) {
-      table.removeChild(table.firstChild);
-    }
-  }
-
   // Select input and add event
   const input = document.querySelector("#input-box");
   input.addEventListener("input", calc);
 
-  // Loop over dataInfo(array) and call the function each time
-  dataInfo.forEach((obj) => {
-    drawElements(obj);
-  });
+  // Select container in html
+  const table = document.querySelector(".container");
+
+  // Check if ".container" doesn't have any child elements
+  if (!table.firstChild) {
+    // Loop over dataInfo(array) and call the function each time
+    dataInfo.forEach((obj) => drawElements(obj));
+  } else {
+    calc();
+  }
 
   // Set "#input-box" to display
   input.style.display = "inline-block";
 
+  //
+  function calc() {
+    // Select all ".calcValue"
+    const prices = document.querySelectorAll(".calcValue");
+
+    for (let i = 0; i < dataInfo.length; i++) {
+      prices[i].innerText = formatter.format(dataInfo[i].price * input.value);
+    }
+  }
+
+  // This function only runs once
   function drawElements(obj) {
     // Create HTML elements
     const tableRow = document.createElement("section");
@@ -82,22 +90,5 @@ function processData(data) {
     // Append to DOM
     table.appendChild(tableRow);
     tableRow.append(tableImg, tableName, tablePrice);
-  }
-
-  // Calculation function
-  function calc(e) {
-    // Value(numbers) of the input box
-    let myValue = "";
-
-    // Select ALL classes ".calcValue"
-    const prices = document.querySelectorAll(".calcValue");
-
-    // Value(numbers) typed in the input box
-    myValue = e.target.value;
-
-    // Update text with results
-    for (let i = 0; i < dataInfo.length; i++) {
-      prices[i].innerText = formatter.format(dataInfo[i].price * input.value);
-    }
   }
 }
