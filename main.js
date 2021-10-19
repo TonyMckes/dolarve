@@ -10,7 +10,8 @@ const formatter = new Intl.NumberFormat("es-VE", {
 document.querySelector("button").addEventListener("click", refresh);
 
 function refresh() {
-  //TODO: Show notification or animation
+  // Show loading animation
+  showLoading();
 
   fetchData(vcoudUrl);
 }
@@ -18,17 +19,25 @@ function refresh() {
 fetchData(vcoudUrl);
 
 async function fetchData(url) {
-  //TODO: Show notification or animation
+  //  Show loading animation
+  showLoading();
 
   try {
     const response = await fetch(url);
     const data = await response.json();
     processData(data);
 
-    //TODO: remove loading animation
+    // Hide loading animation
+    (() => loading.classList.remove("display"))();
   } catch (error) {
     console.warn(error);
   }
+}
+
+// Show loading animation
+function showLoading() {
+  const loading = document.querySelector("#loading");
+  loading.classList.add("display");
 }
 
 function processData(data) {
@@ -53,11 +62,16 @@ function processData(data) {
 
   //
   function calc() {
-    // Select all ".calcValue"
+    // Select all classes
     const prices = document.querySelectorAll(".calcValue");
+    const dates = document.querySelectorAll(".dateTime");
 
+    // For every class, update only the innerText
     for (let i = 0; i < dataInfo.length; i++) {
       prices[i].innerText = formatter.format(dataInfo[i].price * input.value);
+      dates[i].innerText = new Date(dataInfo[i].updatedAt).toLocaleString(
+        "es-VE"
+      );
     }
   }
 
@@ -70,6 +84,7 @@ function processData(data) {
       const tableImg = document.createElement("img");
       const tableName = document.createElement("h3");
       const tablePrice = document.createElement("p");
+      const tableDate = document.createElement("p");
 
       tableRow.className = `item-card ${obj.slug}`;
 
@@ -84,9 +99,13 @@ function processData(data) {
       tablePrice.innerText = formatter.format(obj.price); //* Update this text for each element.
       tablePrice.className = "calcValue";
 
+      // Process dates
+      tableDate.innerText = new Date(obj.updatedAt).toLocaleString("es-VE");
+      tableDate.className = "dateTime";
+
       // Append to DOM
       table.appendChild(tableRow);
-      tableRow.append(tableImg, tableName, tablePrice);
+      tableRow.append(tableImg, tableName, tablePrice, tableDate);
     });
   }
 }
