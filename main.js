@@ -7,6 +7,9 @@ const formatter = new Intl.NumberFormat("es-VE", {
   currency: "VES",
 });
 
+const loadingWindow = document.querySelector("#loading-window");
+const loading = document.querySelector("#loading");
+
 document.querySelector("button").addEventListener("click", refresh);
 
 function refresh() {
@@ -28,15 +31,16 @@ async function fetchData(url) {
     processData(data);
 
     // Hide loading animation
-    (() => loading.classList.remove("display"))();
+    loadingWindow.classList.remove("display");
+    loading.classList.remove("display");
   } catch (error) {
+    // TODO: Add an alert or option to reload
     console.warn(error);
   }
 }
-
 // Show loading animation
 function showLoading() {
-  const loading = document.querySelector("#loading");
+  loadingWindow.classList.add("display");
   loading.classList.add("display");
 }
 
