@@ -20,15 +20,16 @@
           <li><a href="#">Info</a></li>
         </ul>
       </nav>
-      <h1>Big Title</h1>
     </header>
+    <div class="wrapper">
+      <h1>USD => Bs.S</h1>
+      <input type="number" name="USD" step="0.01" id="input-box" value="1" />
+    </div>
     <main>
-      <div class="calcu">
-        <h2>USD => Bs.S</h2>
-        <input type="number" name="USD" step="0.01" id="input-box" value="1" />
-        <button><i class="fas fa-sync"></i></button>
-      </div>
+      <div id="loading-window"></div>
+      <div id="loading"></div>
       <div class="container"></div>
+      <button class="update-data"><i class="fas fa-sync"></i></button>
     </main>
     <footer>Some footer</footer>
     <script src="main.js"></script>
