@@ -5,7 +5,10 @@ body {
   justify-content: space-between;
   margin: 0px;
 }
-
+header {
+  position: sticky;
+  top: 0;
+}
 ul {
   background-color: rgb(218, 218, 218);
   display: flex;
@@ -47,34 +50,26 @@ input {
   text-align: right;
   width: 80px;
 }
-
-/* input::-webkit-outer-spin-button,
+/* Remove arrows from input field */
+input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 input[type="number"] {
   -moz-appearance: textfield;
-} */
-
-/* Main container, where new div's generate  */
-/* .container {
-  margin-left: auto;
-  margin-right: auto;
-  width: auto;
-  max-width: 480px;
-  position: relative;
-} */
+}
+/* Generated list inside .container */
 .item-card {
   align-items: center;
   display: grid;
   grid-auto-flow: row;
-  grid-template-columns: 0fr 1fr 1fr;
+  grid-template-columns: 0fr 1fr 1fr 0fr;
   grid-template-rows: 1fr 1fr 1fr;
   grid-template-areas:
-    "img title ."
-    "img title value"
-    "img title date";
+    "img title . ."
+    "img title value button"
+    "img title date date";
 }
 .item-card img {
   grid-area: img;
@@ -85,13 +80,13 @@ input[type="number"] {
   grid-area: title;
   margin: 0 0 0 10px;
 }
-.calcValue {
+.coinValue {
   font-weight: bold;
   grid-area: value;
   justify-self: right;
   margin: 0 10px 0 0;
 }
-.dateTime {
+.coinDate {
   font-size: 12px;
   grid-area: date;
   justify-self: right;
@@ -159,7 +154,25 @@ input[type="number"] {
 footer {
   align-items: center;
   background-color: #d1d1d1;
+  bottom: 0;
   display: flex;
   justify-content: space-around;
   min-height: 46px;
+  position: sticky;
+}
+
+/* Desktop mode */
+@media (min-width: 425px) {
+  .wrapper {
+    margin-left: auto;
+    margin-right: auto;
+    min-width: 425px;
+  }
+
+  /* Main container, where new div's generate  */
+  .container {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 425px;
+  }
 }
