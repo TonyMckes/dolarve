@@ -133,7 +133,8 @@ input[type="number"] {
   border: 5px solid #f3f3f3;
   height: 2rem;
   left: 50%;
-  margin: auto;
+  margin-left: -1rem;
+  margin-top: -1rem;
   position: absolute;
   top: 50%;
   visibility: hidden;
@@ -151,6 +152,7 @@ input[type="number"] {
     transform: rotate(360deg);
   }
 }
+
 footer {
   align-items: center;
   background-color: #d1d1d1;
