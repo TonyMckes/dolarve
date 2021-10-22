@@ -23,14 +23,20 @@
     </header>
     <div class="wrapper">
       <h1>USD => Bs.S</h1>
+      <select name="Currency" id="select-currency">
+        <option value="VES">USD => Bs.S</option>
+        <option value="USD">Bs.S => USD</option>
+      </select>
       <input type="number" name="USD" step="0.01" id="input-box" value="1" />
     </div>
     <main>
-      <div id="loading-window"></div>
-      <div id="loading"></div>
       <div class="container"></div>
-      <button id="refresh" class="update-data"><i class="fas fa-sync"></i></button>
+      <button id="refresh" class="update-data">
+        <i class="fas fa-sync"></i>
+      </button>
     </main>
+    <div id="loading-window"></div>
+    <div id="loading"></div>
     <footer>Some footer</footer>
     <script src="main.js"></script>
   </body>
