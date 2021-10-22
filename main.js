@@ -2,14 +2,28 @@
 const vcoud = "https://exchange.vcoud.com/coins/";
 const offline = "offline.json";
 
-// Currency formatter
-const formatter = new Intl.NumberFormat("es-VE", {
-  style: "currency",
-  currency: "VES",
-});
-
 const fadeBackground = document.querySelector("#loading-window");
 const loadingSpinner = document.querySelector("#loading");
+
+const selectCurrency = document.querySelector("#select-currency");
+selectCurrency.addEventListener("click", currencyFormatter);
+
+// Currency formatter
+function currencyFormatter(value, inputValue = 1) {
+  const currencyType = {
+    USD: { location: "en-US", options: { style: "currency", currency: "USD" } },
+    VES: { location: "es-VE", options: { style: "currency", currency: "VES" } },
+  };
+  const selectedCurrency = selectCurrency.value;
+  const location = currencyType[selectedCurrency].location;
+  const options = currencyType[selectedCurrency].options;
+
+  // TODO: Multiplication and division depending on the currency
+  const multiplicationVES = value * inputValue;
+  const divisionUSD = inputValue / value;
+
+  return new Intl.NumberFormat(location, options).format();
+}
 
 document.querySelector("button").addEventListener("click", refresh);
 
@@ -20,7 +34,7 @@ function refresh() {
   fetchData(vcoud);
 }
 
-fetchData(vcoud);
+fetchData(offline);
 
 // Get info from server
 async function fetchData(url) {
@@ -125,7 +139,8 @@ function processData(dataArray) {
 
         // Process currency value
         coinValue.className = "coinValue";
-        coinValue.innerText = formatter.format(currency.price);
+        //! coinValue.innerText = formatter.format(currency.price);
+        coinValue.innerText = currencyFormatter(currency.price, input.value);
 
         // Process dates
         // coinDate.innerText = new Date(obj.updatedAt).toLocaleString("es-VE");
@@ -145,7 +160,8 @@ function processData(dataArray) {
 
       currencies.forEach((currency, i) => {
         // Update existing classes with up to date information
-        values[i].innerText = formatter.format(currency.price * input.value);
+        //! values[i].innerText = formatter.format(currency.price * input.value);
+        values[i].innerText = currencyFormatter(currency.price, input.value);
         dates[i].innerText = timeAgo(currency.updatedAt);
       });
     }
