@@ -44,7 +44,7 @@ h1 {
 }
 /* Input field */
 input {
-  display: none;
+  /* display: none; */
   height: 20px;
   margin-right: 10px;
   text-align: right;
