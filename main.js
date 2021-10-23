@@ -2,28 +2,16 @@
 const vcoud = "https://exchange.vcoud.com/coins/";
 const offline = "offline.json";
 
-const fadeBackground = document.querySelector("#loading-window");
-const loadingSpinner = document.querySelector("#loading");
+// Select container in html
+const container = document.querySelector(".container");
+
+// Select input
+const input = document.querySelector("#input-box");
 
 const selectCurrency = document.querySelector("#select-currency");
-selectCurrency.addEventListener("click", currencyFormatter);
 
-// Currency formatter
-function currencyFormatter(value, inputValue = 1) {
-  const currencyType = {
-    USD: { location: "en-US", options: { style: "currency", currency: "USD" } },
-    VES: { location: "es-VE", options: { style: "currency", currency: "VES" } },
-  };
-  const selectedCurrency = selectCurrency.value;
-  const location = currencyType[selectedCurrency].location;
-  const options = currencyType[selectedCurrency].options;
-
-  // TODO: Multiplication and division depending on the currency
-  const multiplicationVES = value * inputValue;
-  const divisionUSD = inputValue / value;
-
-  return new Intl.NumberFormat(location, options).format();
-}
+const fadeBackground = document.querySelector("#loading-window");
+const loadingSpinner = document.querySelector("#loading");
 
 document.querySelector("button").addEventListener("click", refresh);
 
@@ -34,7 +22,7 @@ function refresh() {
   fetchData(vcoud);
 }
 
-fetchData(offline);
+fetchData(vcoud);
 
 // Get info from server
 async function fetchData(url) {
@@ -74,46 +62,15 @@ function processData(dataArray) {
   const selection = [0, 1, 2, 4, 6, 7, 9]; //13, 19
   const currencies = dataArray.filter((_, i) => selection.includes(i));
 
-  // Select container in html
-  const container = document.querySelector(".container");
-
-  // Select input and add event
-  const input = document.querySelector("#input-box");
-
-  // input.addEventListener("input", calc);
   input.addEventListener("input", renderElements);
 
   // Start displaying elements
   renderElements();
 
   // Set "#input-box" to display
-  input.style.display = "inline-block";
+  // input.style.display = "inline-block"; //? Maybe this is now useless
 
-  // Calculate time since last data was fetched
-  function timeAgo(input) {
-    const date = input instanceof Date ? input : new Date(input);
-
-    const formatter = new Intl.RelativeTimeFormat("es");
-
-    const ranges = {
-      years: 3600 * 24 * 365,
-      months: 3600 * 24 * 30,
-      weeks: 3600 * 24 * 7,
-      days: 3600 * 24,
-      hours: 3600,
-      minutes: 60,
-      seconds: 1,
-    };
-
-    const secondsElapsed = (date.getTime() - Date.now()) / 1000;
-
-    for (let key in ranges) {
-      if (ranges[key] < Math.abs(secondsElapsed)) {
-        const delta = secondsElapsed / ranges[key];
-        return formatter.format(Math.round(delta), key);
-      }
-    }
-  }
+  selectCurrency.addEventListener("click", renderElements);
 
   // Start displaying elements
   function renderElements() {
@@ -139,11 +96,9 @@ function processData(dataArray) {
 
         // Process currency value
         coinValue.className = "coinValue";
-        //! coinValue.innerText = formatter.format(currency.price);
         coinValue.innerText = currencyFormatter(currency.price, input.value);
 
         // Process dates
-        // coinDate.innerText = new Date(obj.updatedAt).toLocaleString("es-VE");
         coinDate.className = "coinDate";
         coinDate.innerText = timeAgo(currency.updatedAt);
 
@@ -160,10 +115,67 @@ function processData(dataArray) {
 
       currencies.forEach((currency, i) => {
         // Update existing classes with up to date information
-        //! values[i].innerText = formatter.format(currency.price * input.value);
         values[i].innerText = currencyFormatter(currency.price, input.value);
         dates[i].innerText = timeAgo(currency.updatedAt);
       });
+    }
+  }
+
+  // Currency formatter
+  function currencyFormatter(value, inputValue = 1) {
+    //
+    const currencyType = {
+      USD: {
+        location: "en-US",
+        options: { style: "currency", currency: "USD" },
+        operator: (a, b) => {
+          return b / a;
+        },
+      },
+      VES: {
+        location: "es-VE",
+        options: { style: "currency", currency: "VES" },
+        operator: (a, b) => {
+          return a * b;
+        },
+      },
+    };
+
+    const selectedCurrency = selectCurrency.value;
+    const location = currencyType[selectedCurrency].location;
+    const options = currencyType[selectedCurrency].options;
+    const operation = currencyType[selectedCurrency].operator(
+      value,
+      inputValue
+    );
+
+    console.log(new Intl.NumberFormat(location, options).format(operation));
+    return new Intl.NumberFormat(location, options).format(operation);
+  }
+
+  // Calculate time since last data was fetched
+  function timeAgo(input) {
+    const date = input instanceof Date ? input : new Date(input);
+
+    const formatter = new Intl.RelativeTimeFormat("es");
+
+    const ranges = {
+      years: 3600 * 24 * 365,
+      months: 3600 * 24 * 30,
+      weeks: 3600 * 24 * 7,
+      days: 3600 * 24,
+      hours: 3600,
+      minutes: 60,
+      seconds: 1,
+    };
+
+    const secondsElapsed = (date.getTime() - Date.now()) / 1000;
+
+    for (let key in ranges) {
+      if (ranges[key] < Math.abs(secondsElapsed)) {
+        const delta = secondsElapsed / ranges[key];
+        return formatter.format(Math.round(delta), key);
+      }
     }
   }
 }
