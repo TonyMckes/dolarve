@@ -1,6 +1,7 @@
 // const url = "https://s3.amazonaws.com/dolartoday/data.json";
 const vcoud = "https://exchange.vcoud.com/coins/";
-const offline = "offline.json";
+const offline = "offline.json"; // https://exchange.vcoud.com/coins/
+const offlineCoins = "offline-coin.json"; // https://exchange.vcoud.com/coins/dolartoday?gap=1w&base=usd
 
 // Select container in html
 const container = document.querySelector(".container");
@@ -33,21 +34,27 @@ async function fetchData(url) {
     // Wait for response
     const response = await fetch(url);
 
+    if (response.status >= 400 && response.status < 600) {
+      throw new Error(`Hello ${response.status} ${response.statusText}`);
+    }
+
     // If response is OK, take json and return an array with objects
-    const dataArray = await response.json();
+    const data = await response.json();
 
     // Then call
-    processData(dataArray);
+    processData(data);
 
     // After the page gets rendered, hide loading indicators
-    fadeBackground.classList.remove("display");
-    loadingSpinner.classList.remove("display");
+    hideLoading();
 
     //Then
   } catch (error) {
     // If something goes wrong then;
     // TODO: Add an alert or option to reload
-    console.warn(error);
+    console.error(`${error}`);
+
+    // On errors, hide loading indicators
+    hideLoading();
   }
 }
 
@@ -55,21 +62,27 @@ function showLoading() {
   fadeBackground.classList.add("display");
   loadingSpinner.classList.add("display");
 }
+function hideLoading() {
+  fadeBackground.classList.remove("display");
+  loadingSpinner.classList.remove("display");
+}
 
 //
-function processData(dataArray) {
+function processData(data) {
   // Filter selected ones only
   const selection = [0, 1, 2, 4, 6, 7, 9]; //13, 19
-  const currencies = dataArray.filter((_, i) => selection.includes(i));
+
+  if (data instanceof Array) {
+    //FIXME:
+    const currencies = data.filter((_, i) => selection.includes(i));
+
+    // Start displaying elements
+    renderElements();
+  } else {
+    renderWindow();
+  }
 
   input.addEventListener("input", renderElements);
-
-  // Start displaying elements
-  renderElements();
-
-  // Set "#input-box" to display
-  // input.style.display = "inline-block"; //? Maybe this is now useless
-
   selectCurrency.addEventListener("click", renderElements);
 
   // Start displaying elements
@@ -86,6 +99,12 @@ function processData(dataArray) {
         const coinDate = document.createElement("p");
 
         section.className = `item-card ${currency.slug}`;
+        section.dataset.name = currency.slug;
+        section.addEventListener("click", function () {
+          fetchData(
+            `https://exchange.vcoud.com/coins/${this.dataset.name}?gap=1w&base=usd`
+          );
+        });
 
         // Process image
         coinImg.src = currency.icon;
@@ -121,61 +140,109 @@ function processData(dataArray) {
     }
   }
 
-  // Currency formatter
-  function currencyFormatter(value, inputValue = 1) {
+  //
+  function renderWindow() {
     //
-    const currencyType = {
-      USD: {
-        location: "en-US",
-        options: { style: "currency", currency: "USD" },
-        operator: (a, b) => {
-          return b / a;
-        },
-      },
-      VES: {
-        location: "es-VE",
-        options: { style: "currency", currency: "VES" },
-        operator: (a, b) => {
-          return a * b;
-        },
-      },
-    };
+    const frame = `
+    <div class="window-container">
+      <h3>${data.name}</h3>
+      <p>${data?.subtitle ? data.subtitle : ""}</p>
+      <table>
+        <thead>
+          <th>Fecha</th>
+          <th>Valor</th>
+        </thead>
+        <tbody>
 
-    const selectedCurrency = selectCurrency.value;
-    const location = currencyType[selectedCurrency].location;
-    const options = currencyType[selectedCurrency].options;
-    const operation = currencyType[selectedCurrency].operator(
-      value,
-      inputValue
-    );
+        </tbody>
+      </table>
 
-    console.log(new Intl.NumberFormat(location, options).format(operation));
-    return new Intl.NumberFormat(location, options).format(operation);
+    <button class="close-btn"><i class="far fa-times-circle"></i></button>
+    </div>
+    `;
+
+    const divWindow = document.createElement("div");
+    divWindow.className = "history-window";
+    document.body.appendChild(divWindow);
+    divWindow.innerHTML = frame;
+
+    const container = document.querySelector(".window-container");
+
+    const tbody = document.querySelector(".window-container > table > tbody");
+
+    data.prices
+      .slice()
+      .reverse()
+      .forEach((element) => {
+        const tr = document.createElement("tr");
+        const td = document.createElement("td");
+        const tdPrice = document.createElement("td");
+
+        td.innerText = timeAgo(element.updatedAt); //TODO: Change date format
+
+        tdPrice.innerText = currencyFormatter(element.price); //
+
+        tbody.append(tr);
+        tr.append(td, tdPrice);
+      });
+
+    const button = document.querySelector(".close-btn");
+    button.addEventListener("click", () => {
+      divWindow.remove();
+    });
   }
+}
 
-  // Calculate time since last data was fetched
-  function timeAgo(input) {
-    const date = input instanceof Date ? input : new Date(input);
+// Currency formatter
+function currencyFormatter(value, inputValue = 1) {
+  //
+  const currencyType = {
+    USD: {
+      location: "en-US",
+      options: { style: "currency", currency: "USD" },
+      operator: (a, b) => {
+        return b / a;
+      },
+    },
+    VES: {
+      location: "es-VE",
+      options: { style: "currency", currency: "VES" },
+      operator: (a, b) => {
+        return a * b;
+      },
+    },
+  };
 
-    const formatter = new Intl.RelativeTimeFormat("es");
+  const selectedCurrency = selectCurrency.value;
+  const location = currencyType[selectedCurrency].location;
+  const options = currencyType[selectedCurrency].options;
+  const operation = currencyType[selectedCurrency].operator(value, inputValue);
 
-    const ranges = {
-      years: 3600 * 24 * 365,
-      months: 3600 * 24 * 30,
-      weeks: 3600 * 24 * 7,
-      days: 3600 * 24,
-      hours: 3600,
-      minutes: 60,
-      seconds: 1,
-    };
+  return new Intl.NumberFormat(location, options).format(operation);
+}
 
-    const secondsElapsed = (date.getTime() - Date.now()) / 1000;
+// Calculate time since last data was fetched
+function timeAgo(input) {
+  const date = input instanceof Date ? input : new Date(input);
 
-    for (let key in ranges) {
-      if (ranges[key] < Math.abs(secondsElapsed)) {
-        const delta = secondsElapsed / ranges[key];
-        return formatter.format(Math.round(delta), key);
-      }
+  const formatter = new Intl.RelativeTimeFormat("es");
+
+  const ranges = {
+    years: 3600 * 24 * 365,
+    months: 3600 * 24 * 30,
+    weeks: 3600 * 24 * 7,
+    days: 3600 * 24,
+    hours: 3600,
+    minutes: 60,
+    seconds: 1,
+  };
+
+  const secondsElapsed = (date.getTime() - Date.now()) / 1000;
+
+  for (let key in ranges) {
+    if (ranges[key] < Math.abs(secondsElapsed)) {
+      const delta = secondsElapsed / ranges[key];
+      return formatter.format(Math.round(delta), key);
     }
   }
 }
