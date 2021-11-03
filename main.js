@@ -41,8 +41,13 @@ async function fetchData(url) {
     // If response is OK, take json and return an array with objects
     const data = await response.json();
 
-    // Then call
-    processData(data);
+    if (data instanceof Array) {
+      //
+      processData(data);
+      //
+    } else {
+      renderWindow(data);
+    }
 
     // After the page gets rendered, hide loading indicators
     hideLoading();
@@ -71,21 +76,15 @@ function hideLoading() {
 function processData(data) {
   // Filter selected ones only
   const selection = [0, 1, 2, 4, 6, 7, 9]; //13, 19
+  const currencies = data.filter((_, i) => selection.includes(i));
 
-  if (data instanceof Array) {
-    //FIXME:
-    const currencies = data.filter((_, i) => selection.includes(i));
-
-    // Start displaying elements
-    renderElements();
-  } else {
-    renderWindow();
-  }
+  // Start displaying elements
+  renderElements();
 
   input.addEventListener("input", renderElements);
   selectCurrency.addEventListener("click", renderElements);
 
-  // Start displaying elements
+  //
   function renderElements() {
     // If the container doesn't have any element child's, then
     if (!container.firstChild) {
@@ -139,58 +138,58 @@ function processData(data) {
       });
     }
   }
+}
 
+//
+function renderWindow(data) {
   //
-  function renderWindow() {
-    //
-    const frame = `
-    <div class="window-container">
-      <h3>${data.name}</h3>
-      <p>${data?.subtitle ? data.subtitle : ""}</p>
-      <table>
-        <thead>
-          <th>Fecha</th>
-          <th>Valor</th>
-        </thead>
-        <tbody>
+  const frame = `
+  <div class="window-container">
+    <h3>${data.name}</h3>
+    <p>${data?.subtitle ? data.subtitle : ""}</p>
+    <table>
+      <thead>
+        <th>Fecha</th>
+        <th>Valor</th>
+      </thead>
+      <tbody>
 
-        </tbody>
-      </table>
+      </tbody>
+    </table>
 
-    <button class="close-btn"><i class="far fa-times-circle"></i></button>
-    </div>
-    `;
+  <button class="close-btn"><i class="far fa-times-circle"></i></button>
+  </div>
+  `;
 
-    const divWindow = document.createElement("div");
-    divWindow.className = "history-window";
-    document.body.appendChild(divWindow);
-    divWindow.innerHTML = frame;
+  const divWindow = document.createElement("div");
+  divWindow.className = "history-window";
+  document.body.appendChild(divWindow);
+  divWindow.innerHTML = frame;
 
-    const container = document.querySelector(".window-container");
+  const container = document.querySelector(".window-container");
 
-    const tbody = document.querySelector(".window-container > table > tbody");
+  const tbody = document.querySelector(".window-container > table > tbody");
 
-    data.prices
-      .slice()
-      .reverse()
-      .forEach((element) => {
-        const tr = document.createElement("tr");
-        const td = document.createElement("td");
-        const tdPrice = document.createElement("td");
+  data.prices
+    .slice()
+    .reverse()
+    .forEach((element) => {
+      const tr = document.createElement("tr");
+      const td = document.createElement("td");
+      const tdPrice = document.createElement("td");
 
-        td.innerText = timeAgo(element.updatedAt); //TODO: Change date format
+      td.innerText = timeAgo(element.updatedAt); //TODO: Change date format
 
-        tdPrice.innerText = currencyFormatter(element.price); //
+      tdPrice.innerText = currencyFormatter(element.price); //
 
-        tbody.append(tr);
-        tr.append(td, tdPrice);
-      });
-
-    const button = document.querySelector(".close-btn");
-    button.addEventListener("click", () => {
-      divWindow.remove();
+      tbody.append(tr);
+      tr.append(td, tdPrice);
     });
-  }
+
+  const button = document.querySelector(".close-btn");
+  button.addEventListener("click", () => {
+    divWindow.remove();
+  });
 }
 
 // Currency formatter
