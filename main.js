@@ -23,7 +23,7 @@ function refresh() {
   fetchData(vcoud);
 }
 
-fetchData(vcoud);
+fetchData(offline);
 
 // Get info from server
 async function fetchData(url) {
