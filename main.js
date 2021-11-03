@@ -118,7 +118,7 @@ function processData(data) {
 
         // Process dates
         coinDate.className = "coinDate";
-        coinDate.innerText = timeAgo(currency.updatedAt);
+        coinDate.innerText = timeFormat(currency.updatedAt);
 
         // Append to DOM
         container.appendChild(section);
@@ -134,7 +134,7 @@ function processData(data) {
       currencies.forEach((currency, i) => {
         // Update existing classes with up to date information
         values[i].innerText = currencyFormatter(currency.price, input.value);
-        dates[i].innerText = timeAgo(currency.updatedAt);
+        dates[i].innerText = timeFormat(currency.updatedAt);
       });
     }
   }
@@ -171,14 +171,14 @@ function renderWindow(data) {
   const tbody = document.querySelector(".window-container > table > tbody");
 
   data.prices
-    .slice()
+    .slice(1)
     .reverse()
     .forEach((element) => {
       const tr = document.createElement("tr");
       const td = document.createElement("td");
       const tdPrice = document.createElement("td");
 
-      td.innerText = timeAgo(element.updatedAt); //TODO: Change date format
+      td.innerText = timeFormat("", element.updatedAt);
 
       tdPrice.innerText = currencyFormatter(element.price); //
 
@@ -221,27 +221,42 @@ function currencyFormatter(value, inputValue = 1) {
 }
 
 // Calculate time since last data was fetched
-function timeAgo(input) {
+function timeFormat(input, dates) {
+  // input = 2021-10-14T17:10:50.323Z
+  // Check if input is already formatted, if NOT then proceed
+  // date = Thu Oct 14 2021 13:10:50 GMT-0400 (Venezuela Time)
   const date = input instanceof Date ? input : new Date(input);
 
   const formatter = new Intl.RelativeTimeFormat("es");
 
+  // Ranges of times
   const ranges = {
-    years: 3600 * 24 * 365,
-    months: 3600 * 24 * 30,
-    weeks: 3600 * 24 * 7,
-    days: 3600 * 24,
-    hours: 3600,
+    years: 3600 * 24 * 365, // 31536000 seconds in a year
+    months: 3600 * 24 * 30, // 2592000 seconds in a month
+    weeks: 3600 * 24 * 7, // 604800 seconds in a week
+    days: 3600 * 24, // 86400 seconds in a day
+    hours: 3600, // 3600 seconds in an hour
     minutes: 60,
     seconds: 1,
   };
 
+  // Get time (in milliseconds) from date then subtract the time now
+  // and divide by 1000. It should look like: 1632595489773.408
   const secondsElapsed = (date.getTime() - Date.now()) / 1000;
 
   for (let key in ranges) {
+    // Check if the time from the input is less than the secondsElapsed
     if (ranges[key] < Math.abs(secondsElapsed)) {
+      // Then divide
       const delta = secondsElapsed / ranges[key];
+
+      // Format from milliseconds to date or time
       return formatter.format(Math.round(delta), key);
     }
   }
+  //
+  return new Date(dates).toLocaleDateString("es", {
+    day: "2-digit",
+    month: "long",
+  });
 }
