@@ -2,10 +2,10 @@
 .container {
   border: solid grey 1px;
   margin: 0 1.3rem;
+  user-select: none;
 }
 
 .cur-container {
-  user-select: none;
   cursor: pointer;
   display: grid;
   align-items: center;
@@ -60,7 +60,7 @@
   /* font-style: italic; */
 }
 
-@media only screen and (min-width: 480px) {
+@media only screen and (min-width: 479px) {
   .cur-container {
     grid-template-columns: 0fr 1fr 1fr;
   }

@@ -19,7 +19,11 @@ function App() {
         {/* <h1>USD =&gt; Bs.S</h1> */}
         <Currencies inputValue={inputValue} currency={currency} />
 
-        <Inputs setInputValue={setInputValue} setCurrency={setCurrency} />
+        <Inputs
+          setInputValue={setInputValue}
+          currency={currency}
+          setCurrency={setCurrency}
+        />
 
         <div>
           <div className={`loading-bg ${!data.length ? "display" : ""}`}></div>

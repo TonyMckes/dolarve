@@ -1,30 +1,25 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Inputs.css";
 
-function Inputs({ setInputValue, setCurrency }) {
-  const [curSelect, setCurSelect] = useState("VES");
+function Inputs({ setInputValue, currency, setCurrency }) {
   // TODO:
   return (
     <div className="input-container">
       <select
         name="Currency"
         id="select-currency"
-        onChange={(e) => {
-          setCurSelect(e.target.value);
-          setCurrency(e.target.value);
-        }}
+        onChange={(e) => setCurrency(e.target.value)}
       >
         <option value="VES">Bs.S</option>
         <option value="USD">USD</option>
       </select>
 
       <label>
-        {curSelect == "VES" ? "> $" : "> Bs."}
+        {currency == "VES" ? "> $" : "> Bs."}
         <input
           type="number"
           name="USD"
           step="0.01"
-          max="4"
           placeholder="Calculadora"
           onChange={(e) => setInputValue(e.target.value)}
         />
