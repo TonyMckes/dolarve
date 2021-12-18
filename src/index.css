@@ -6,9 +6,7 @@ body {
 
 #root {
   display: flex;
-  flex-direction: column;
-  height: 100vh;
-  justify-content: space-around;
+  justify-content: center;
 }
 
 h1 {

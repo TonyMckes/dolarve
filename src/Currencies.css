@@ -1,8 +1,11 @@
 /* Generated list inside .container */
 .container {
   border: solid grey 1px;
-  margin: 0 1.3rem;
+  margin: 1.5rem 0 5rem;
   user-select: none;
+  overflow: none scroll;
+  width: 90vw;
+  height: fit-content;
 }
 
 .cur-container {
@@ -42,6 +45,7 @@
   /* margin: 0 0.5rem; */
   font-weight: 600;
   font-size: 1rem;
+  line-height: 1.2;
 }
 .cur-value {
   grid-area: value;
@@ -60,11 +64,39 @@
   /* font-style: italic; */
 }
 
-@media only screen and (min-width: 479px) {
+/* @media only screen and (min-width: 479px) {
   .cur-container {
-    grid-template-columns: 0fr 1fr 1fr;
+    grid-template-columns: 0fr 2fr 1fr;
   }
-}
+} */
 
-@media only screen and (min-width: 768px) {
-}
+/* @media only screen and (min-width: 768px) {
+  .container {
+    border: solid grey 1px;
+    margin: 2rem 1.3rem;
+    bottom: 3rem;
+    user-select: none;
+    height: 80%;
+    overflow-y: scroll;
+    padding: 1.4rem;
+  }
+
+  ::-webkit-scrollbar {
+    width: 0.3rem;
+  }
+
+
+  ::-webkit-scrollbar-track {
+    background: #ddd;
+  }
+
+
+  ::-webkit-scrollbar-thumb {
+    background: #aaa;
+  }
+
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+} */

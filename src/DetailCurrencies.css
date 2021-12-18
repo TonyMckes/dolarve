@@ -1,0 +1,48 @@
+.background-window {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #00000080;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 1;
+  transition: background-color 0.5s linear;
+  padding-bottom: 4rem;
+}
+
+.history-window {
+  position: relative;
+  z-index: 3;
+  background-color: #fff;
+  border: 1px solid black;
+  width: 80%;
+  margin-bottom: 4rem;
+}
+
+.window-container {
+  padding: 0.5rem;
+  margin: 1rem;
+  border: 1px solid grey;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.window-container > h3 {
+  font-size: 0.9rem;
+}
+.window-container > p {
+  font-size: 0.8rem;
+}
+.window-container > table {
+  font-size: 0.9rem;
+}
+
+.close-btn {
+  top: 0.3rem;
+  right: 0.3rem;
+  position: absolute;
+  height: 1rem;
+  text-align: center;
+  line-height: 0.8rem;
+}

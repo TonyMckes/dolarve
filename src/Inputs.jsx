@@ -1,21 +1,24 @@
-import React from "react";
+import React, { useContext } from "react";
+import { UserContext } from "./App";
 import "./Inputs.css";
 
-function Inputs({ setInputValue, currency, setCurrency }) {
-  // TODO:
+function Inputs({ setCurrencyCode, setInputValue }) {
+  // const [currencies] = useContext(UserContext);
+
   return (
     <div className="input-container">
       <select
         name="Currency"
         id="select-currency"
-        onChange={(e) => setCurrency(e.target.value)}
+        onChange={(e) => setCurrencyCode(e.target.value)}
       >
-        <option value="VES">Bs.S</option>
-        <option value="USD">USD</option>
+        <option value="VES">US$</option>
+        <option value="USD">Bs.</option>
       </select>
 
       <label>
-        {currency == "VES" ? "> $" : "> Bs."}
+        {/* {currencies === "VES" ? "> $" : "> Bs."} */}
+        &gt;
         <input
           type="number"
           name="USD"

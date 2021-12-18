@@ -34,6 +34,6 @@ export function timeFormat(input, dates) {
   //
   return new Date(dates).toLocaleDateString("es", {
     day: "2-digit",
-    month: "long",
+    month: "short",
   });
 }

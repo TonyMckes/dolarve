@@ -1,33 +1,48 @@
-import React, { useState, useEffect, useContext } from "react";
-import { currencyFormatter } from "./currencyFormatter";
-import { timeFormat } from "./timeFormat";
+import React, { useContext, useEffect } from "react";
 import { UserContext } from "./App";
-import { fetchData } from "./fetchData";
 import "./Currencies.css";
+import { currencyFormatter } from "./currencyFormatter";
+import { fetchData } from "./fetchData";
+import { timeFormat } from "./timeFormat";
 
-function Currencies({ inputValue, currency }) {
-  const [resourceType, setResourceType] = useState("");
-  const [data, setData] = useContext(UserContext);
-  const [dataObj, setDataObj] = useState({});
+function Currencies({
+  currencyCode,
+  currencyName,
+  inputValue,
+  setCurrencies,
+  setCurrencyDetails,
+  setCurrencyName,
+  setToggleModal,
+  toggleModal,
+}) {
+  const [currencies] = useContext(UserContext);
 
-  useEffect(async () => {
-    const res = await fetchData(resourceType);
-    if (res instanceof Array) setData(res);
-    if (res instanceof Object) setDataObj(res);
-  }, [resourceType]);
+  useEffect(() => {
+    const fetchDat = async () => {
+      // You can await here
+      const response = await fetchData(currencyName);
+      if (response instanceof Array) {
+        setCurrencies(response);
+      } else {
+        setCurrencyDetails(response);
+        setToggleModal(!toggleModal);
+      }
+    };
+    fetchDat();
+  }, [currencyName]);
 
   function handleClick(e) {
-    setResourceType(e.currentTarget.dataset.name);
+    // console.log(e.currentTarget.dataset.name);
+    setCurrencyName(e.currentTarget.dataset.name);
   }
 
   return (
-    <div className="container">
-      {data &&
-        data.length > 0 &&
-        data.map((item) => {
+    currencies.length > 0 && (
+      <div className="container">
+        {currencies.map((item) => {
           return (
             <div
-              className={`cur-container ${item.slug}`}
+              className={`cur-container`}
               key={item._id}
               data-name={item.slug}
               onClick={(e) => handleClick(e)}
@@ -35,13 +50,14 @@ function Currencies({ inputValue, currency }) {
               <img className="cur-logo" src={item.icon} alt={item.name} />
               <h4 className="cur-name">{item.name}</h4>
               <span className="cur-value">
-                {currencyFormatter(currency, item.price, inputValue)}
+                {currencyFormatter(currencyCode, item.price, inputValue)}
               </span>
               <span className="cur-updated">{timeFormat(item.updatedAt)}</span>
             </div>
           );
         })}
-    </div>
+      </div>
+    )
   );
 }
 

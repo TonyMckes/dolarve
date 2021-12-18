@@ -1,36 +1,60 @@
-import React, { useState, createContext } from "react";
-import Header from "./Header";
-import Inputs from "./Inputs";
+import React, { createContext, useState } from "react";
 import Currencies from "./Currencies";
-import Footer from "./Footer";
+import DetailCurrencies from "./DetailCurrencies";
+// import Header from "./Header";
+import Inputs from "./Inputs";
+// import Footer from "./Footer";
 
 export const UserContext = createContext();
 
 function App() {
+  const [currencies, setCurrencies] = useState([]);
+  const [currencyCode, setCurrencyCode] = useState("VES");
+  const [currencyDetails, setCurrencyDetails] = useState({});
+  const [currencyName, setCurrencyName] = useState("");
   const [inputValue, setInputValue] = useState(1);
-  const [currency, setCurrency] = useState("VES");
-
-  const [data, setData] = useState([]);
+  const [toggleModal, setToggleModal] = useState(false);
 
   return (
     <>
-      <UserContext.Provider value={[data, setData]}>
-        <Header />
-        {/* <h1>USD =&gt; Bs.S</h1> */}
-        <Currencies inputValue={inputValue} currency={currency} />
-
+      <UserContext.Provider value={[currencies]}>
+        {/* <Header /> */}
+        {/* <h1 className="h-12">USD =&gt; Bs.S</h1> */}
+        <Currencies
+          currencyCode={currencyCode}
+          currencyName={currencyName}
+          inputValue={inputValue}
+          setCurrencies={setCurrencies}
+          setCurrencyDetails={setCurrencyDetails}
+          setCurrencyName={setCurrencyName}
+          setToggleModal={setToggleModal}
+          toggleModal={toggleModal}
+        />
+        {toggleModal && (
+          <DetailCurrencies
+            currencyCode={currencyCode}
+            currencyDetails={currencyDetails}
+            inputValue={inputValue}
+            setCurrencyName={setCurrencyName}
+            setToggleModal={setToggleModal}
+            toggleModal={toggleModal}
+          />
+        )}
         <Inputs
           setInputValue={setInputValue}
-          currency={currency}
-          setCurrency={setCurrency}
+          setCurrencyCode={setCurrencyCode}
         />
 
         <div>
-          <div className={`loading-bg ${!data.length ? "display" : ""}`}></div>
-          <div className={`loading ${!data.length ? "display" : ""}`}></div>
+          <div
+            className={`loading-bg ${!currencies.length ? "display" : ""}`}
+          ></div>
+          <div
+            className={`loading ${!currencies.length ? "display" : ""}`}
+          ></div>
         </div>
 
-        <Footer />
+        {/* <Footer /> */}
       </UserContext.Provider>
     </>
   );
