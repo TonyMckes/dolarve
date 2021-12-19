@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { UserContext } from "./App";
 import { currencyFormatter } from "./currencyFormatter";
 import "./DetailCurrencies.css";
+import LineChart from "./LineChart";
 import { timeFormat } from "./timeFormat";
 
 function DetailCurrencies({
@@ -12,8 +13,6 @@ function DetailCurrencies({
   setToggleModal,
   toggleModal,
 }) {
-  const [currencies] = useContext(UserContext);
-
   function closeHandler(e) {
     if (e.currentTarget !== e.target) return;
     setCurrencyName("");
@@ -37,7 +36,6 @@ function DetailCurrencies({
               </tr>
             </thead>
             <tbody>
-              {console.log(currencyDetails)}
               {currencyDetails.prices.slice(0, 7).map((item) => {
                 return (
                   <tr key={item._id}>
@@ -50,6 +48,11 @@ function DetailCurrencies({
               })}
             </tbody>
           </table>
+          <LineChart
+            currencyCode={currencyCode}
+            currencyDetails={currencyDetails}
+            inputValue={inputValue}
+          />
         </div>
       </div>
     </div>

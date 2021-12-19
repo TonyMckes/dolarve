@@ -1,26 +1,23 @@
-export function currencyFormatter(currency, value, inputValue = 1) {
-  //
-  const currencyType = {
+export function currencyFormatter(currencyCode, value, inputValue = 1, check) {
+  const currencyList = {
     USD: {
       location: "en-US",
       options: { style: "currency", currency: "USD" },
-      operator: (a, b) => {
-        return b / a;
-      },
+      operation: (a, b) => b / a,
     },
     VES: {
       location: "es-VE",
       options: { style: "currency", currency: "VES" },
-      operator: (a, b) => {
-        return a * b;
-      },
+      operation: (a, b) => a * b,
     },
   };
 
-  const selectedCurrency = currency;
-  const location = currencyType[selectedCurrency].location;
-  const options = currencyType[selectedCurrency].options;
-  const operation = currencyType[selectedCurrency].operator(value, inputValue);
+  const location = currencyList[currencyCode].location;
+  const options = currencyList[currencyCode].options;
+  const operation = currencyList[currencyCode].operation(value, inputValue);
 
-  return new Intl.NumberFormat(location, options).format(operation);
+  if (check === undefined) {
+    return new Intl.NumberFormat(location, options).format(operation);
+  }
+  return new Intl.NumberFormat(options).format(operation);
 }
