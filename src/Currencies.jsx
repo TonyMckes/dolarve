@@ -19,20 +19,22 @@ function Currencies({
 
   useEffect(() => {
     const fetchDat = async () => {
-      // You can await here
       const response = await fetchData(currencyName);
       if (response instanceof Array) {
         setCurrencies(response);
       } else {
         setCurrencyDetails(response);
         setToggleModal(!toggleModal);
+        document.body.classList.remove("loading-indicator");
       }
     };
+
+    if (currencyName !== "") document.body.classList.add("loading-indicator");
+
     fetchDat();
   }, [currencyName]);
 
   function handleClick(e) {
-    // console.log(e.currentTarget.dataset.name);
     setCurrencyName(e.currentTarget.dataset.name);
   }
 

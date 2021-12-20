@@ -14,29 +14,15 @@ function BarChart({ currencyCode, currencyDetails, inputValue }) {
             .map((item) => timeFormat("", item.updatedAt)),
           datasets: [
             {
-              label: "",
               data: currencyDetails.prices
                 .slice(0, 7)
                 .map((item) =>
                   currencyFormatter(currencyCode, item.price, inputValue, true)
                 ),
-              backgroundColor: [
-                "rgba(255, 99, 132, 0.2)",
-                "rgba(54, 162, 235, 0.2)",
-                "rgba(255, 206, 86, 0.2)",
-                "rgba(75, 192, 192, 0.2)",
-                "rgba(153, 102, 255, 0.2)",
-                "rgba(255, 159, 64, 0.2)",
-              ],
-              borderColor: [
-                "rgba(255, 99, 132, 1)",
-                "rgba(54, 162, 235, 1)",
-                "rgba(255, 206, 86, 1)",
-                "rgba(75, 192, 192, 1)",
-                "rgba(153, 102, 255, 1)",
-                "rgba(255, 159, 64, 1)",
-              ],
+              backgroundColor: ["#00d48780"],
+              borderColor: ["#00d487"],
               borderWidth: 1,
+              fill: "origin",
             },
           ],
         }}
@@ -46,6 +32,8 @@ function BarChart({ currencyCode, currencyDetails, inputValue }) {
               display: false,
             },
             tooltip: {
+              titleAlign: "center",
+              displayColors: false,
               callbacks: {
                 label: function (context) {
                   let label = context.dataset.label || "";
@@ -53,19 +41,16 @@ function BarChart({ currencyCode, currencyDetails, inputValue }) {
                   if (label) label += ": ";
 
                   if (context.parsed.y !== null) {
-                    if (currencyCode === "USD") {
-                      return (label += currencyFormatter(
-                        currencyCode,
-                        inputValue / context.parsed.y,
-                        inputValue
-                      ));
-                    }
-
-                    label += currencyFormatter(
-                      currencyCode,
+                    const list = {
+                      USD: { operation: (a, b) => (b < 0.0 ? a : b / a) },
+                      VES: { operation: (a, b) => a / b },
+                    };
+                    const value = list[currencyCode].operation(
                       context.parsed.y,
                       inputValue
                     );
+
+                    label += currencyFormatter(currencyCode, value, inputValue);
                   }
                   return label;
                 },

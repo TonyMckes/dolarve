@@ -1,5 +1,4 @@
-import React, { useContext } from "react";
-import { UserContext } from "./App";
+import React from "react";
 import { currencyFormatter } from "./currencyFormatter";
 import "./DetailCurrencies.css";
 import LineChart from "./LineChart";
@@ -23,11 +22,14 @@ function DetailCurrencies({
     <div className="background-window" onClick={(e) => closeHandler(e)}>
       <div className="history-window">
         <button className="close-btn" onClick={(e) => closeHandler(e)}>
-          X
+          x
         </button>
         <div className="window-container">
-          <h3>{currencyDetails.name}</h3>
-          {currencyDetails.subtitle ? <p>{currencyDetails.subtitle}</p> : null}
+          <div>
+            <img src={currencyDetails.icon} alt={currencyDetails.name} />
+            <h3>{currencyDetails.name}</h3>
+          </div>
+          <p>Precio del {currencyDetails.name} hoy en Venezuela</p>
           <table>
             <thead>
               <tr>

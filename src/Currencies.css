@@ -1,4 +1,27 @@
-/* Generated list inside .container */
+.loading-indicator:before {
+  content: "";
+  background: #00000080;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.loading-indicator:after {
+  content: "Cargando";
+  position: fixed;
+  width: 100%;
+  top: 50%;
+  left: 0;
+  z-index: 1001;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
 .container {
   border: solid grey 1px;
   margin: 1.5rem 0 5rem;
