@@ -1,9 +1,8 @@
 import React, { createContext, useState } from "react";
 import Currencies from "./Currencies";
 import DetailCurrencies from "./DetailCurrencies";
-// import Header from "./Header";
-import Inputs from "./Inputs";
-// import Footer from "./Footer";
+import Footer from "./Footer";
+import Header from "./Header";
 
 export const UserContext = createContext();
 
@@ -14,22 +13,34 @@ function App() {
   const [currencyName, setCurrencyName] = useState("");
   const [inputValue, setInputValue] = useState(1);
   const [toggleModal, setToggleModal] = useState(false);
+  const [view, setView] = useState(false);
 
   return (
     <>
       <UserContext.Provider value={[currencies]}>
-        {/* <Header /> */}
-        {/* <h1 className="h-12">USD =&gt; Bs.S</h1> */}
+        <Header view={view} setView={setView} />
         <Currencies
           currencyCode={currencyCode}
+          currencyDetails={currencyDetails}
           currencyName={currencyName}
           inputValue={inputValue}
           setCurrencies={setCurrencies}
+          setCurrencyCode={setCurrencyCode}
           setCurrencyDetails={setCurrencyDetails}
           setCurrencyName={setCurrencyName}
+          setInputValue={setInputValue}
           setToggleModal={setToggleModal}
           toggleModal={toggleModal}
+          view={view}
         />
+        <div>
+          <div
+            className={`loading-bg ${!currencies.length ? "display" : ""}`}
+          ></div>
+          <div
+            className={`loading ${!currencies.length ? "display" : ""}`}
+          ></div>
+        </div>
         {toggleModal && (
           <DetailCurrencies
             currencyCode={currencyCode}
@@ -40,21 +51,7 @@ function App() {
             toggleModal={toggleModal}
           />
         )}
-        <Inputs
-          setInputValue={setInputValue}
-          setCurrencyCode={setCurrencyCode}
-        />
-
-        <div>
-          <div
-            className={`loading-bg ${!currencies.length ? "display" : ""}`}
-          ></div>
-          <div
-            className={`loading ${!currencies.length ? "display" : ""}`}
-          ></div>
-        </div>
-
-        {/* <Footer /> */}
+        <Footer />
       </UserContext.Provider>
     </>
   );

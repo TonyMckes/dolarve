@@ -3,4 +3,9 @@ footer {
 }
 
 @media only screen and (min-width: 768px) {
+  footer {
+    display: flex;
+    background-color: #227355;
+    height: 8rem;
+  }
 }

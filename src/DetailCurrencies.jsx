@@ -29,7 +29,7 @@ function DetailCurrencies({
             <img src={currencyDetails.icon} alt={currencyDetails.name} />
             <h3>{currencyDetails.name}</h3>
           </div>
-          <p>Precio del {currencyDetails.name} hoy en Venezuela</p>
+          <p>Precio del {currencyDetails.name} de la semana en Venezuela</p>
           <table>
             <thead>
               <tr>

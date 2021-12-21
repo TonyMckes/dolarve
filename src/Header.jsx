@@ -1,7 +1,7 @@
 import React from "react";
-// import "./Header.css";
+import "./Header.css";
 
-function Header() {
+function Header({ view, setView }) {
   return (
     <header>
       <nav>
@@ -17,6 +17,9 @@ function Header() {
           </li>
         </ul>
       </nav>
+      <button className="view-toggler" onClick={() => setView(!view)}>
+        View
+      </button>
     </header>
   );
 }

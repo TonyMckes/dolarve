@@ -16,19 +16,26 @@
   top: 50%;
   left: 0;
   z-index: 1001;
-  color: white;
+  color: #fff;
   text-align: center;
   font-weight: bold;
   font-size: 1.5rem;
 }
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.title {
+  display: none;
+}
 
 .container {
-  border: solid grey 1px;
+  border: solid #ccc 1px;
   margin: 1.5rem 0 5rem;
   user-select: none;
-  overflow: none scroll;
   width: 90vw;
-  height: fit-content;
+  background-color: #eee;
 }
 
 .cur-container {
@@ -44,28 +51,29 @@
     "img title date date";
 }
 .cur-container:nth-child(odd) {
-  background-color: #ccc;
+  background-color: #00d48750;
 }
 .cur-container {
-  transition: 300ms transform;
+  border-radius: 0;
+  transition: 300ms transform, 300ms border-radius;
 }
 .cur-container:hover,
 .cur-container:active {
   transform: scale(1.1);
-  background-color: #888888;
-  transition: 300ms transform, 500ms background-color;
+  background-color: #00d487;
+  border-radius: 0.7rem;
+  transition: 300ms transform, 500ms background-color, 300ms border-radius;
 }
 
 .cur-logo {
   grid-area: img;
   margin: 0 0.5rem;
-  max-width: 3rem;
+  width: 3rem;
   border-radius: 2rem;
-  box-shadow: -2.5px 5px 5px 0px #00000040;
+  box-shadow: 0px 5px 10px 0px #0002;
 }
 .cur-name {
   grid-area: title;
-  /* margin: 0 0.5rem; */
   font-weight: 600;
   font-size: 1rem;
   line-height: 1.2;
@@ -84,42 +92,109 @@
   font-weight: 400;
   font-size: 0.7rem;
   white-space: nowrap;
-  /* font-style: italic; */
 }
-
-/* @media only screen and (min-width: 479px) {
-  .cur-container {
-    grid-template-columns: 0fr 2fr 1fr;
+/*           */
+/* List view */
+/*           */
+@media only screen and (min-width: 768px) {
+  .title {
+    grid-area: title;
+    /* display: block; */
   }
-} */
 
-/* @media only screen and (min-width: 768px) {
   .container {
-    border: solid grey 1px;
-    margin: 2rem 1.3rem;
-    bottom: 3rem;
-    user-select: none;
-    height: 80%;
-    overflow-y: scroll;
-    padding: 1.4rem;
+    padding: 2rem;
+    width: 75%;
+  }
+
+  .cur-container {
+    cursor: pointer;
+    display: grid;
+    align-items: center;
+    grid-auto-flow: row;
+    grid-template-columns: 0fr 0.3fr 1fr;
+    grid-template-rows: 0.8fr 0fr 0fr;
+    grid-template-areas:
+      "img title . ."
+      "img title value button"
+      "img title date date";
+  }
+
+  .cur-container {
+    border-radius: 0.2rem;
+    transition: 300ms transform, 300ms border-radius;
+  }
+  .cur-container:hover,
+  .cur-container:active {
+    transform: scale(1.1);
+    background-color: #00d487;
+    border-radius: 0.7rem;
+    transition: 300ms transform, 500ms background-color, 300ms border-radius;
   }
 
   ::-webkit-scrollbar {
-    width: 0.3rem;
+    width: 0.8rem;
   }
-
 
   ::-webkit-scrollbar-track {
-    background: #ddd;
+    background: #eee;
   }
-
 
   ::-webkit-scrollbar-thumb {
     background: #aaa;
   }
 
-
   ::-webkit-scrollbar-thumb:hover {
-    background: #555;
+    background: #00d487;
   }
-} */
+}
+/*           */
+/* Grid view */
+/*           */
+@media only screen and (min-width: 768px) {
+  .container.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .cur-container.grid {
+    grid-template-columns: 1fr 0fr;
+    grid-template-rows: 1fr 1fr 0fr;
+    grid-template-areas:
+      "title logo"
+      "value value"
+      "date date";
+    border: solid 1px #ccc;
+    border-radius: 0.7rem;
+    transition: 300ms transform;
+    background-color: #46eaae;
+    box-shadow: 0px 5px 15px 0px #0004, inset 0px 0px 10px 0px #0002;
+  }
+
+  .cur-container.grid:hover,
+  .cur-container.grid:active {
+    transform: scale(1.1);
+    background-color: #00d487;
+    border-radius: 0.7rem;
+    transition: 300ms transform, 500ms background-color, 300ms border-radius;
+  }
+
+  .cur-logo.grid {
+    grid-area: logo;
+    margin: 0.5rem;
+  }
+
+  .cur-name.grid {
+    margin: 0 max(0.5rem, 10%);
+    font-size: 1.25rem;
+  }
+  .cur-value.grid {
+    justify-self: center;
+    font-size: 1.5rem;
+  }
+  .cur-updated.grid {
+    margin: 0 0.7rem;
+    font-style: italic;
+  }
+}

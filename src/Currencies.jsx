@@ -3,6 +3,7 @@ import { UserContext } from "./App";
 import "./Currencies.css";
 import { currencyFormatter } from "./currencyFormatter";
 import { fetchData } from "./fetchData";
+import Inputs from "./Inputs";
 import { timeFormat } from "./timeFormat";
 
 function Currencies({
@@ -10,10 +11,13 @@ function Currencies({
   currencyName,
   inputValue,
   setCurrencies,
+  setCurrencyCode,
   setCurrencyDetails,
   setCurrencyName,
+  setInputValue,
   setToggleModal,
   toggleModal,
+  view,
 }) {
   const [currencies] = useContext(UserContext);
 
@@ -38,28 +42,48 @@ function Currencies({
     setCurrencyName(e.currentTarget.dataset.name);
   }
 
+  const layoutView = view === true ? "grid" : "";
+
   return (
-    currencies.length > 0 && (
-      <div className="container">
-        {currencies.map((item) => {
-          return (
-            <div
-              className={`cur-container`}
-              key={item._id}
-              data-name={item.slug}
-              onClick={(e) => handleClick(e)}
-            >
-              <img className="cur-logo" src={item.icon} alt={item.name} />
-              <h4 className="cur-name">{item.name}</h4>
-              <span className="cur-value">
-                {currencyFormatter(currencyCode, item.price, inputValue)}
-              </span>
-              <span className="cur-updated">{timeFormat(item.updatedAt)}</span>
-            </div>
-          );
-        })}
+    <>
+      <div className="wrapper">
+        <div>
+          <h1 className="title">USD =&gt; Bs.S</h1>
+        </div>
+        {currencies.length > 0 && (
+          <div className={`container ${layoutView}`}>
+            {currencies.map((item) => {
+              return (
+                <div
+                  className={`cur-container ${layoutView}`}
+                  key={item._id}
+                  data-name={item.slug}
+                  onClick={(e) => handleClick(e)}
+                >
+                  <img
+                    className={`cur-logo ${layoutView}`}
+                    src={item.icon}
+                    alt={item.name}
+                  />
+                  <h4 className={`cur-name ${layoutView}`}>{item.name}</h4>
+                  <span className={`cur-value ${layoutView}`}>
+                    {currencyFormatter(currencyCode, item.price, inputValue)}
+                  </span>
+                  <span className={`cur-updated ${layoutView}`}>
+                    {timeFormat(item.updatedAt)}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        )}
+
+        <Inputs
+          setInputValue={setInputValue}
+          setCurrencyCode={setCurrencyCode}
+        />
       </div>
-    )
+    </>
   );
 }
 
