@@ -1,3 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body,
+#root {
+  height: 100vh;
+
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (min-width: 768px) {
+  body,
+  #root {
+    height: 100%;
+  }
+}
+/* 
 *,
 body {
   font-family: "Poppins", sans-serif;
@@ -14,7 +33,7 @@ h1 {
   margin: 1rem 0 0 0;
   align-self: center;
 }
-/* Loading window? */
+
 .loading-bg {
   background-color: black;
   height: 100%;
@@ -32,7 +51,7 @@ h1 {
   transition: opacity 0.5s linear;
   visibility: visible;
 }
-/* Loading spinner */
+
 .loading {
   animation: spin 1s infinite linear;
   border-radius: 100%;
@@ -64,3 +83,4 @@ h1 {
     background-color: #fff;
   }
 }
+ */

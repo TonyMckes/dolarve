@@ -1,4 +1,4 @@
-export function timeFormat(input, dates) {
+export function formatTime(input, dates) {
   // input = 2021-10-14T17:10:50.323Z
   // Check if input is already formatted, if NOT then proceed
   // date = Thu Oct 14 2021 13:10:50 GMT-0400 (Venezuela Time)

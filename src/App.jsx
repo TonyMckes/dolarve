@@ -1,59 +1,52 @@
-import React, { createContext, useState } from "react";
-import Currencies from "./Currencies";
-import DetailCurrencies from "./DetailCurrencies";
-import Footer from "./Footer";
-import Header from "./Header";
-
-export const UserContext = createContext();
+import { useState } from "react";
+import { IconContext } from "react-icons";
+import { Outlet } from "react-router-dom";
+import Header from "./components/Header";
+import LoadingSpinner from "./components/LoadingSpinner";
+import Modal from "./components/Modal/Modal";
+import CurrenciesContextProvider from "./context/CurrenciesContextProvider";
+import { ThemeProvider } from "./context/ThemeContext";
+import FavoritesContextProvider from "./hooks/useFavorites";
 
 function App() {
-  const [currencies, setCurrencies] = useState([]);
-  const [currencyCode, setCurrencyCode] = useState("VES");
-  const [currencyDetails, setCurrencyDetails] = useState({});
-  const [currencyName, setCurrencyName] = useState("");
-  const [inputValue, setInputValue] = useState(1);
-  const [toggleModal, setToggleModal] = useState(false);
-  const [view, setView] = useState(false);
+  const [curList, setCurList] = useState([]);
+  // const [curInput, setCurInput] = useState({ inputCode: "VES", inputValue: 1 });
+  const [loading, setLoading] = useState(true);
+  const [modal, setModal] = useState({ data: {}, show: false, spinner: false });
+  const [filteredCur, setFilteredCur] = useState([]);
+
+  const states = {
+    // curInput,
+    curList,
+    filteredCur,
+    loading,
+    modal,
+    // setCurInput,
+    setCurList,
+    setFilteredCur,
+    setLoading,
+    setModal,
+  };
 
   return (
-    <>
-      <UserContext.Provider value={[currencies]}>
-        <Header view={view} setView={setView} />
-        <Currencies
-          currencyCode={currencyCode}
-          currencyDetails={currencyDetails}
-          currencyName={currencyName}
-          inputValue={inputValue}
-          setCurrencies={setCurrencies}
-          setCurrencyCode={setCurrencyCode}
-          setCurrencyDetails={setCurrencyDetails}
-          setCurrencyName={setCurrencyName}
-          setInputValue={setInputValue}
-          setToggleModal={setToggleModal}
-          toggleModal={toggleModal}
-          view={view}
-        />
-        <div>
-          <div
-            className={`loading-bg ${!currencies.length ? "display" : ""}`}
-          ></div>
-          <div
-            className={`loading ${!currencies.length ? "display" : ""}`}
-          ></div>
+    <ThemeProvider>
+      <IconContext.Provider value={{ className: "inline-block w-6 h-6" }}>
+        <div className="w-full h-full text-gray-800 lg:mx-auto lg:container dark:text-gray-300 ">
+          <div className="grid grid-cols-1 md:grid-cols-layout md:grid-rows-layout">
+            <Header />
+
+            <FavoritesContextProvider>
+              <CurrenciesContextProvider>
+                <Outlet context={states} />
+              </CurrenciesContextProvider>
+
+              <LoadingSpinner loading={modal.spinner} />
+              <Modal modal={{ ...modal, setModal }} />
+            </FavoritesContextProvider>
+          </div>
         </div>
-        {toggleModal && (
-          <DetailCurrencies
-            currencyCode={currencyCode}
-            currencyDetails={currencyDetails}
-            inputValue={inputValue}
-            setCurrencyName={setCurrencyName}
-            setToggleModal={setToggleModal}
-            toggleModal={toggleModal}
-          />
-        )}
-        <Footer />
-      </UserContext.Provider>
-    </>
+      </IconContext.Provider>
+    </ThemeProvider>
   );
 }
 
