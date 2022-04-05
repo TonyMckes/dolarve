@@ -5,7 +5,7 @@ import { Logo } from "../Logo";
 import TableList from "../TableList";
 import { Title } from "../Title";
 import { DetailsButton } from "./DetailsButton";
-import { FavoriteButton } from "./FavoriteButton";
+import { FavoriteButton } from "../FavoriteButton";
 
 function Modal({ modal }) {
   const {
@@ -42,13 +42,13 @@ function Modal({ modal }) {
     showing && (
       <div
         className="fixed top-0 left-0 z-50 flex items-center justify-center w-screen h-screen bg-black bg-opacity-25 dark:bg-opacity-50 background-window"
-        onClick={(e) => closeHandler(e)}
+        onClick={closeHandler}
       >
         <div className="w-4/5 p-4 text-sm bg-white rounded-lg dark:bg-neutral-800 md:max-w-md history-window">
           <div className="flex flex-row-reverse mb-2">
             <button
               className="outline-none drop-shadow-lg"
-              onClick={(e) => closeHandler(e)}
+              onClick={closeHandler}
             >
               <AiOutlineCloseCircle className="w-6 h-6" pointerEvents="none" />
             </button>
@@ -70,11 +70,7 @@ function Modal({ modal }) {
 
             <TableList prices={prices} currency={currency} />
 
-            <LineChart
-              /* currencyCode={currencyCode} inputValue={inputValue} */ data={
-                data
-              }
-            />
+            <LineChart currencyCode={currency} data={data} />
           </div>
 
           <div className="flex justify-around m-4">

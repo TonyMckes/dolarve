@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { urlPath } from "../../constants";
 import { useCurrencies } from "../../context/CurrenciesContextProvider";
-import { getRandomCur } from "../../utils/utils";
-import { urlPath } from "../../constants/urlPath";
+import { getRandomCur } from "../../utils";
 
 export function DiscoverOthers() {
   const [randomCurr, setRandomCurr] = useState([]);
@@ -20,7 +20,7 @@ export function DiscoverOthers() {
           randomCurr.map(({ _id, name, icon, slug, symbol, type }) => (
             <li
               key={_id}
-              className="hover:bg-neutral-100 dark:hover:bg-neutral-700 w-full transition-colors rounded-2xl "
+              className="w-full transition-colors hover:bg-neutral-100 dark:hover:bg-neutral-700 rounded-2xl "
             >
               <Link
                 className="block p-1 my-1 "

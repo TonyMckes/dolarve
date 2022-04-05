@@ -1,10 +1,7 @@
-import SearchBar from "../SearchBar";
-
 export default function CurrenciesSkeleton() {
   return (
     <>
-      <SearchBar variant skeleton />
-      <div className="px-4 border dark:border-neutral-700 rounded-lg self-start table w-full md:col-start-2 mt-12 table-fixed  animate-pulse md:mx-auto md:mt-0">
+      <div className="self-start table w-full px-4 mt-12 border rounded-lg table-fixed dark:border-neutral-700 md:col-start-2 animate-pulse md:mx-auto md:mt-0">
         <div className="table-row-group">
           {Array(20)
             .fill(null)

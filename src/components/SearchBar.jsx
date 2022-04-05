@@ -1,17 +1,18 @@
 import { useState } from "react";
-import { MdSearch, MdClose } from "react-icons/md";
-import { useCurrencies } from "../context/CurrenciesContextProvider";
+import { MdClose, MdSearch } from "react-icons/md";
+import { useOutletContext } from "react-router-dom";
 
 export default function SearchBar({
   currencies,
   setFilteredCur,
   variant,
-  skeleton,
+  placeholder,
 }) {
   const [searchFilter, setSearchFilter] = useState("");
+  const { loading } = useOutletContext();
 
   const handler = (e) => {
-    const value = e.currentTarget.value;
+    const value = e.target.value;
 
     const filtered = currencies.filter(
       ({ name, symbol }) =>
@@ -26,7 +27,6 @@ export default function SearchBar({
 
       return setFilteredCur([]);
     }
-
     setSearchFilter(value);
     setFilteredCur(filtered);
   };
@@ -36,28 +36,26 @@ export default function SearchBar({
       className={`flex items-center w-full ${
         variant ? "sticky z-10 ml-16 mr-6 top-3 md:top-0 md:m-0 w-auto" : ""
       }`}
-      htmlFor="searchBox"
     >
       {searchFilter.length > 0 ? (
         <MdClose
           className="absolute w-6 h-6 mx-2 text-gray-400"
-          onClick={() => setSearchFilter("")}
+          onClick={() => handler({ target: { value: "" } })}
         />
       ) : (
         <MdSearch className="absolute w-6 h-6 mx-2 text-gray-400" />
       )}
       <input
-        disabled={skeleton}
-        id="searchBox"
-        className={`w-full px-3 py-1 pl-8 border shadow-inner rounded-xl focus:outline-slate-500 ${
-          skeleton
+        disabled={loading}
+        className={` w-full md:my-1 dark:border-neutral-700 focus:border-neutral-500 focus:ring-2 hover:bg-neutral-50 duration-500 dark:bg-neutral-800 hover:dark:bg-neutral-700 px-3 py-1 pl-8 outline-none border shadow-inner rounded-xl ${
+          loading
             ? "disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
             : ""
         }`}
         type="text"
         value={searchFilter}
-        placeholder="Buscar"
-        onChange={(e) => handler(e)}
+        placeholder={placeholder}
+        onChange={handler}
       />
     </label>
   );

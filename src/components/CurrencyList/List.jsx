@@ -1,14 +1,12 @@
 import axios from "axios";
 import { useOutletContext } from "react-router-dom";
-import SearchBar from "../SearchBar";
-import { FavoriteButton } from "./FavoriteButton";
+import { FavoriteButton } from "../FavoriteButton";
 import { Logo } from "./Logo";
 import { Prices } from "./Prices";
 import { Title } from "./Title";
 
 export default function List() {
-  const { modal, setModal, filteredCur, setFilteredCur, curList, curInput } =
-    useOutletContext();
+  const { modal, setModal, filteredCur } = useOutletContext();
 
   async function handleClick(id) {
     try {
@@ -26,8 +24,6 @@ export default function List() {
 
   return (
     <>
-      <SearchBar currencies={curList} setFilteredCur={setFilteredCur} variant />
-
       <div
         className={`md:px-4 md:border dark:border-neutral-700 rounded-lg dark:bg-neutral-800 md:dark:bg-inherit  transition-all dark:text-gray-100 md:col-start-2 w-full self-start md:mx-auto table text-sm mt-6 md:mt-0`}
       >

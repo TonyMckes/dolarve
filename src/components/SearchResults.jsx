@@ -1,15 +1,15 @@
 import { Link } from "react-router-dom";
-import { urlPath } from "../constants/urlPath";
+import { urlPath } from "../constants";
 
 export default function SearchResults({ results }) {
   return (
-    <div className=" bg-white">
+    <div className="bg-white dark:bg-neutral-800">
       <ul className="">
         {results.length > 0 &&
           results.slice(0, 6).map(({ _id, name, icon, slug, symbol, type }) => (
             <li
               key={_id}
-              className="hover:bg-neutral-100 dark:hover:bg-neutral-700 w-full transition-colors rounded-2xl "
+              className="w-full transition-colors hover:bg-neutral-100 dark:hover:bg-neutral-700 rounded-2xl "
             >
               <Link
                 className="block p-1 my-1 "

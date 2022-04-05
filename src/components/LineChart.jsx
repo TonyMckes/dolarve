@@ -1,8 +1,8 @@
 import "chart.js/auto";
 import { Line } from "react-chartjs-2";
-import { curFormatter, formatTime } from "../utils/utils";
+import { formatCur, formatTime } from "../utils";
 
-function LineChart({ currencyCode, data, inputValue }) {
+function LineChart({ currencyCode, data }) {
   const { prices = [] } = data;
 
   return (
@@ -11,11 +11,9 @@ function LineChart({ currencyCode, data, inputValue }) {
         labels: prices.map(({ updatedAt }) => formatTime("", updatedAt)),
         datasets: [
           {
-            data: prices.map(({ price }) => price),
-
-            // .map((item) =>
-            //   currencyFormatter(currencyCode, item.price, inputValue, true),
-            // ),
+            data: prices.map(({ price }) =>
+              formatCur(price, currencyCode, true),
+            ),
             backgroundColor: ["#00d48780"],
             borderColor: ["#00d487"],
             borderWidth: 1,
@@ -31,27 +29,28 @@ function LineChart({ currencyCode, data, inputValue }) {
           tooltip: {
             titleAlign: "center",
             displayColors: false,
-            callbacks: {
-              label: function (context) {
-                let label = context.dataset.label || "";
+            // callbacks: {
+            //   label: function (context) {
+            //     let label = context.dataset.label || "";
 
-                if (label) label += ": ";
+            //     if (label) label += ": ";
 
-                if (context.parsed.y !== null) {
-                  const list = {
-                    USD: { operation: (a, b) => (b < 0.0 ? a : b / a) },
-                    VES: { operation: (a, b) => a / b },
-                  };
-                  // const value = list[currencyCode].operation(
-                  //   context.parsed.y,
-                  //   inputValue,
-                  // );
+            //     if (context.parsed.y !== null) {
+            //       const list = {
+            //         USD: { operation: (a, b) => (b < 0.0 ? a : b / a) },
+            //         VES: { operation: (a, b) => a / b },
+            //       };
+            //       const value = list[currencyCode].operation(
+            //         context.parsed.y,
+            //         1,
+            //       );
 
-                  // label += currencyFormatter(currencyCode, value, inputValue);
-                }
-                return label;
-              },
-            },
+            //       label += formatCur(value, currencyCode, true);
+            //     }
+
+            //     return label;
+            //   },
+            // },
           },
         },
       }}

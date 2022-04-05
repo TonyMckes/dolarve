@@ -1,3 +1,5 @@
+export const API_URL = "https://exchange.vcoud.com";
+
 export const urlPath = {
   bolivar: "cotizaciones",
   cripto: "criptomonedas",

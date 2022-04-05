@@ -3,7 +3,7 @@ import { useOutletContext } from "react-router-dom";
 import Currencies from "../components/CurrencyList";
 import { useCurrencies } from "../context/CurrenciesContextProvider";
 
-export default function Home() {
+export default function Favorites() {
   const { setCurList, setLoading, setCurInput } = useOutletContext();
 
   const { allCurrencies } = useCurrencies();
@@ -11,20 +11,20 @@ export default function Home() {
   useEffect(() => {
     try {
       (async () => {
-        setLoading(true);
+        const arr = localStorage.getItem("favorites");
 
-        const arr = localStorage.getItem("favoritedCurr");
+        if (arr) {
+          setLoading(true);
 
-        const favCurrencies = allCurrencies.reduce((acc, curr) => {
-          if (arr.includes(curr._id)) acc.push(curr);
-          return acc;
-        }, []);
+          const favCurrencies = allCurrencies.reduce((acc, curr) => {
+            if (arr.includes(curr._id)) acc.push(curr);
+            return acc;
+          }, []);
 
-        // setCurInput({ inputCode: "VES", inputValue: 1 });
+          setCurList(favCurrencies);
 
-        setCurList(favCurrencies);
-
-        setLoading(false);
+          setLoading(false);
+        }
       })();
     } catch (error) {
       console.log(error);

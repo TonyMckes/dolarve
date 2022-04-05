@@ -1,7 +1,7 @@
-export function Logo({ layoutView, icon, name }) {
+export function Logo({ icon, name }) {
   return (
     <img
-      className={`dark:border-gray-500 dark:border w-6 mx-auto rounded-full drop-shadow-md ${layoutView} text-xs`}
+      className="w-6 mx-auto text-xs rounded-full dark:border-gray-500 dark:border drop-shadow-md"
       src={icon}
       alt={name}
     />

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { urlPath } from "../../constants/urlPath";
+import { urlPath } from "../../constants";
 
 export function DetailsButton({ modal, setModal }) {
   const { _id, slug, type } = modal.data;

@@ -6,11 +6,11 @@ import { NavLink } from "react-router-dom";
 
 export default function NavLinks({ sidebar }) {
   const navItems = [
-    [<MdOutlineFavorite />, "Favorites",       "/"],
-    [<RiBillFill        />, "Cotizaciones",    "/cotizaciones"],
-    [<BsCurrencyBitcoin />, "Criptomonedas",   "/criptomonedas"],
-    [<AiTwotoneBank     />, "Tasas de bancos", "/tasas-de-bancos"],
-    [<AiFillGold        />, "Recursos",        "/recursos"],
+    [<MdOutlineFavorite />, "Favorites", "/"],
+    [<RiBillFill />, "Cotizaciones", "/cotizaciones"],
+    [<BsCurrencyBitcoin />, "Criptomonedas", "/criptomonedas"],
+    [<AiTwotoneBank />, "Tasas de bancos", "/tasas-de-bancos"],
+    [<AiFillGold />, "Recursos", "/recursos"],
     // [<AiFillGold        />, "Blue",            "/blue"],
     // [<AiFillGold        />, "Divisa",          "/divisa"],
     // [<AiFillGold        />, "Divisa Blue",     "/divisa-blue"],
@@ -27,7 +27,7 @@ export default function NavLinks({ sidebar }) {
           <li className="" key={i}>
             <NavLink
               className={({ isActive }) =>
-                ` whitespace-nowrap hover:bg-neutral-100 dark:hover:bg-neutral-700 rounded-xl px-2 py-1 align-middle ${
+                ` whitespace-nowrap hover:bg-neutral-100 dark:hover:bg-neutral-700 rounded-xl px-2 py-1 align-middle  ${
                   isActive
                     ? "font-bold ring-1 ring-neutral-200 dark:ring-neutral-600"
                     : ""

@@ -1,19 +1,15 @@
-import { formatCur, diffPrice, formatTime } from "../../utils/utils";
+import { diffPrice, formatCur, formatTime } from "../../utils";
 
 export function Prices({ price24h, price, currency, updatedAt }) {
   return (
     <>
-      <span className={` dark:drop-shadow-xl block text-xs font-light`}>
-        {`${diffPrice(price24h, price)}%`} {formatCur(price, currency)}
+      <span className="block text-xs font-light dark:drop-shadow-xl">
+        {`${diffPrice(price24h, price)}%`} {formatCur(price24h, currency)}
       </span>
-      <span
-        className={` dark:drop-shadow-xl block row-start-2 col-start-3 place-self-end font-medium `}
-      >
-        {price} {formatCur(price, currency)}
+      <span className="block col-start-3 row-start-2 font-medium dark:drop-shadow-xl place-self-end">
+        {formatCur(price, currency)}
       </span>
-      <span
-        className={` dark:drop-shadow-xl block col-start-1 whitespace-nowrap row-start-3 col-span-3 place-self-end text-xs  font-light`}
-      >
+      <span className="block col-span-3 col-start-1 row-start-3 text-xs font-light dark:drop-shadow-xl whitespace-nowrap place-self-end">
         {formatTime(updatedAt)}
       </span>
     </>

@@ -19,12 +19,18 @@ export default function Currencies() {
 
   return (
     <>
+      <SearchBar
+        currencies={curList}
+        placeholder="Filtrar lista..."
+        setFilteredCur={setFilteredCur}
+        variant
+      />
       {loading ? (
         <ListSkeleton />
       ) : curList.length > 0 ? (
         <List />
       ) : (
-        <div className="text-xl flex flex-col items-center justify-center h-screen">
+        <div className="flex flex-col items-center justify-center h-screen text-xl">
           Nothing over here...
         </div>
       )}
@@ -34,6 +40,7 @@ export default function Currencies() {
           <SearchBar
             currencies={allCurrencies}
             setFilteredCur={setSearchResults}
+            placeholder="Buscar..."
           />
           <SearchResults results={searchResults} />
         </SidebarCard>

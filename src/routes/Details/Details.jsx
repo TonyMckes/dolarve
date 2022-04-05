@@ -12,7 +12,7 @@ import SearchResults from "../../components/SearchResults";
 import Sidebar from "../../components/Sidebar";
 import SidebarCard from "../../components/SidebarCard";
 import { useCurrencies } from "../../context/CurrenciesContextProvider";
-import { formatCur } from "../../utils/utils";
+import { formatCur } from "../../utils";
 
 export default function Details() {
   const { allCurrencies } = useCurrencies();
@@ -55,7 +55,7 @@ export default function Details() {
   return (
     <>
       {prices.length > 0 && (
-        <div className="space-y-4 py-4 self-start w-full md:col-start-2 mt-12 text-sm md:mx-auto md:mt-0 ">
+        <div className="self-start w-full py-4 mt-12 space-y-4 text-sm md:col-start-2 md:mx-auto md:mt-0 ">
           <div className="p-4 space-y-2 border rounded-md dark:border-neutral-700">
             <div className="flex items-center">
               <Logo {...details} />
@@ -69,7 +69,7 @@ export default function Details() {
             </div>
 
             <div className="">
-              <LineChart data={{ prices }} />
+              <LineChart currencyCode={currency} data={{ prices }} />
             </div>
           </div>
 
