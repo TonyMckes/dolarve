@@ -4,6 +4,7 @@ import { Outlet } from "react-router-dom";
 import Header from "./components/Header";
 import LoadingSpinner from "./components/LoadingSpinner";
 import Modal from "./components/Modal/Modal";
+import AuthContextProvider from "./context/AuthContextProvider";
 import CurrenciesContextProvider from "./context/CurrenciesContextProvider";
 import { ThemeProvider } from "./context/ThemeContext";
 import FavoritesContextProvider from "./hooks/useFavorites";
@@ -30,22 +31,24 @@ function App() {
 
   return (
     <ThemeProvider>
-      <IconContext.Provider value={{ className: "inline-block w-6 h-6" }}>
-        <div className="w-full h-full text-gray-800 lg:mx-auto lg:container dark:text-gray-300 ">
-          <div className="grid grid-cols-1 md:grid-cols-layout md:grid-rows-layout">
-            <Header />
+      <AuthContextProvider>
+        <IconContext.Provider value={{ className: "inline-block w-6 h-6" }}>
+          <div className="w-full h-full text-gray-800 lg:mx-auto lg:container dark:text-gray-300 ">
+            <div className="grid grid-cols-1 md:grid-cols-layout md:grid-rows-layout">
+              <FavoritesContextProvider>
+                <Header />
 
-            <FavoritesContextProvider>
-              <CurrenciesContextProvider>
-                <Outlet context={states} />
-              </CurrenciesContextProvider>
+                <CurrenciesContextProvider>
+                  <Outlet context={states} />
+                </CurrenciesContextProvider>
 
-              <LoadingSpinner loading={modal.spinner} />
-              <Modal modal={{ ...modal, setModal }} />
-            </FavoritesContextProvider>
+                <LoadingSpinner loading={modal.spinner} />
+                <Modal modal={{ ...modal, setModal }} />
+              </FavoritesContextProvider>
+            </div>
           </div>
-        </div>
-      </IconContext.Provider>
+        </IconContext.Provider>
+      </AuthContextProvider>
     </ThemeProvider>
   );
 }
