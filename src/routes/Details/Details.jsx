@@ -5,39 +5,17 @@ import { DiscoverOthers } from "../../components/Details/DiscoverOthers";
 import GapSelector from "../../components/Details/GapSelector";
 import LineChart from "../../components/LineChart";
 import { Logo } from "../../components/Logo";
-import TableList from "../../components/TableList";
-import { Title } from "../../components/Title";
-import SearchBar from "../../components/SearchBar";
-import SearchResults from "../../components/SearchResults";
+import SearchCard from "../../components/SearchCurrenciesCard";
 import Sidebar from "../../components/Sidebar";
 import SidebarCard from "../../components/SidebarCard";
 import { useCurrencies } from "../../context/CurrenciesContextProvider";
 import { formatCur } from "../../utils";
 
 export default function Details() {
-  const { allCurrencies } = useCurrencies();
-
   const [details, setDetails] = useState({});
-
-  const [searchResults, setSearchResults] = useState([]);
-
-  const { slug } = useParams();
-
-  const {
-    base,
-    createdAt,
-    currency,
-    icon,
-    name,
-    price,
-    price24h,
-    prices = [],
-    symbol,
-    type,
-    updatedAt,
-  } = details;
-
+  const { currency, price, prices = [] } = details;
   const { pathname } = useLocation();
+  const { slug } = useParams();
 
   useEffect(() => {
     (async () => {
@@ -84,11 +62,7 @@ export default function Details() {
 
       <Sidebar>
         <SidebarCard title="Buscar...">
-          <SearchBar
-            currencyList={allCurrencies}
-            setFilteredCurrency={setSearchResults}
-          />
-          <SearchResults results={searchResults} />
+          <SearchCard />
         </SidebarCard>
 
         <SidebarCard title="Descubre otras...">

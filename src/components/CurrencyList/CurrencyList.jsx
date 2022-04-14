@@ -1,10 +1,5 @@
 import { useEffect, useState } from "react";
-import { useOutletContext } from "react-router-dom";
-import { useCurrencies } from "../../context/CurrenciesContextProvider";
 import SearchBar from "../SearchBar";
-import SearchResults from "../SearchResults";
-import Sidebar from "../Sidebar";
-import SidebarCard from "../SidebarCard";
 import List from "./List";
 import ListSkeleton from "./ListSkeleton";
 
@@ -21,13 +16,12 @@ function CurrencyList({ currencies, loading }) {
 
   return (
     <>
-      {/* TODO: Refactor SearchBar 
       <SearchBar
         currencies={currencies}
         placeholder="Filtrar lista..."
         onFilterCur={handleFilter}
         variant
-      /> */}
+      />
 
       {loading ? (
         <ListSkeleton />
