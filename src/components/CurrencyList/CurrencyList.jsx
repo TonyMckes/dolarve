@@ -1,5 +1,5 @@
+import SearchBar from "components/SearchBar";
 import { useEffect, useState } from "react";
-import SearchBar from "../SearchBar";
 import List from "./List";
 import ListSkeleton from "./ListSkeleton";
 

@@ -1,6 +1,6 @@
+import { ThemeContext } from "context/ThemeContext";
 import { useContext } from "react";
 import { FaMoon, FaSun } from "react-icons/fa";
-import { ThemeContext } from "../context/ThemeContext";
 
 const Toggle = ({ sidebar }) => {
   const { theme, setTheme } = useContext(ThemeContext);

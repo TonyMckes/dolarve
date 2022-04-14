@@ -1,5 +1,5 @@
-import CurrencyList from "../components/CurrencyList";
-import useCurrencies from "../hooks/useCurrencies";
+import CurrencyList from "components/CurrencyList";
+import useCurrencies from "hooks/useCurrencies";
 
 function Criptomonedas() {
   const { curList, loading } = useCurrencies("cripto");

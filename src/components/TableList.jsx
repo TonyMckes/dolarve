@@ -1,4 +1,4 @@
-import { formatCur, formatTime } from "../utils";
+import { formatCur, formatTime } from "utils";
 
 export default function TableList({ prices, variant, currency }) {
   return (

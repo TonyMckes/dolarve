@@ -1,8 +1,8 @@
+import { useAuthContext } from "context/AuthContext";
+import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { useAuthContext } from "../context/AuthContext";
-import { logInWithGoogle, signUpWithEmailAndPassword } from "../utils/firebase";
+import { logInWithGoogle, signUpWithEmailAndPassword } from "utils/firebase";
 
 function SignIn() {
   const [error, setError] = useState("");

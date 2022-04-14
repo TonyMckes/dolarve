@@ -1,6 +1,6 @@
+import CurrencyList from "components/CurrencyList";
+import useCurrencies from "hooks/useCurrencies";
 import { useEffect, useState } from "react";
-import CurrencyList from "../components/CurrencyList";
-import useCurrencies from "../hooks/useCurrencies";
 
 function Favorites() {
   const { loading, curList } = useCurrencies("");

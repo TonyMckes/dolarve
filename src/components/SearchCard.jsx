@@ -1,7 +1,7 @@
+import SearchBar from "components/SearchBar";
+import SearchResults from "components/SearchResults";
+import { useCurrenciesContext } from "context/CurrenciesContext";
 import { useState } from "react";
-import { useCurrenciesContext } from "../context/CurrenciesContext";
-import SearchBar from "./SearchBar";
-import SearchResults from "./SearchResults";
 
 function SearchCard() {
   const [searchResults, setSearchResults] = useState([]);

@@ -1,20 +1,22 @@
+import App from "App";
+import "index.css";
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import App from "./App";
-import "./index.css";
-import reportWebVitals from "./reportWebVitals";
-import Banks from "./routes/Banks";
-// import Blue from "./routes/Blue";
-import Cryptocurrencies from "./routes/Cryptocurrencies";
-// import Currency from "./routes/Currency";
-// import CurrencyBlue from "./routes/CurrencyBlue";
-import Details from "./routes/Details/Details";
-import Favorites from "./routes/Favorites";
-import Login from "./routes/Login";
-import Quotations from "./routes/Quotations";
-import Resources from "./routes/Resources";
-import SignUp from "./routes/SignUp";
+import reportWebVitals from "reportWebVitals";
+import Banks from "routes/Banks";
+// import Blue from "routes/Blue";
+import Cryptocurrencies from "routes/Cryptocurrencies";
+// import Currency from "routes/Currency";
+// import CurrencyBlue from "routes/CurrencyBlue";
+import Details from "routes/Details/Details";
+import Favorites from "routes/Favorites";
+import Login from "routes/Login";
+import Quotations from "routes/Quotations";
+import Resources from "routes/Resources";
+import SignUp from "routes/SignUp";
+
+// TODO: Make favorites route conditional
 
 ReactDOM.render(
   <React.StrictMode>

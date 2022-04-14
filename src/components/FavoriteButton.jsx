@@ -1,8 +1,8 @@
+import { useAuthContext } from "context/AuthContext";
+import { useFavoritesContext } from "context/FavoritesContext";
 import { doc, setDoc } from "firebase/firestore";
 import { MdOutlineFavorite, MdOutlineFavoriteBorder } from "react-icons/md";
-import { useAuthContext } from "../context/AuthContext";
-import { useFavoritesContext } from "../context/FavoritesContext";
-import { db } from "../utils/firebase";
+import { db } from "utils/firebase";
 
 export function FavoriteButton({ _id }) {
   const { favorites, setFavorites } = useFavoritesContext();

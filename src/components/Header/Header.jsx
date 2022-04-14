@@ -1,11 +1,11 @@
+import { useAuthContext } from "context/AuthContext";
+import { useFavoritesContext } from "context/FavoritesContext";
 import { useState } from "react";
 import { FcCurrencyExchange } from "react-icons/fc";
 import { HiMenu } from "react-icons/hi";
 import { Link, NavLink } from "react-router-dom";
-import { useAuthContext } from "../../context/AuthContext";
-import { useFavoritesContext } from "../../context/FavoritesContext";
-import { auth } from "../../utils/firebase";
-import Toggle from "../../utils/toggleTheme";
+import { auth } from "utils/firebase";
+import Toggle from "utils/toggleTheme";
 import NavLinks from "./NavLinks";
 
 function Header() {

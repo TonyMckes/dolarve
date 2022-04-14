@@ -1,16 +1,16 @@
 import axios from "axios";
+import { DiscoverOthers } from "components/Details/DiscoverOthers";
+import GapSelector from "components/Details/GapSelector";
+import LineChart from "components/LineChart";
+import { Logo } from "components/Logo";
+import SearchCard from "components/SearchCard";
+import Sidebar from "components/Sidebar";
+import SidebarCard from "components/SidebarCard";
+import TableList from "components/TableList";
+import { Title } from "components/Title";
 import { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
-import { DiscoverOthers } from "../../components/Details/DiscoverOthers";
-import GapSelector from "../../components/Details/GapSelector";
-import LineChart from "../../components/LineChart";
-import { Logo } from "../../components/Logo";
-import SearchCard from "../../components/SearchCurrenciesCard";
-import Sidebar from "../../components/Sidebar";
-import SidebarCard from "../../components/SidebarCard";
-import TableList from "../../components/TableList";
-import { Title } from "../../components/Title";
-import { formatCur } from "../../utils";
+import { formatCur } from "utils";
 
 export default function Details() {
   const [details, setDetails] = useState({});
@@ -39,7 +39,7 @@ export default function Details() {
             <div className="flex items-center">
               <Logo {...details} />
 
-              <Title data={details} variant />
+              <Title {...details} />
               <div className="flex-1 text-right">
                 <span className="md:text-xl ">
                   {formatCur(price, currency)}

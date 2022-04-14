@@ -1,4 +1,4 @@
-import { diffPrice, formatCur, formatTime } from "../../utils";
+import { diffPrice, formatCur, formatTime } from "utils";
 
 export function Prices({ price24h, price, currency, updatedAt }) {
   return (

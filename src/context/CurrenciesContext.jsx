@@ -1,5 +1,5 @@
+import useCurrencies from "hooks/useCurrencies";
 import { createContext, useContext, useEffect, useState } from "react";
-import useCurrencies from "../hooks/useCurrencies";
 
 const CurrenciesContext = createContext();
 export function useCurrenciesContext() {

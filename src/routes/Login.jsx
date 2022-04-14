@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
-import { logInWithEmailAndPassword, logInWithGoogle } from "../utils/firebase";
+import { logInWithEmailAndPassword, logInWithGoogle } from "utils/firebase";
 
 function SignIn() {
   const [error, setError] = useState("");

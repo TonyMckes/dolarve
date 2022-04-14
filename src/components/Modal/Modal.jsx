@@ -1,11 +1,11 @@
+import { FavoriteButton } from "components/FavoriteButton";
+import LineChart from "components/LineChart";
+import { Logo } from "components/Logo";
+import TableList from "components/TableList";
+import { Title } from "components/Title";
 import { useEffect } from "react";
 import { AiOutlineCloseCircle } from "react-icons/ai";
-import LineChart from "../LineChart";
-import { Logo } from "../Logo";
-import TableList from "../TableList";
-import { Title } from "../Title";
 import { DetailsButton } from "./DetailsButton";
-import { FavoriteButton } from "../FavoriteButton";
 
 function Modal({ modal }) {
   const {

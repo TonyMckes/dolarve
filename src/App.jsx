@@ -1,13 +1,13 @@
+import Header from "components/Header";
+import LoadingSpinner from "components/LoadingSpinner";
+import Modal from "components/Modal/Modal";
+import AuthProvider from "context/AuthContext";
+import CurrenciesProvider from "context/CurrenciesContext";
+import FavoritesProvider from "context/FavoritesContext";
+import { ThemeProvider } from "context/ThemeContext";
 import { useState } from "react";
 import { IconContext } from "react-icons";
 import { Outlet } from "react-router-dom";
-import Header from "./components/Header";
-import LoadingSpinner from "./components/LoadingSpinner";
-import Modal from "./components/Modal/Modal";
-import AuthProvider from "./context/AuthContext";
-import CurrenciesProvider from "./context/CurrenciesContext";
-import FavoritesProvider from "./context/FavoritesContext";
-import { ThemeProvider } from "./context/ThemeContext";
 
 function App() {
   const [modal, setModal] = useState({ data: {}, show: false, spinner: false });

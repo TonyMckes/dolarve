@@ -1,8 +1,8 @@
+import { useCurrenciesContext } from "context/CurrenciesContext";
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import { getRandomCur } from "utils";
 import { urlPath } from "../../constants";
-import { useCurrenciesContext } from "../../context/CurrenciesContext";
-import { getRandomCur } from "../../utils";
 
 export function DiscoverOthers() {
   const [randomCurr, setRandomCurr] = useState([]);

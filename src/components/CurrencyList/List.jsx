@@ -1,7 +1,7 @@
 import axios from "axios";
+import { FavoriteButton } from "components/FavoriteButton";
+import { Logo } from "components/Logo";
 import { useOutletContext } from "react-router-dom";
-import { FavoriteButton } from "../FavoriteButton";
-import { Logo } from "./Logo";
 import { Prices } from "./Prices";
 import { Title } from "./Title";
 
@@ -43,7 +43,7 @@ export default function List({ filteredCur }) {
                 onClick={() => handleClick(curr._id)}
               >
                 <div className="table-cell w-10 align-middle border-y dark:border-neutral-700 ">
-                  <Logo {...curr} />
+                  <Logo {...curr} variant />
                 </div>
 
                 <div className="table-cell align-middle border-y dark:border-neutral-700 ">

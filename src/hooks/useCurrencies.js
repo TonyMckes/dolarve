@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import fetchCurrencies from "../services/fetchCurrencies";
+import fetchCurrencies from "services/fetchCurrencies";
 
 function useCurrencies(curType) {
   const [curList, setCurList] = useState([]);

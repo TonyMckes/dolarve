@@ -1,6 +1,6 @@
 import "chart.js/auto";
 import { Line } from "react-chartjs-2";
-import { formatCur, formatTime } from "../utils";
+import { formatCur, formatTime } from "utils";
 
 function LineChart({ currencyCode, data }) {
   const { prices = [] } = data;
