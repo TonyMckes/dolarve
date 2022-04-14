@@ -1,32 +1,12 @@
-import axios from "axios";
-import { useEffect } from "react";
-import { useOutletContext } from "react-router-dom";
-import Currencies from "../components/CurrencyList";
+import CurrencyList from "../components/CurrencyList";
+import useCurrencies from "../hooks/useCurrencies";
 
 function Cotizaciones() {
-  const { setCurList, setLoading } = useOutletContext();
-
-  useEffect(() => {
-    try {
-      (async () => {
-        setLoading(true);
-
-        const res = await axios.get(
-          `https://exchange.vcoud.com/coins/latest?type=bolivar&base=usd`,
-        );
-
-        setCurList(res.data);
-        setLoading(false);
-      })();
-    } catch (error) {
-      console.log(error);
-      setLoading(false);
-    }
-  }, []);
+  const { loading, curList } = useCurrencies("bolivar");
 
   return (
     <>
-      <Currencies />
+      <CurrencyList currencies={curList} loading={loading} />
     </>
   );
 }

@@ -8,47 +8,38 @@ import SidebarCard from "../SidebarCard";
 import List from "./List";
 import ListSkeleton from "./ListSkeleton";
 
-export default function Currencies() {
-  const [searchResults, setSearchResults] = useState([]);
-  const { curList, loading, setFilteredCur } = useOutletContext();
-  const { allCurrencies } = useCurrencies();
+function CurrencyList({ currencies, loading }) {
+  const [filteredCur, setFilteredCur] = useState(currencies);
 
   useEffect(() => {
-    setFilteredCur(curList);
-  }, [curList]);
+    setFilteredCur(currencies);
+  }, [currencies]);
+
+  const handleFilter = (curr) => {
+    setFilteredCur(curr);
+  };
 
   return (
     <>
+      {/* TODO: Refactor SearchBar 
       <SearchBar
-        currencies={curList}
+        currencies={currencies}
         placeholder="Filtrar lista..."
-        setFilteredCur={setFilteredCur}
+        onFilterCur={handleFilter}
         variant
-      />
+      /> */}
+
       {loading ? (
         <ListSkeleton />
-      ) : curList.length > 0 ? (
-        <List />
+      ) : currencies.length > 0 ? (
+        <List filteredCur={filteredCur} />
       ) : (
         <div className="flex flex-col items-center justify-center h-screen text-xl">
           Nothing over here...
         </div>
       )}
-
-      <Sidebar>
-        <SidebarCard title="Busca monedas...">
-          <SearchBar
-            currencies={allCurrencies}
-            setFilteredCur={setSearchResults}
-            placeholder="Buscar..."
-          />
-          <SearchResults results={searchResults} />
-        </SidebarCard>
-
-        <SidebarCard title="Tips...">
-          <p>Agrega favoritos para verlos al inicio!</p>
-        </SidebarCard>
-      </Sidebar>
     </>
   );
 }
+
+export default CurrencyList;

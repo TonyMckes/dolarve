@@ -1,36 +1,29 @@
-import { useEffect } from "react";
-import { useOutletContext } from "react-router-dom";
-import Currencies from "../components/CurrencyList";
-import { useCurrencies } from "../context/CurrenciesContextProvider";
+import { useEffect, useState } from "react";
+import CurrencyList from "../components/CurrencyList";
+import useCurrencies from "../hooks/useCurrencies";
 
-export default function Favorites() {
-  const { setCurList, setLoading, setCurInput } = useOutletContext();
-
-  const { allCurrencies } = useCurrencies();
+function Favorites() {
+  const { loading, curList } = useCurrencies("");
+  const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
-    try {
-      (async () => {
-        const arr = localStorage.getItem("favorites");
+    const favorites = localStorage.getItem("favorites");
 
-        if (arr) {
-          setLoading(true);
+    if (favorites) {
+      const favCurrencies = curList.reduce((acc, curr) => {
+        if (favorites.includes(curr._id)) acc.push(curr);
+        return acc;
+      }, []);
 
-          const favCurrencies = allCurrencies.reduce((acc, curr) => {
-            if (arr.includes(curr._id)) acc.push(curr);
-            return acc;
-          }, []);
-
-          setCurList(favCurrencies);
-
-          setLoading(false);
-        }
-      })();
-    } catch (error) {
-      console.log(error);
-      setLoading(false);
+      setFavorites(favCurrencies);
     }
-  }, [allCurrencies]);
+  }, [curList]);
 
-  return <Currencies filter />;
+  return (
+    <>
+      <CurrencyList currencies={favorites} loading={loading} />
+    </>
+  );
 }
+
+export default Favorites;

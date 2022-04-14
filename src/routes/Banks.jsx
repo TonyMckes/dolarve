@@ -1,34 +1,12 @@
-import axios from "axios";
-import { useEffect } from "react";
-import { useOutletContext } from "react-router-dom";
-import Currencies from "../components/CurrencyList";
+import CurrencyList from "../components/CurrencyList";
+import useCurrencies from "../hooks/useCurrencies";
 
 function TasasDeBancos() {
-  const { setCurList, setLoading } = useOutletContext();
-
-  useEffect(() => {
-    try {
-      (async () => {
-        setLoading(true);
-
-        const res = await axios.get(
-          `https://exchange.vcoud.com/coins/latest?type=bancove`,
-        );
-
-        setCurList(res.data);
-        setLoading(false);
-      })();
-    } catch (error) {
-      console.log(error);
-      setLoading(false);
-    }
-  }, []);
+  const { curList, loading } = useCurrencies("bancove");
 
   return (
     <>
-      <Currencies />
-
-      {/* <Inputs /> */}
+      <CurrencyList currencies={curList} loading={loading} />
     </>
   );
 }
