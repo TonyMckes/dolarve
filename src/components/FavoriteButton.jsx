@@ -1,12 +1,12 @@
 import { doc, setDoc } from "firebase/firestore";
 import { MdOutlineFavorite, MdOutlineFavoriteBorder } from "react-icons/md";
-import { useAuth } from "../context/AuthContextProvider";
-import { useFavorites } from "../hooks/useFavorites";
+import { useAuthContext } from "../context/AuthContext";
+import { useFavoritesContext } from "../context/FavoritesContext";
 import { db } from "../utils/firebase";
 
 export function FavoriteButton({ _id }) {
-  const { favorites, setFavorites } = useFavorites();
-  const { authState } = useAuth();
+  const { favorites, setFavorites } = useFavoritesContext();
+  const { authState } = useAuthContext();
 
   const save = async (arr) => {
     if (authState) {

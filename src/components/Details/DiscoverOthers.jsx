@@ -1,22 +1,22 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { urlPath } from "../../constants";
-import { useCurrencies } from "../../context/CurrenciesContextProvider";
+import { useCurrenciesContext } from "../../context/CurrenciesContext";
 import { getRandomCur } from "../../utils";
 
 export function DiscoverOthers() {
   const [randomCurr, setRandomCurr] = useState([]);
-  const { allCurrencies } = useCurrencies();
+  const { currencies } = useCurrenciesContext();
   const location = useLocation();
 
   useEffect(() => {
-    setRandomCurr(getRandomCur(allCurrencies));
+    setRandomCurr(getRandomCur(currencies));
   }, [location]);
 
   return (
     <div className="">
       <ul className="overflow-y-auto h-1/4 ">
-        {allCurrencies.length > 0 &&
+        {currencies.length > 0 &&
           randomCurr.map(({ _id, name, icon, slug, symbol, type }) => (
             <li
               key={_id}

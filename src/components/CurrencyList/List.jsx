@@ -5,8 +5,8 @@ import { Logo } from "./Logo";
 import { Prices } from "./Prices";
 import { Title } from "./Title";
 
-export default function List() {
-  const { modal, setModal, filteredCur } = useOutletContext();
+export default function List({ filteredCur }) {
+  const { modal, setModal } = useOutletContext();
 
   async function handleClick(id) {
     try {

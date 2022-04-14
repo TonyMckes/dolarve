@@ -4,13 +4,13 @@ import { auth } from "../utils/firebase";
 
 const AuthContext = createContext();
 
-export function useAuth() {
+export function useAuthContext() {
   return useContext(AuthContext);
 }
 
 const authInitState = JSON.parse(localStorage.getItem("user"));
 
-function AuthContextProvider({ children }) {
+function AuthProvider({ children }) {
   const [authState, setAuthState] = useState(authInitState);
 
   useEffect(() => {
@@ -48,4 +48,4 @@ function AuthContextProvider({ children }) {
   );
 }
 
-export default AuthContextProvider;
+export default AuthProvider;

@@ -1,7 +1,7 @@
 import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useAuth } from "../context/AuthContextProvider";
+import { useAuthContext } from "../context/AuthContext";
 import { logInWithGoogle, signUpWithEmailAndPassword } from "../utils/firebase";
 
 function SignIn() {
@@ -12,7 +12,7 @@ function SignIn() {
   });
   const { email, password } = inputValue;
 
-  const { setAuthState } = useAuth();
+  const { setAuthState } = useAuthContext();
   const navigate = useNavigate();
 
   const googleHandler = async () => {

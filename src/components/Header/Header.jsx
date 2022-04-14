@@ -2,19 +2,19 @@ import { useState } from "react";
 import { FcCurrencyExchange } from "react-icons/fc";
 import { HiMenu } from "react-icons/hi";
 import { Link, NavLink } from "react-router-dom";
-import { useAuth } from "../../context/AuthContextProvider";
+import { useAuthContext } from "../../context/AuthContext";
+import { useFavoritesContext } from "../../context/FavoritesContext";
+import { auth } from "../../utils/firebase";
 import Toggle from "../../utils/toggleTheme";
 import NavLinks from "./NavLinks";
-import { auth } from "../../utils/firebase";
-import { useFavorites } from "../../hooks/useFavorites";
 
-export default function Header() {
+function Header() {
   const [sidebar, setSidebar] = useState(false);
   const [show, setShow] = useState(false);
 
-  const { authState, setAuthState } = useAuth();
+  const { authState, setAuthState } = useAuthContext();
   const { displayName, email, photoURL } = authState || {};
-  const { setFavorites } = useFavorites();
+  const { setFavorites } = useFavoritesContext();
 
   const handleClick = (e) => {
     setShow(!show);
@@ -118,3 +118,5 @@ export default function Header() {
     </header>
   );
 }
+
+export default Header;

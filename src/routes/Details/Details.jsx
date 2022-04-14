@@ -8,7 +8,8 @@ import { Logo } from "../../components/Logo";
 import SearchCard from "../../components/SearchCurrenciesCard";
 import Sidebar from "../../components/Sidebar";
 import SidebarCard from "../../components/SidebarCard";
-import { useCurrencies } from "../../context/CurrenciesContextProvider";
+import TableList from "../../components/TableList";
+import { Title } from "../../components/Title";
 import { formatCur } from "../../utils";
 
 export default function Details() {

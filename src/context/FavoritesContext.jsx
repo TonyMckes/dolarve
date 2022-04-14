@@ -1,21 +1,21 @@
 import { doc, getDoc, setDoc } from "firebase/firestore";
 import { createContext, useContext, useEffect, useState } from "react";
-import { useAuth } from "../context/AuthContextProvider";
+import { useAuthContext } from "./AuthContext";
 import { db } from "../utils/firebase";
 
 const FavoritesContext = createContext();
 
-export function useFavorites() {
+export function useFavoritesContext() {
   return useContext(FavoritesContext);
 }
 
 const localFavorites = JSON.parse(localStorage.getItem("favorites"));
 const initialState = localFavorites ? localFavorites : [];
 
-export default function FavoritesContextProvider({ children }) {
+function FavoritesProvider({ children }) {
   const [favorites, setFavorites] = useState(initialState);
 
-  const { authState } = useAuth();
+  const { authState } = useAuthContext();
 
   useEffect(() => {
     (async () => {
@@ -50,3 +50,5 @@ export default function FavoritesContextProvider({ children }) {
     </FavoritesContext.Provider>
   );
 }
+
+export default FavoritesProvider;
