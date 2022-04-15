@@ -1,8 +1,9 @@
+import CurIcon from "components/CurIcon";
+import CurName from "components/CurName";
 import { FavoriteButton } from "components/FavoriteButton";
 import LineChart from "components/LineChart";
-import { Logo } from "components/Logo";
 import TableList from "components/TableList";
-import { Title } from "components/Title";
+import TrendingIcon from "components/TrendingIcon";
 import { useEffect } from "react";
 import { AiOutlineCloseCircle } from "react-icons/ai";
 import { DetailsButton } from "./DetailsButton";
@@ -53,16 +54,17 @@ function Modal({ modal }) {
               <AiOutlineCloseCircle className="w-6 h-6" pointerEvents="none" />
             </button>
           </div>
-          <div className=""></div>
+
           <div
-            className={`p-1 border border-neutral-300 dark:border-neutral-700 rounded-lg window-container ${bgColor}`}
+            className={`border border-neutral-300 dark:border-neutral-700 rounded-lg window-container ${bgColor}`}
           >
-            <div className="flex items-center border-b-2">
-              <Logo icon={icon} name={name} />
-              <Title data={data} />
+            <div className="flex items-center p-2 border-b-2">
+              <CurIcon name={name} icon={icon} size="14" />
+              <CurName name={name} size="lg" weight="bold" custom="mx-2" />
+              <TrendingIcon price={price} price24h={price24h} />
             </div>
 
-            <div className="mx-2 my-4">
+            <div className="px-2  mx-2 my-4">
               <p className="dark:text-gray-800">
                 Precio del {name} de la semana en Venezuela
               </p>
@@ -70,11 +72,13 @@ function Modal({ modal }) {
 
             <TableList prices={prices} currency={currency} />
 
-            <LineChart currencyCode={currency} data={data} />
+            <div className="px-2 pt-2">
+              <LineChart currencyCode={currency} data={data} />
+            </div>
           </div>
 
           <div className="flex justify-around m-4">
-            <FavoriteButton _id={_id} />
+            <FavoriteButton _id={_id} size="9" />
             <DetailsButton modal={modal} setModal={setModal} />
           </div>
         </div>

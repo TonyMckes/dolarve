@@ -1,20 +1,21 @@
 import axios from "axios";
-import { DiscoverOthers } from "components/Details/DiscoverOthers";
+import CurIcon from "components/CurIcon";
+import CurName from "components/CurName";
+import DiscoverOthers from "components/Details/DiscoverOthers";
 import GapSelector from "components/Details/GapSelector";
 import LineChart from "components/LineChart";
-import { Logo } from "components/Logo";
 import SearchCard from "components/SearchCard";
 import Sidebar from "components/Sidebar";
 import SidebarCard from "components/SidebarCard";
 import TableList from "components/TableList";
-import { Title } from "components/Title";
+import TrendingIcon from "components/TrendingIcon";
 import { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { formatCur } from "utils";
 
 export default function Details() {
   const [details, setDetails] = useState({});
-  const { currency, price, prices = [] } = details;
+  const { name, icon, currency, price, price24h, prices = [] } = details;
   const { pathname } = useLocation();
   const { slug } = useParams();
 
@@ -37,11 +38,12 @@ export default function Details() {
         <div className="self-start w-full py-4 mt-12 space-y-4 text-sm md:col-start-2 md:mx-auto md:mt-0 ">
           <div className="p-4 space-y-2 border rounded-md dark:border-neutral-700">
             <div className="flex items-center">
-              <Logo {...details} />
+              <CurIcon icon={icon} name={name} size="16" />
+              <CurName name={name} size="xl" weight="bold" custom="mx-2" />
 
-              <Title {...details} />
               <div className="flex-1 text-right">
-                <span className="md:text-xl ">
+                <TrendingIcon price={price} price24h={price24h} />{" "}
+                <span className="md:text-xl align-middle">
                   {formatCur(price, currency)}
                 </span>
               </div>

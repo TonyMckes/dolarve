@@ -1,9 +1,11 @@
 import axios from "axios";
+import CurSymbol from "components/CurSymbol";
+import CurIcon from "components/CurIcon";
+import CurName from "components/CurName";
 import { FavoriteButton } from "components/FavoriteButton";
-import { Logo } from "components/Logo";
 import { useOutletContext } from "react-router-dom";
 import { Prices } from "./Prices";
-import { Title } from "./Title";
+import TrendingIcon from "components/TrendingIcon";
 
 export default function List({ filteredCur }) {
   const { modal, setModal } = useOutletContext();
@@ -28,6 +30,7 @@ export default function List({ filteredCur }) {
         className={`md:px-4 md:border dark:border-neutral-700 rounded-lg dark:bg-neutral-800 md:dark:bg-inherit  transition-all dark:text-gray-100 md:col-start-2 w-full self-start md:mx-auto table text-sm mt-6 md:mt-0`}
       >
         <div className="table-row-group ">
+          {/* TODO: Refactor */}
           {filteredCur.map((curr) => {
             const bgColor =
               curr.price24h < curr.price
@@ -43,11 +46,13 @@ export default function List({ filteredCur }) {
                 onClick={() => handleClick(curr._id)}
               >
                 <div className="table-cell w-10 align-middle border-y dark:border-neutral-700 ">
-                  <Logo {...curr} variant />
+                  <CurIcon icon={curr.icon} name={curr.name} />
                 </div>
 
                 <div className="table-cell align-middle border-y dark:border-neutral-700 ">
-                  <Title {...curr} />
+                  <TrendingIcon price={curr.price} price24h={curr.price24h} size="4" />{" "}
+                  <CurName name={curr.name} size="sm" weight="medium" />{" "}
+                  <CurSymbol symbol={curr.symbol} size="xs" />
                 </div>
 
                 <div className="table-cell text-right align-middle border-y dark:border-neutral-700 ">
@@ -55,7 +60,7 @@ export default function List({ filteredCur }) {
                 </div>
 
                 <div className="table-cell w-5 text-center align-middle border-y dark:border-neutral-700 ">
-                  <FavoriteButton _id={curr._id} />
+                  <FavoriteButton _id={curr._id} size="5" />
                 </div>
               </div>
             );
