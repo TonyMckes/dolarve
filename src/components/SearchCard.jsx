@@ -1,5 +1,5 @@
 import SearchBar from "components/SearchBar";
-import SearchResults from "components/SearchResults";
+import SmallerCurrencyList from "components/SmallerCurrencyList";
 import { useCurrenciesContext } from "context/CurrenciesContext";
 import { useState } from "react";
 
@@ -14,7 +14,7 @@ function SearchCard() {
         onFilterCur={setSearchResults}
         placeholder="Buscar..."
       />
-      <SearchResults results={searchResults} />
+      <SmallerCurrencyList currencies={searchResults} />
     </>
   );
 }

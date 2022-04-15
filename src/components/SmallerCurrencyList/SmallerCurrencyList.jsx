@@ -1,4 +1,4 @@
-import ListItem from "components/ListItem";
+import ListItem from "components/SmallerCurrencyList/ListItem";
 
 function SmallerCurrencyList({ currencies }) {
   return (
