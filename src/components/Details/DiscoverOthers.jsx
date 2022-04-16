@@ -7,11 +7,11 @@ import { getRandomCur } from "utils";
 function DiscoverOthers() {
   const [randomCurr, setRandomCurr] = useState([]);
   const { currencies } = useCurrenciesContext();
-  const location = useLocation();
+  const { pathname } = useLocation();
 
   useEffect(() => {
     setRandomCurr(getRandomCur(currencies));
-  }, [location]);
+  }, [pathname, currencies]);
 
   return <SmallerCurrencyList currencies={randomCurr} />;
 }

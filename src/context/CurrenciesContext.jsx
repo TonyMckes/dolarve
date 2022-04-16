@@ -1,5 +1,5 @@
-import useCurrencies from "hooks/useCurrencies";
 import { createContext, useContext, useEffect, useState } from "react";
+import fetchCurrencies from "services/fetchCurrencies";
 
 const CurrenciesContext = createContext();
 export function useCurrenciesContext() {
@@ -11,22 +11,31 @@ const initialState = sessionCur ? JSON.parse(sessionCur) : [];
 
 function CurrenciesProvider({ children }) {
   const [currencies, setCurrencies] = useState(initialState);
-  const { curList } = useCurrencies("");
 
   useEffect(() => {
-    if (!sessionCur) {
-      const excludedList = ["blue", "currencyBlue", "currency"];
+    if (sessionCur) return;
 
-      const filteredCur = curList.reduce((acc, curr) => {
-        if (!excludedList.includes(curr.type)) acc.push(curr);
+    (async () => {
+      try {
+        const excludedList = ["blue", "currencyBlue", "currency"];
+        const data = await fetchCurrencies("");
 
-        return acc;
-      }, []);
+        const filteredCur = data.reduce((acc, curr) => {
+          if (!excludedList.includes(curr.type)) acc.push(curr);
 
-      setCurrencies(filteredCur);
+          return acc;
+        }, []);
 
-      sessionStorage.setItem("sessionCurrencies", JSON.stringify(filteredCur));
-    }
+        setCurrencies(filteredCur);
+
+        sessionStorage.setItem(
+          "sessionCurrencies",
+          JSON.stringify(filteredCur),
+        );
+      } catch (error) {
+        console.error(error);
+      }
+    })();
   }, []);
 
   return (
