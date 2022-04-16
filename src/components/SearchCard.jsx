@@ -1,7 +1,7 @@
 import SearchBar from "components/SearchBar";
 import SmallerCurrencyList from "components/SmallerCurrencyList";
 import { useCurrenciesContext } from "context/CurrenciesContext";
-import { useState } from "react";
+import { memo, useState } from "react";
 
 function SearchCard() {
   const [searchResults, setSearchResults] = useState([]);
@@ -19,4 +19,4 @@ function SearchCard() {
   );
 }
 
-export default SearchCard;
+export default memo(SearchCard);

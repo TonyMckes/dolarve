@@ -1,6 +1,6 @@
 import SmallerCurrencyList from "components/SmallerCurrencyList";
 import { useCurrenciesContext } from "context/CurrenciesContext";
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { getRandomCur } from "utils";
 
@@ -16,4 +16,4 @@ function DiscoverOthers() {
   return <SmallerCurrencyList currencies={randomCurr} />;
 }
 
-export default DiscoverOthers;
+export default memo(DiscoverOthers);

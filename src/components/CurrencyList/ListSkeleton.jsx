@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 function CurrenciesSkeleton() {
   return (
     <div className="self-start table w-full px-4 mt-6 border rounded-lg table-fixed dark:border-neutral-700 md:col-start-2 animate-pulse md:mx-auto md:mt-0">
@@ -27,4 +29,4 @@ function CurrenciesSkeleton() {
   );
 }
 
-export default CurrenciesSkeleton;
+export default memo(CurrenciesSkeleton);
