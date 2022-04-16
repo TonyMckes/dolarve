@@ -4,7 +4,7 @@ function CurrenciesSkeleton() {
   return (
     <div className="self-start table w-full px-4 mt-6 border rounded-lg table-fixed dark:border-neutral-700 md:col-start-2 animate-pulse md:mx-auto md:mt-0">
       <div className="table-row-group">
-        {Array(20)
+        {Array(Math.round(window.innerHeight / 60))
           .fill(null)
           .map((_, i) => (
             <div className="table-row" key={i}>
