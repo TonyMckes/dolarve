@@ -11,7 +11,7 @@ function CurIcon({ icon = PLACEHOLDER_URL, name, size = "8" }) {
 
   return (
     <img
-      className={`opacity-0 transition-opacity rounded-full inline-block drop-shadow-md w-${size} h-${size}`}
+      className={`mx-1 opacity-0 transition-opacity rounded-full inline-block drop-shadow-md w-${size} h-${size}`}
       src={icon}
       alt={name}
       onError={handleOnError}
