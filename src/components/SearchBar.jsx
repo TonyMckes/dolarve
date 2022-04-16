@@ -14,6 +14,9 @@ function SearchBar({ currencies, onFilterCur, variant, placeholder }) {
     );
 
     setSearchFilter(value);
+
+    if (!value) return onFilterCur([]);
+
     onFilterCur(filtered);
   };
 
