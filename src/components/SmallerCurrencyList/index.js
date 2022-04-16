@@ -1,1 +1,1 @@
-export { default } from "components/SmallerCurrencyList/SmallerCurrencyList";
+export { default } from "./SmallerCurrencyList";
