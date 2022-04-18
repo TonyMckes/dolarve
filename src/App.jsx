@@ -9,8 +9,10 @@ import { useState } from "react";
 import { IconContext } from "react-icons";
 import { Outlet } from "react-router-dom";
 
+const modalState = { data: {}, showing: false, spinner: false };
+
 function App() {
-  const [modal, setModal] = useState({ data: {}, show: false, spinner: false });
+  const [{ data, showing, spinner }, setModal] = useState(modalState);
 
   return (
     <AuthProvider>
@@ -22,11 +24,11 @@ function App() {
                 <Header />
 
                 <CurrenciesProvider>
-                  <Outlet context={{ modal, setModal }} />
+                  <Outlet context={setModal} />
                 </CurrenciesProvider>
 
-                <LoadingSpinner loading={modal.spinner} />
-                <Modal modal={{ ...modal, setModal }} />
+                <LoadingSpinner loading={spinner} />
+                <Modal details={data} setModal={setModal} showing={showing} />
               </FavoritesProvider>
             </div>
           </div>

@@ -1,7 +1,7 @@
 function CurName({ name, size = "base", weight = "base", custom = "" }) {
   return (
     <span
-      className={`dark:text-gray-100 whitespace-nowrap drop-shadow font-${weight} text-${size} ${custom}`}
+      className={`dark:text-gray-100 drop-shadow font-${weight} lg:text-${size} ${custom}`}
     >
       {name}
     </span>

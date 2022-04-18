@@ -4,7 +4,7 @@ import { doc, setDoc } from "firebase/firestore";
 import { MdOutlineFavorite, MdOutlineFavoriteBorder } from "react-icons/md";
 import { db } from "utils/firebase";
 
-export function FavoriteButton({ _id }) {
+function FavoriteButton({ _id, size = "6" }) {
   const { favorites, setFavorites } = useFavoritesContext();
   const { authState } = useAuthContext();
 
@@ -49,10 +49,12 @@ export function FavoriteButton({ _id }) {
   return (
     <button className="" onClick={(e) => handleFav(e, _id)}>
       {favorites.includes(_id) ? (
-        <MdOutlineFavorite className="h-4 w-4" />
+        <MdOutlineFavorite className={`w-${size} h-${size}`} />
       ) : (
-        <MdOutlineFavoriteBorder className="h-4 w-4" />
+        <MdOutlineFavoriteBorder className={`w-${size} h-${size}`} />
       )}
     </button>
   );
 }
+
+export default FavoriteButton;

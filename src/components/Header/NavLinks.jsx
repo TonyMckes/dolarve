@@ -18,7 +18,7 @@ export default function NavLinks({ sidebar }) {
 
   return (
     <ul
-      className={`h-auto space-y-10 text-xl  ${
+      className={`h-auto space-y-10 text-lg md:text-base lg:text-xl  ${
         sidebar ? "opacity-100" : "opacity-0 md:opacity-100"
       }`}
     >
@@ -27,7 +27,7 @@ export default function NavLinks({ sidebar }) {
           <li className="" key={i}>
             <NavLink
               className={({ isActive }) =>
-                ` whitespace-nowrap hover:bg-neutral-100 dark:hover:bg-neutral-700 rounded-xl px-2 py-1 align-middle  ${
+                `whitespace-nowrap hover:bg-neutral-100 dark:hover:bg-neutral-700 rounded-xl px-2 py-1 align-middle  ${
                   isActive
                     ? "font-bold ring-1 ring-neutral-200 dark:ring-neutral-600"
                     : ""

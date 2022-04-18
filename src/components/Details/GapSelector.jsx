@@ -1,15 +1,16 @@
 import axios from "axios";
 import { useState } from "react";
+import { API_URL } from "../../constants";
 
-export default function GapSelector({ details, setDetails, slug }) {
+function GapSelector({ details, setDetails, slug }) {
   const [selectedGap, setSelectedGap] = useState("w");
 
   const handleWeek = async (gap) => {
-    const res = await axios.get(
-      `https://exchange.vcoud.com/coins/${slug}?gap=1${gap}&base=usd`,
+    const { data: prices } = await axios(
+      `${API_URL}/coins/${slug}?gap=1${gap}&base=usd`,
     );
 
-    setDetails({ ...details, prices: res.data.prices });
+    setDetails({ ...details, prices });
     setSelectedGap(gap);
   };
 
@@ -22,8 +23,10 @@ export default function GapSelector({ details, setDetails, slug }) {
           ["m", "Mes"],
         ].map(([abbr, text], i) => (
           <button
-            className={`bg-emerald-300 rounded-md px-2 py-1 py-none m-2  outline-none transition-colors hover:bg-emerald-400 dark:text-gray-800 ${
-              abbr === selectedGap ? "bg-emerald-500 text-white " : ""
+            className={`bg-emerald-300 rounded-md px-2 py-1 py-none m-2 outline-none transition-colors hover:bg-emerald-400 dark:text-gray-800 ${
+              abbr === selectedGap
+                ? "bg-emerald-600 text-white dark:text-neutral-100 ring-2 ring-emerald-500"
+                : ""
             }`}
             key={i}
             name={abbr}
@@ -36,3 +39,5 @@ export default function GapSelector({ details, setDetails, slug }) {
     </div>
   );
 }
+
+export default GapSelector;

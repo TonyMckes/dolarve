@@ -1,6 +1,6 @@
 import { diffPrice, formatCur, formatTime } from "utils";
 
-export function Prices({ price24h, price, currency, updatedAt }) {
+function Prices({ price24h, price, currency, updatedAt }) {
   return (
     <>
       <span className="block text-xs font-light dark:drop-shadow-xl">
@@ -15,3 +15,5 @@ export function Prices({ price24h, price, currency, updatedAt }) {
     </>
   );
 }
+
+export default Prices;

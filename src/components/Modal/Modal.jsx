@@ -1,20 +1,17 @@
 import CurIcon from "components/CurIcon";
 import CurName from "components/CurName";
-import { FavoriteButton } from "components/FavoriteButton";
+import CurPrice from "components/CurPrice";
+import FavoriteButton from "components/FavoriteButton";
 import LineChart from "components/LineChart";
 import TableList from "components/TableList";
 import TrendingIcon from "components/TrendingIcon";
 import { useEffect } from "react";
 import { AiOutlineCloseCircle } from "react-icons/ai";
-import { DetailsButton } from "./DetailsButton";
+import DetailsButton from "./DetailsButton";
 
-function Modal({ modal }) {
-  const {
-    data,
-    data: { icon, name, prices, _id, price, price24h, currency },
-    setModal,
-    show: showing,
-  } = modal;
+function Modal({ details, setModal, showing }) {
+  const { slug, type, icon, name, prices, _id, price, price24h, currency } =
+    details || {};
 
   useEffect(() => {
     if (showing) {
@@ -36,9 +33,9 @@ function Modal({ modal }) {
 
     if (e.currentTarget !== e.target) return;
 
-    setModal({ ...modal, show: false });
+    setModal((prev) => ({ ...prev, showing: false }));
   }
-
+  // TODO: Refactor
   return (
     showing && (
       <div
@@ -62,24 +59,39 @@ function Modal({ modal }) {
               <CurIcon name={name} icon={icon} size="14" />
               <CurName name={name} size="lg" weight="bold" custom="mx-2" />
               <TrendingIcon price={price} price24h={price24h} />
+              <CurPrice currency={currency} price={price} />
             </div>
 
-            <div className="px-2  mx-2 my-4">
-              <p className="dark:text-gray-800">
-                Precio del {name} de la semana en Venezuela
-              </p>
-            </div>
+            {prices.length > 0 ? (
+              <>
+                <div className="px-2  mx-2 my-4">
+                  <p className="dark:text-gray-800">
+                    Precio de {name} de la semana en Venezuela
+                  </p>
+                </div>
 
-            <TableList prices={prices} currency={currency} />
+                <TableList prices={prices} currency={currency} />
 
-            <div className="px-2 pt-2">
-              <LineChart currencyCode={currency} data={data} />
-            </div>
+                <div className="px-2 pt-2">
+                  <LineChart currencyCode={currency} prices={prices} />
+                </div>
+              </>
+            ) : (
+              <div className="p-4 space-y-2 border rounded-md dark:border-neutral-700">
+                No hay muchos detalles sobre esta moneda
+              </div>
+            )}
           </div>
 
           <div className="flex justify-around m-4">
             <FavoriteButton _id={_id} size="9" />
-            <DetailsButton modal={modal} setModal={setModal} />
+            <DetailsButton
+              _id={_id}
+              handler={closeHandler}
+              details={details}
+              slug={slug}
+              type={type}
+            />
           </div>
         </div>
       </div>

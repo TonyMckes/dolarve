@@ -1,6 +1,7 @@
-import { formatCur, formatTime } from "utils";
+import TableListRow from "./TableListRow";
 
-export default function TableList({ prices, variant, currency }) {
+// TODO: Refactor
+function TableList({ prices, variant, currency }) {
   return (
     <table className="w-full p-2 text-center border dark:border-neutral-700">
       <thead className="">
@@ -11,12 +12,13 @@ export default function TableList({ prices, variant, currency }) {
       </thead>
 
       <tbody className="">
-        {prices.map((item) => (
-          <TableRow
-            {...item}
+        {prices.map(({ _id, price, updatedAt }) => (
+          <TableListRow
+            price={price}
+            updatedAt={updatedAt}
             currency={currency}
             variant={variant}
-            key={item._id}
+            key={_id}
           />
         ))}
       </tbody>
@@ -24,18 +26,4 @@ export default function TableList({ prices, variant, currency }) {
   );
 }
 
-function TableRow({ price, updatedAt, currency, variant }) {
-  return (
-    <tr
-      className={`${
-        variant
-          ? "even:bg-emerald-200 dark:even:bg-emerald-800"
-          : "even:bg-white dark:even:bg-neutral-700"
-      }`}
-    >
-      <td className="">{formatTime("", updatedAt)}</td>
-
-      <td className="text-right ">{formatCur(price, currency)}</td>
-    </tr>
-  );
-}
+export default TableList;
