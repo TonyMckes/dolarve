@@ -8,6 +8,11 @@ async function fetchCurrencies(curType = "") {
 
     return data;
   } catch (error) {
+    const { message } = error;
+    if (message === "Network Error") {
+      throw "Comprueba tu conexión! ⚠️";
+    }
+
     console.log(error);
   }
 }

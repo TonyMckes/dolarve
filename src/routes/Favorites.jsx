@@ -6,7 +6,7 @@ import useCurrencies from "hooks/useCurrencies";
 import { useEffect, useState } from "react";
 
 function Favorites() {
-  const { loading, curList } = useCurrencies("");
+  const { curList, error, loading } = useCurrencies("");
   const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
@@ -24,7 +24,7 @@ function Favorites() {
 
   return (
     <>
-      <CurrencyList currencies={favorites} loading={loading} />
+      <CurrencyList currencies={favorites} error={error} loading={loading} />
 
       <Sidebar>
         <SidebarCard title="Buscar...">

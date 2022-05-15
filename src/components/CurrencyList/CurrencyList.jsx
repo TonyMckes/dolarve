@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import List from "./List";
 import ListSkeleton from "./ListSkeleton";
 
-function CurrencyList({ currencies, loading }) {
+function CurrencyList({ currencies, error, loading }) {
   const [filteredCur, setFilteredCur] = useState(currencies);
 
   useEffect(() => {
@@ -29,7 +29,7 @@ function CurrencyList({ currencies, loading }) {
         <List filteredCur={filteredCur} />
       ) : (
         <div className="flex flex-col items-center justify-center h-screen text-xl">
-          Nothing over here...
+          {error || "No hay divisas para mostrar..."}
         </div>
       )}
     </>

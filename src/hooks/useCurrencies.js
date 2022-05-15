@@ -3,16 +3,17 @@ import fetchCurrencies from "services/fetchCurrencies";
 
 function useCurrencies(curType) {
   const [curList, setCurList] = useState([]);
+  const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchCurrencies(curType)
       .then(setCurList)
-      .then(() => setLoading(false))
-      .catch((error) => console.error(error));
+      .catch(setError)
+      .finally(() => setLoading(false));
   }, []);
 
-  return { curList, loading };
+  return { curList, error, loading };
 }
 
 export default useCurrencies;

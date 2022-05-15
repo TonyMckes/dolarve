@@ -5,11 +5,11 @@ import SidebarCard from "components/SidebarCard";
 import useCurrencies from "hooks/useCurrencies";
 
 function Cotizaciones() {
-  const { loading, curList } = useCurrencies("bolivar");
+  const { curList, error, loading } = useCurrencies("bolivar");
 
   return (
     <>
-      <CurrencyList currencies={curList} loading={loading} />
+      <CurrencyList currencies={curList} error={error} loading={loading} />
 
       <Sidebar>
         <SidebarCard title="Buscar...">

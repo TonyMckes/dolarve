@@ -2,11 +2,11 @@ import CurrencyList from "components/CurrencyList";
 import useCurrencies from "hooks/useCurrencies";
 
 function TasasDeBancos() {
-  const { curList, loading } = useCurrencies("bancove");
+  const { curList, error, loading } = useCurrencies("bancove");
 
   return (
     <>
-      <CurrencyList currencies={curList} loading={loading} />
+      <CurrencyList currencies={curList} error={error} loading={loading} />
     </>
   );
 }

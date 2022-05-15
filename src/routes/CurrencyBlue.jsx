@@ -2,11 +2,11 @@ import CurrencyList from "components/CurrencyList";
 import useCurrencies from "hooks/useCurrencies";
 
 function CurrencyBlue() {
-  const { curList, loading } = useCurrencies("currencyBlue");
+  const { curList, error, loading } = useCurrencies("currencyBlue");
 
   return (
     <>
-      <CurrencyList currencies={curList} loading={loading} />
+      <CurrencyList currencies={curList} error={error} loading={loading} />
     </>
   );
 }

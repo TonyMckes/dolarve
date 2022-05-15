@@ -2,11 +2,11 @@ import CurrencyList from "components/CurrencyList";
 import useCurrencies from "hooks/useCurrencies";
 
 function Recursos() {
-  const { curList, loading } = useCurrencies("petrooro");
+  const { curList, error, loading } = useCurrencies("petrooro");
 
   return (
     <>
-      <CurrencyList currencies={curList} loading={loading} />
+      <CurrencyList currencies={curList} error={error} loading={loading} />
     </>
   );
 }
