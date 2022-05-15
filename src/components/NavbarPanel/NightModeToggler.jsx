@@ -2,24 +2,28 @@ import { ThemeContext } from "context/ThemeContext";
 import { useContext } from "react";
 import { FaMoon, FaSun } from "react-icons/fa";
 
-const Toggle = ({ sidebar }) => {
+const NightModeToggler = () => {
   const { theme, setTheme } = useContext(ThemeContext);
 
+  const handleClick = () => {
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+  };
+
   return (
-    <div className="transition duration-500 ease-in-out rounded-full p-2 mx-2 my-4 md:p-4 md:mx-4 lg:pl-16">
+    <div className="transition duration-500 ease-in-out rounded-full ">
       {theme === "dark" ? (
         <FaSun
-          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
           className="text-gray-500 dark:text-gray-400 text-2xl cursor-pointer"
+          onClick={handleClick}
         />
       ) : (
         <FaMoon
-          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
           className="text-gray-500 dark:text-gray-400 text-2xl cursor-pointer"
+          onClick={handleClick}
         />
       )}
     </div>
   );
 };
 
-export default Toggle;
+export default NightModeToggler;

@@ -29,7 +29,7 @@ function SearchBar({ currencies, onFilterCur, variant, placeholder }) {
   return (
     <label
       className={`flex items-center w-full ${
-        variant ? "sticky z-10 ml-16 mr-6 top-3 md:top-0 md:m-0 w-auto" : ""
+        variant ? "sticky z-20 ml-16 mr-6 top-3 md:top-0 md:m-0 w-auto" : ""
       }`}
     >
       {searchFilter.length > 0 ? (

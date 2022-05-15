@@ -1,6 +1,7 @@
 import Header from "components/Header";
 import LoadingSpinner from "components/LoadingSpinner";
 import Modal from "components/Modal/Modal";
+import NavbarPanel from "components/NavbarPanel";
 import AuthProvider from "context/AuthContext";
 import CurrenciesProvider from "context/CurrenciesContext";
 import FavoritesProvider from "context/FavoritesContext";
@@ -21,11 +22,10 @@ function App() {
           <div className="w-full h-full text-gray-800 lg:mx-auto lg:container dark:text-gray-300 ">
             <div className="grid grid-cols-1 md:grid-cols-layout md:grid-rows-layout">
               <FavoritesProvider>
-                <Header />
-
-                <CurrenciesProvider>
-                  <Outlet context={setModal} />
-                </CurrenciesProvider>
+                  <NavbarPanel />
+                  <CurrenciesProvider>
+                    <Outlet context={setModal} />
+                  </CurrenciesProvider>
 
                 <LoadingSpinner loading={spinner} />
                 <Modal details={data} setModal={setModal} showing={showing} />

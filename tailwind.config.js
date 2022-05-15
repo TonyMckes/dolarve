@@ -9,6 +9,11 @@ module.exports = {
       gridTemplateRows: {
         layout: "auto 1fr",
       },
+      colors: {
+        neutral: {
+          450: "rgb(139, 139, 139)",
+        },
+      },
     },
   },
   plugins: [],
