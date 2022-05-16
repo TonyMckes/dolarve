@@ -45,7 +45,7 @@ function Modal({ details, setModal, showing }) {
         <div className="w-4/5 p-4 text-sm bg-white rounded-lg dark:bg-neutral-800 md:max-w-md history-window">
           <div className="flex flex-row-reverse mb-2">
             <button
-              className="outline-none drop-shadow-lg"
+              className="outline-none"
               onClick={closeHandler}
             >
               <AiOutlineCloseCircle className="w-6 h-6" pointerEvents="none" />
@@ -84,7 +84,7 @@ function Modal({ details, setModal, showing }) {
           </div>
 
           <div className="flex justify-around m-4">
-            <FavoriteButton _id={_id} size="9" />
+            <FavoriteButton _id={_id} size="9" variant />
             <DetailsButton
               _id={_id}
               handler={closeHandler}

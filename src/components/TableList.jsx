@@ -3,7 +3,7 @@ import TableListRow from "./TableListRow";
 // TODO: Refactor
 function TableList({ prices, variant, currency }) {
   return (
-    <table className="w-full p-2 text-center border dark:border-neutral-700">
+    <table className="w-full p-2 text-center border border-neutral-450">
       <thead className="">
         <tr className="bg-emerald-500">
           <th className="">Dia</th>

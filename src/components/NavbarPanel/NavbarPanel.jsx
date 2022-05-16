@@ -43,7 +43,7 @@ function NavbarPanel() {
       </div>
 
       <div
-        className={`divide-y divide-neutral-450 px-2 fixed bottom-0 z-10 md:w-1/4 lg:w-auto w-2/3 space-y-2 transition  whitespace-nowrap md:pt-0 lg:p-4 lg:mx-4 xl:pl-16 ${sidebarToggle}`}
+        className={`fixed bottom-0 z-10 w-2/3 px-2 space-y-2 transition divide-y divide-neutral-450 md:w-1/4 lg:w-auto whitespace-nowrap md:pt-0 lg:p-4 lg:mx-4 xl:pl-16 ${sidebarToggle}`}
       >
         <ProfileInfo />
         <SessionLinks />

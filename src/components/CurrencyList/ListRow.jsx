@@ -24,32 +24,32 @@ function ListRow({ _id, currency, icon, name, price, price24h, symbol, updatedAt
   };
 
   const bgColor =
-  price24h < price
-    ? "bg-gradient-to-l from-green-300 dark:from-green-400 via-transparent"
-    : price24h > price
-    ? "bg-gradient-to-l from-red-300 dark:from-red-400 via-transparent"
-    : "bg-white dark:bg-neutral-800";
-    
+    price24h < price
+      ? "bg-gradient-to-l from-green-400 via-transparent"
+      : price24h > price
+      ? "bg-gradient-to-l from-red-400  via-transparent"
+      : "bg-gradient-to-l from-neutral-450  via-transparent";
+
   return (
     <div
-      className={`table-row transition-all cursor-pointer md:hover:scale-105 ${bgColor}`}
+      className={`table-row transition cursor-pointer md:hover:scale-105 ${bgColor}`}
       onClick={() => handleClick(_id)}
     >
-      <div className="table-cell w-10 align-middle border-y dark:border-neutral-700 ">
+      <div className="table-cell w-10 text-center align-middle border-y border-neutral-450">
         <CurIcon icon={icon} name={name} />
       </div>
 
-      <div className="table-cell align-middle border-y dark:border-neutral-700 ">
-        <TrendingIcon price={price} price24h={price24h} size="4" />{" "}
-        <CurName name={name} size="sm" weight="medium" />{" "}
+      <div className="table-cell align-middle border-y border-neutral-450">
+        <CurName name={name} size="sm" weight="medium" />
+        <TrendingIcon price={price} price24h={price24h} size="4" />
         <CurSymbol symbol={symbol} size="xs" />
       </div>
 
-      <div className="table-cell text-right align-middle border-y dark:border-neutral-700 ">
+      <div className="table-cell w-32 text-right align-middle border-y border-neutral-450">
         <Prices currency={currency} price={price} price24h={price24h} updatedAt={updatedAt} />
       </div>
 
-      <div className="table-cell w-5 text-center align-middle border-y dark:border-neutral-700 ">
+      <div className="table-cell w-6 text-center align-middle border-y border-neutral-450">
         <FavoriteButton _id={_id} size="5" />
       </div>
     </div>

@@ -35,7 +35,7 @@ function Details() {
   return (
     <>
       <div className="self-start w-full py-4 mt-12 space-y-4 text-sm md:col-start-2 md:mx-auto md:mt-0 ">
-        <div className="p-4 space-y-2 border rounded-md dark:border-neutral-700">
+        <div className="p-4 space-y-2 border rounded-md border-neutral-450">
           <div className="flex items-center">
             <CurIcon icon={icon} name={name} size="16" />
             <CurName name={name} size="xl" weight="bold" custom="mx-2" />
@@ -50,14 +50,14 @@ function Details() {
         </div>
 
         {prices.length > 0 ? (
-          <div className="p-4 space-y-2 border rounded-md dark:border-neutral-700">
+          <div className="p-4 space-y-2 border rounded-md border-neutral-450">
             <GapSelector {...{ details, setDetails, slug }} />
             <div className="lg:col-start-2">
               <TableList variant prices={prices} currency={currency} />
             </div>
           </div>
         ) : (
-          <div className="p-4 space-y-2 border rounded-md dark:border-neutral-700">
+          <div className="p-4 space-y-2 border rounded-md border-neutral-450">
             No hay muchos detalles sobre esta moneda
           </div>
         )}

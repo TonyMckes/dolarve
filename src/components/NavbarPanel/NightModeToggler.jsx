@@ -10,7 +10,7 @@ const NightModeToggler = () => {
   };
 
   return (
-    <div className="transition duration-500 ease-in-out rounded-full ">
+    <div className="rounded-full">
       {theme === "dark" ? (
         <FaSun
           className="text-gray-500 dark:text-gray-400 text-2xl cursor-pointer"

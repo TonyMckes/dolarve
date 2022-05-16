@@ -1,6 +1,6 @@
 function CurSymbol({ symbol, size = "sm" }) {
   return (
-    <span className={`text-${size} text-gray-500 dark:text-gray-400`}>
+    <span className={`text-neutral-450 text-${size} `}>
       ({symbol})
     </span>
   );
