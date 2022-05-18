@@ -40,7 +40,9 @@ function FavoritesProvider({ children }) {
 
       const docRef = doc(db, "users", authState.uid);
 
-      await setDoc(docRef, { favorites }, { merge: true });
+      if (docRef.exists()) {
+        await setDoc(docRef, { favorites }, { merge: true });
+      }
     })();
 
     if (favorites.length === initialState().length) return;
