@@ -1,24 +1,21 @@
-import { useAuthContext } from "context/AuthContext";
+import { GoogleAuthProvider } from "firebase/auth";
 import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
-import { logInWithGoogle, signUpWithEmailAndPassword } from "utils/firebase";
+import userSignInWithProvider from "services/userSignInWithProvider";
+import userSignUp from "services/userSignUp";
 
 function SignIn() {
   const [error, setError] = useState("");
-  const [inputValue, setInputValue] = useState({
-    email: "",
-    password: "",
-  });
+  const [inputValue, setInputValue] = useState({ email: "", password: "" });
   const { email, password } = inputValue;
 
-  const { setAuthState } = useAuthContext();
   const navigate = useNavigate();
 
-  const googleHandler = async () => {
-    const { user } = await logInWithGoogle();
-
-    navigate("/");
+  const googleHandler = () => {
+    userSignInWithProvider(new GoogleAuthProvider())
+      .then(() => navigate("/"))
+      .catch(console.log);
   };
 
   const handleInput = (e) => {
@@ -30,18 +27,12 @@ function SignIn() {
     setInputValue({ ...inputValue, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (password.length < 6) return setError("must be at least 6 characters");
-
-    try {
-      const { user } = await signUpWithEmailAndPassword(email, password);
-
-      navigate("/");
-    } catch (error) {
-      console.log(error);
-    }
+    userSignUp(email, password)
+      .then(() => navigate("/"))
+      .catch(setError);
   };
 
   return (

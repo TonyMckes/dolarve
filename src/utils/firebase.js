@@ -1,13 +1,5 @@
-// Import the functions you need from the SDKs you need
-import { getAnalytics } from "firebase/analytics";
 import { initializeApp } from "firebase/app";
-import {
-  createUserWithEmailAndPassword,
-  getAuth,
-  GoogleAuthProvider,
-  signInWithEmailAndPassword,
-  signInWithPopup,
-} from "firebase/auth";
+import { getAuth } from "firebase/auth";
 import { enableIndexedDbPersistence, getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -37,16 +29,7 @@ enableIndexedDbPersistence(db).catch((err) => {
     // ...
   }
 });
+
 // Subsequent queries will use persistence, if it was enabled successfully
 
-const provider = new GoogleAuthProvider();
-
-export const logInWithGoogle = () => signInWithPopup(auth, provider);
-
-export const signUpWithEmailAndPassword = (email, password) =>
-  createUserWithEmailAndPassword(auth, email, password);
-
-export const logInWithEmailAndPassword = (email, password) =>
-  signInWithEmailAndPassword(auth, email, password);
-
-export const analytics = getAnalytics(app);
+export default app;

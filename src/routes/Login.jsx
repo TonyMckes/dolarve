@@ -1,26 +1,21 @@
+import { GoogleAuthProvider } from "firebase/auth";
 import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
-import { logInWithEmailAndPassword, logInWithGoogle } from "utils/firebase";
+import userSignIn from "services/userSignIn";
+import userSignInWithProvider from "services/userSignInWithProvider";
 
 function SignIn() {
   const [error, setError] = useState("");
-  const [inputValue, setInputValue] = useState({
-    email: "",
-    password: "",
-  });
+  const [inputValue, setInputValue] = useState({ email: "", password: "" });
   const { email, password } = inputValue;
 
   const navigate = useNavigate();
 
-  const googleHandler = async () => {
-    try {
-      const { user } = await logInWithGoogle();
-    } catch (error) {
-      console.log(error);
-    }
-
-    navigate("/");
+  const googleHandler = () => {
+    userSignInWithProvider(new GoogleAuthProvider())
+      .then(() => navigate("/"))
+      .catch(console.log);
   };
 
   const handleInput = (e) => {
@@ -32,18 +27,12 @@ function SignIn() {
     setInputValue({ ...inputValue, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (password.length < 6) return setError("must be at least 6 characters");
-
-    try {
-      const { user } = await logInWithEmailAndPassword(email, password);
-
-      navigate("/");
-    } catch (error) {
-      console.log(error);
-    }
+    userSignIn(email, password)
+      .then(() => navigate("/"))
+      .catch(setError);
   };
 
   return (
@@ -65,7 +54,7 @@ function SignIn() {
                   type="email"
                   name="email"
                   value={email}
-                  onChange={(e) => handleInput(e)}
+                  onChange={handleInput}
                   required
                 />
               </label>
@@ -78,18 +67,19 @@ function SignIn() {
                   type="password"
                   name="password"
                   value={password}
-                  onChange={(e) => handleInput(e)}
+                  onChange={handleInput}
                   required
                 />
               </label>
               <button
-                onClick={(e) => handleSubmit(e)}
+                onClick={handleSubmit}
                 className="px-2 py-3 mt-4 font-semibold rounded-2xl bg-neutral-200 hover:bg-neutral-300 dark:bg-neutral-700 dark:hover:bg-neutral-600"
               >
                 Sign up
               </button>
             </form>
           </div>
+
           <div className="p-4">
             <button
               className="p-2 border outline-none rounded-xl hover:bg-gray-100"
@@ -99,6 +89,7 @@ function SignIn() {
               <span className="font-bold">Sign in with Google</span>
             </button>
           </div>
+
           <p className="p-4">
             Dont have an account?
             <Link
@@ -107,6 +98,13 @@ function SignIn() {
             >
               {" "}
               Register
+            </Link>
+            <Link
+              className="text-blue-500 duration-300 hover:text-blue-700"
+              to="/"
+            >
+              {" "}
+              Home
             </Link>
           </p>
         </div>
