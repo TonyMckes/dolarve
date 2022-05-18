@@ -9,8 +9,7 @@ export function useFavoritesContext() {
   return useContext(FavoritesContext);
 }
 
-const localFavorites = JSON.parse(localStorage.getItem("favorites"));
-const initialState = localFavorites ? localFavorites : [];
+const initialState = () => JSON.parse(localStorage.getItem("favorites")) || [];
 
 function FavoritesProvider({ children }) {
   const [favorites, setFavorites] = useState(initialState);
@@ -18,31 +17,36 @@ function FavoritesProvider({ children }) {
   const { authState } = useAuthContext();
 
   useEffect(() => {
+    if (!authState) return;
+
     (async () => {
-      if (authState) {
-        const docRef = doc(db, "users", authState.uid);
+      const docRef = doc(db, "users", authState.uid);
+      const docSnap = await getDoc(docRef);
 
-        const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        const dbFavorites = docSnap.get("favorites");
+        const mergedFavorites = [...new Set([...dbFavorites, ...favorites])];
 
-        if (docSnap.exists()) {
-          localStorage.setItem(
-            "favorites",
-            JSON.stringify(docSnap.get("favorites")),
-          );
-
-          setFavorites(docSnap.get("favorites"));
-        } else {
-          const localFavorites = JSON.parse(localStorage.getItem("favorites"));
-
-          const userUID = doc(db, `users/${authState.uid}`);
-
-          await setDoc(userUID, { favorites: localFavorites }, { merge: true });
-        }
+        setFavorites(mergedFavorites);
       } else {
-        // ...
+        await setDoc(docRef, { favorites });
       }
     })();
   }, [authState]);
+
+  useEffect(() => {
+    (async () => {
+      if (!authState) return;
+
+      const docRef = doc(db, "users", authState.uid);
+
+      await setDoc(docRef, { favorites }, { merge: true });
+    })();
+
+    if (favorites.length === initialState().length) return;
+
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  }, [favorites]);
 
   return (
     <FavoritesContext.Provider value={{ favorites, setFavorites }}>
