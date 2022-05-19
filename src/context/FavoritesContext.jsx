@@ -39,8 +39,9 @@ function FavoritesProvider({ children }) {
       if (!authState) return;
 
       const docRef = doc(db, "users", authState.uid);
+      const docSnap = await getDoc(docRef);
 
-      if (docRef.exists()) {
+      if (docSnap.exists()) {
         await setDoc(docRef, { favorites }, { merge: true });
       }
     })();
