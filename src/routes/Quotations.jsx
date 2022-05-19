@@ -4,7 +4,7 @@ import Sidebar from "components/Sidebar";
 import SidebarCard from "components/SidebarCard";
 import useCurrencies from "hooks/useCurrencies";
 
-function Cotizaciones() {
+function Quotations() {
   const { curList, error, loading } = useCurrencies("bolivar");
 
   return (
@@ -20,4 +20,4 @@ function Cotizaciones() {
   );
 }
 
-export default Cotizaciones;
+export default Quotations;

@@ -1,7 +1,7 @@
 import CurrencyList from "components/CurrencyList";
 import useCurrencies from "hooks/useCurrencies";
 
-function Recursos() {
+function Resources() {
   const { curList, error, loading } = useCurrencies("petrooro");
 
   return (
@@ -11,4 +11,4 @@ function Recursos() {
   );
 }
 
-export default Recursos;
+export default Resources;

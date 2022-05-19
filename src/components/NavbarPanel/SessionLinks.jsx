@@ -5,12 +5,13 @@ import {
   HiOutlineLogout,
   HiOutlinePencilAlt,
 } from "react-icons/hi";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { auth } from "utils/firebase";
 
 function SessionLinks() {
   const { authState, setAuthState } = useAuthContext();
   const { setFavorites } = useFavoritesContext();
+  const location = useLocation();
 
   const handleLogout = async () => {
     localStorage.removeItem("user");
@@ -35,12 +36,14 @@ function SessionLinks() {
     <div className="flex justify-end space-x-2 md:justify-start">
       <Link
         className="px-4 py-2 my-3 ring-1 ring-neutral-450 hover:bg-neutral-100 dark:hover:bg-neutral-700 rounded-xl"
+        state={{ backgroundLocation: location }}
         to="/login"
       >
         <HiOutlineLogin /> Log In
       </Link>
       <Link
         className="px-4 py-2 my-3 ring-1 ring-neutral-450 hover:bg-neutral-100 dark:hover:bg-neutral-700 rounded-xl"
+        state={{ backgroundLocation: location }}
         to="/register"
       >
         <HiOutlinePencilAlt /> Sign Up

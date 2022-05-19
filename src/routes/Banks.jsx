@@ -1,7 +1,7 @@
 import CurrencyList from "components/CurrencyList";
 import useCurrencies from "hooks/useCurrencies";
 
-function TasasDeBancos() {
+function Banks() {
   const { curList, error, loading } = useCurrencies("bancove");
 
   return (
@@ -11,4 +11,4 @@ function TasasDeBancos() {
   );
 }
 
-export default TasasDeBancos;
+export default Banks;
