@@ -1,15 +1,17 @@
 import { GoogleAuthProvider } from "firebase/auth";
 import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import userSignInWithProvider from "services/userSignInWithProvider";
 import userSignUp from "services/userSignUp";
 
-function SignIn() {
+function SignUp() {
   const [error, setError] = useState("");
   const [inputValue, setInputValue] = useState({ email: "", password: "" });
   const { email, password } = inputValue;
 
+  const location = useLocation();
+  const { backgroundLocation } = location.state || {};
   const navigate = useNavigate();
 
   const googleHandler = () => {
@@ -93,6 +95,7 @@ function SignIn() {
             Already have an account?{" "}
             <Link
               className="text-blue-500 hover:text-blue-700 duration-300"
+              state={{ backgroundLocation }}
               to="/login"
             >
               Login
@@ -104,4 +107,4 @@ function SignIn() {
   );
 }
 
-export default SignIn;
+export default SignUp;

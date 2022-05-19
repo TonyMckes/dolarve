@@ -58,7 +58,9 @@ export const ThemeProvider = ({ initialTheme, children }) => {
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
-      {children}
+      <div className="min-h-full transition-colors duration-500 dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300">
+        {children}
+      </div>
     </ThemeContext.Provider>
   );
 };

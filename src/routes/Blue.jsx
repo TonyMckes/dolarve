@@ -1,7 +1,7 @@
 import CurrencyList from "components/CurrencyList";
 import useCurrencies from "hooks/useCurrencies";
 
-function Currency() {
+function Blue() {
   const { curList, error, loading } = useCurrencies("blue");
 
   return (
@@ -11,4 +11,4 @@ function Currency() {
   );
 }
 
-export default Currency;
+export default Blue;

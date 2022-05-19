@@ -1,7 +1,7 @@
 import CurrencyList from "components/CurrencyList";
 import useCurrencies from "hooks/useCurrencies";
 
-function Criptomonedas() {
+function Cryptocurrencies() {
   const { curList, error, loading } = useCurrencies("cripto");
 
   return (
@@ -10,4 +10,4 @@ function Criptomonedas() {
     </>
   );
 }
-export default Criptomonedas;
+export default Cryptocurrencies;
