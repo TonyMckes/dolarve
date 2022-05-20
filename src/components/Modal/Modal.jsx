@@ -3,6 +3,7 @@ import CurName from "components/CurName";
 import CurPrice from "components/CurPrice";
 import FavoriteButton from "components/FavoriteButton";
 import LineChart from "components/LineChart";
+import ModalContainer from "components/ModalContainer";
 import TableList from "components/TableList";
 import TrendingIcon from "components/TrendingIcon";
 import { useEffect } from "react";
@@ -13,54 +14,21 @@ function Modal({ details, setModal, showing }) {
   const { slug, type, icon, name, prices, _id, price, price24h, currency } =
     details || {};
 
-  useEffect(() => {
-    if (showing) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
-
-    return () => (document.body.style.overflow = "unset");
-  }, [showing]);
 
   const bgColor =
     price24h <= price
       ? "bg-gradient-to-b from-green-300 "
       : "bg-gradient-to-b from-red-200 ";
 
-  function closeHandler(e) {
-    e.stopPropagation();
-
-    if (e.currentTarget !== e.target) return;
-
-    setModal((prev) => ({ ...prev, showing: false }));
-  }
-  // TODO: Refactor
   return (
-    showing && (
-      <div
-        className="fixed top-0 left-0 z-50 flex items-center justify-center w-screen h-screen bg-black bg-opacity-25 dark:bg-opacity-50 background-window"
-        onClick={closeHandler}
-      >
-        <div className="w-4/5 p-4 text-sm bg-white rounded-lg dark:bg-neutral-800 md:max-w-md history-window">
-          <div className="flex flex-row-reverse mb-2">
-            <button
-              className="outline-none"
-              onClick={closeHandler}
-            >
-              <AiOutlineCloseCircle className="w-6 h-6" pointerEvents="none" />
-            </button>
-          </div>
-
-          <div
-            className={`border border-neutral-300 dark:border-neutral-700 rounded-lg window-container ${bgColor}`}
-          >
-            <div className="flex items-center p-2 border-b-2">
-              <CurIcon name={name} icon={icon} size="14" />
-              <CurName name={name} size="lg" weight="bold" custom="mx-2" />
-              <TrendingIcon price={price} price24h={price24h} />
-              <CurPrice currency={currency} price={price} />
-            </div>
+    <ModalContainer>
+      <div className={`${bgColor}`}>
+        <div className="flex items-center p-2 border-b-2">
+          <CurIcon name={name} icon={icon} size="14" />
+          <CurName name={name} size="lg" weight="bold" custom="mx-2" />
+          <TrendingIcon price={price} price24h={price24h} />
+          <CurPrice currency={currency} price={price} />
+        </div>
 
             {prices.length > 0 ? (
               <>
@@ -94,8 +62,7 @@ function Modal({ details, setModal, showing }) {
             />
           </div>
         </div>
-      </div>
-    )
+    </ModalContainer>
   );
 }
 

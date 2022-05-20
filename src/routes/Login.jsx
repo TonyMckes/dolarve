@@ -1,3 +1,4 @@
+import ModalContainer from "components/ModalContainer";
 import { GoogleAuthProvider } from "firebase/auth";
 import { useState } from "react";
 import { FcGoogle } from "react-icons/fc";
@@ -38,28 +39,22 @@ function Login() {
   };
 
   return (
-    <div
-      className="fixed top-0 left-0 z-50 flex items-center justify-center w-screen h-screen bg-black bg-opacity-25 dark:bg-opacity-50 background-window"
-      // onClick={(e) => closeHandler(e)}
-    >
-      <div className="w-4/5 p-4 text-sm bg-white rounded-lg dark:bg-neutral-800 md:max-w-md history-window">
-        <div
-          className={`flex divide-y-2 divide-gray-300 flex-col items-center p-4 border border-neutral-300 dark:border-neutral-700 rounded-lg window-container `}
-        >
-          <div className="pb-4">
-            <h2 className="text-lg font-bold text-center">Login</h2>
-            <form className="flex flex-col ">
-              <label className="py-2 ">
-                Email
-                <input
-                  className="block px-4 py-1 border rounded outline-gray-300 hover:bg-gray-50"
-                  type="email"
-                  name="email"
-                  value={email}
-                  onChange={handleInput}
-                  required
-                />
-              </label>
+    <ModalContainer>
+      <div className="flex flex-col items-center p-4 divide-y-2 divide-gray-300">
+        <div className="pb-4">
+          <h2 className="text-lg font-bold text-center">Login</h2>
+          <form className="flex flex-col ">
+            <label className="py-2 ">
+              Email
+              <input
+                className="block px-4 py-1 border rounded outline-gray-300 hover:bg-gray-50"
+                type="email"
+                name="email"
+                value={email}
+                onChange={handleInput}
+                required
+              />
+            </label>
 
               <label className={`py-2 ${error ? "text-red-600" : ""} `}>
                 Password{" "}
@@ -104,8 +99,7 @@ function Login() {
             </Link>
           </p>
         </div>
-      </div>
-    </div>
+    </ModalContainer>
   );
 }
 
