@@ -1,26 +1,35 @@
-import axios from "axios";
 import CurIcon from "components/CurIcon";
 import CurName from "components/CurName";
 import CurSymbol from "components/CurSymbol";
 import FavoriteButton from "components/FavoriteButton";
 import TrendingIcon from "components/TrendingIcon";
-import { API_URL } from "constants";
-import { useOutletContext } from "react-router-dom";
+import { urlPath } from "constants";
+import { useLocation, useNavigate } from "react-router-dom";
 import Prices from "./Prices";
 
-function ListRow({ _id, currency, icon, name, price, price24h, symbol, updatedAt }) {
-  const setModal = useOutletContext();
+function ListRow({
+  _id,
+  currency,
+  details,
+  icon,
+  name,
+  price,
+  price24h,
+  slug,
+  symbol,
+  type,
+  updatedAt,
+}) {
+  const location = useLocation();
+  const { pathname } = location;
+  const navigate = useNavigate();
 
-  const handleClick = async (id) => {
-    try {
-      setModal((prev) => ({ ...prev, spinner: true }));
+  const handleClick = (e) => {
+    const path = "/"
+      ? `/${urlPath[type]}/${slug || _id}`
+      : `${pathname}/${slug || _id}`;
 
-      const { data } = await axios(`${API_URL}/coins/${id}?gap=1w&base=usd`);
-
-      setModal({ data, showing: true, spinner: false });
-    } catch (error) {
-      console.error(error);
-    }
+    navigate(path, { state: { backgroundLocation: location, details } });
   };
 
   const bgColor =
@@ -33,7 +42,7 @@ function ListRow({ _id, currency, icon, name, price, price24h, symbol, updatedAt
   return (
     <div
       className={`table-row transition cursor-pointer md:hover:scale-105 ${bgColor}`}
-      onClick={() => handleClick(_id)}
+      onClick={handleClick}
     >
       <div className="table-cell w-10 text-center align-middle border-y border-neutral-450">
         <CurIcon icon={icon} name={name} />

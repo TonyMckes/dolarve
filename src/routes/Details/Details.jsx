@@ -1,4 +1,3 @@
-import axios from "axios";
 import CurIcon from "components/CurIcon";
 import CurName from "components/CurName";
 import CurPrice from "components/CurPrice";
@@ -10,27 +9,17 @@ import Sidebar from "components/Sidebar";
 import SidebarCard from "components/SidebarCard";
 import TableList from "components/TableList";
 import TrendingIcon from "components/TrendingIcon";
-import { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import useCurrency from "hooks/useCurrency";
+import { useState } from "react";
 
 function Details() {
-  const { state } = useLocation();
-  const [details, setDetails] = useState(state || {});
-  const { name, icon, currency, price, price24h, prices = [] } = details;
-  const { slug } = useParams();
+  const [gap, setGap] = useState("1w");
+  const { data, loading } = useCurrency(gap);
+  const { currency, icon, name, price, price24h, prices } = data || {};
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const res = await axios.get(
-          `https://exchange.vcoud.com/coins/${slug}?gap=${"1w"}&base=usd`,
-        );
-        setDetails(res.data);
-      } catch (error) {
-        console.log(error);
-      }
-    })();
-  }, [slug]);
+  const gapHandler = (gap) => {
+    setGap(gap);
+  };
 
   return (
     <>
@@ -46,12 +35,11 @@ function Details() {
             </div>
           </div>
 
-          <LineChart currencyCode={currency} prices={prices} />
+          {!loading && <LineChart currencyCode={currency} prices={prices} />}
         </div>
-
-        {prices.length > 0 ? (
+        {!loading && prices?.length > 0 ? (
           <div className="p-4 space-y-2 border rounded-md border-neutral-450">
-            <GapSelector {...{ details, setDetails, slug }} />
+            <GapSelector gap={gap} handler={gapHandler} loading={loading} />
             <div className="lg:col-start-2">
               <TableList variant prices={prices} currency={currency} />
             </div>

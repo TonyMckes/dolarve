@@ -4,7 +4,7 @@ import { formatCur, formatTime } from "utils";
 
 function LineChart({ currencyCode, prices }) {
   return (
-    prices.length > 0 && (
+    prices?.length > 0 && (
       <Line
         data={{
           labels: prices.map(({ updatedAt }) => formatTime("", updatedAt)),
