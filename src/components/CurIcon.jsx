@@ -1,6 +1,6 @@
 import { PLACEHOLDER_URL } from "../constants";
 
-function CurIcon({ icon = PLACEHOLDER_URL, name, size = "8" }) {
+function CurIcon({ icon = PLACEHOLDER_URL, name, size = "14" }) {
   const handleOnError = (e) => {
     e.target.src = PLACEHOLDER_URL;
   };
@@ -11,7 +11,7 @@ function CurIcon({ icon = PLACEHOLDER_URL, name, size = "8" }) {
 
   return (
     <img
-      className={`inline-block transition-opacity rounded-full opacity-0 w-${size} h-${size}`}
+      className={`inline-block transition-opacity rounded-full p-1 opacity-0 w-${size} h-${size}`}
       src={icon}
       alt={name}
       onError={handleOnError}

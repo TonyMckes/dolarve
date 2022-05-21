@@ -44,18 +44,23 @@ function ListRow({
       className={`table-row transition cursor-pointer md:hover:scale-105 ${bgColor}`}
       onClick={handleClick}
     >
-      <div className="table-cell w-10 text-center align-middle border-y border-neutral-450">
+      <div className="table-cell text-center align-middle w-14 border-y border-neutral-450">
         <CurIcon icon={icon} name={name} />
       </div>
 
       <div className="table-cell align-middle border-y border-neutral-450">
-        <CurName name={name} size="sm" weight="medium" />
+        <CurName name={name} size="sm" weight="medium" custom="truncate" />
         <TrendingIcon price={price} price24h={price24h} size="4" />
         <CurSymbol symbol={symbol} size="xs" />
       </div>
 
       <div className="table-cell w-32 text-right align-middle border-y border-neutral-450">
-        <Prices currency={currency} price={price} price24h={price24h} updatedAt={updatedAt} />
+        <Prices
+          currency={currency}
+          price={price}
+          price24h={price24h}
+          updatedAt={updatedAt}
+        />
       </div>
 
       <div className="table-cell w-6 text-center align-middle border-y border-neutral-450">

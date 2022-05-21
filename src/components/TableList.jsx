@@ -2,7 +2,7 @@ import TableListRow from "./TableListRow";
 
 // TODO: Refactor
 function TableList({ prices, variant, currency }) {
-  return (
+  return prices?.length > 0 ? (
     <table className="w-full p-2 text-center border border-neutral-450">
       <thead className="">
         <tr className="bg-emerald-500">
@@ -23,6 +23,10 @@ function TableList({ prices, variant, currency }) {
         ))}
       </tbody>
     </table>
+  ) : (
+    <p className="py-4 text-center">
+      No encontramos mas detalles sobre esta moneda. <br /> Intenta con otra. 😥
+    </p>
   );
 }
 

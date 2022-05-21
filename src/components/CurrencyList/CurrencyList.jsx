@@ -28,8 +28,8 @@ function CurrencyList({ currencies, error, loading }) {
       ) : currencies.length > 0 ? (
         <List filteredCur={filteredCur} />
       ) : (
-        <div className="flex flex-col items-center justify-center h-screen text-xl">
-          {error || "No hay divisas para mostrar..."}
+        <div className="flex flex-col items-center justify-center h-screen text-xl md:col-start-2">
+          {error || <p>No hay divisas para mostrar...</p>}
         </div>
       )}
     </>

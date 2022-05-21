@@ -7,13 +7,13 @@ function useCurrency(gap = "1w") {
   const { details } = state || {};
   const [data, setData] = useState(details || {});
   const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const { slug } = useParams();
 
   useEffect(() => {
-    if (details?.prices) return;
+    if (details?.prices && !gap) return;
 
-    // setLoading(true);
+    setLoading(true);
 
     getCurrency({ gap, slug })
       .then(setData)

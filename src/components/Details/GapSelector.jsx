@@ -12,7 +12,7 @@ function GapSelector({ gap, handler, loading }) {
           ["1m", "Mes"],
         ].map(([abbr, text]) => (
           <button
-            className={`bg-emerald-300 rounded-md px-2 py-1 py-none m-2 outline-none transition-colors hover:bg-emerald-400 dark:text-gray-800 ${
+            className={`bg-emerald-300 disabled:cursor-wait rounded-md px-2 py-1 py-none m-2 outline-none transition-colors hover:bg-emerald-400 dark:text-gray-800 ${
               abbr === gap
                 ? "bg-emerald-600 text-white dark:text-neutral-100 ring-2 ring-emerald-500"
                 : ""

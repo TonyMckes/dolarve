@@ -6,6 +6,7 @@ function LineChart({ currencyCode, prices }) {
   return (
     prices?.length > 0 && (
       <Line
+        className="border-t border-neutral-450"
         data={{
           labels: prices.map(({ updatedAt }) => formatTime("", updatedAt)),
           datasets: [

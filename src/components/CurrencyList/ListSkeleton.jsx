@@ -8,19 +8,20 @@ function CurrenciesSkeleton() {
           .fill(null)
           .map((_, i) => (
             <div className="table-row" key={i}>
-              <div className="table-cell w-10 text-center align-middle border-y border-neutral-450">
-                <span className="inline-block w-6 h-6 mx-auto rounded-full bg-neutral-450 opacity-20"></span>
+              <div className="table-cell text-center align-middle w-14 border-y border-neutral-450">
+                <span className="block w-12 h-12 m-1 mx-auto rounded-full bg-neutral-450 opacity-20"></span>
               </div>
               <div className="table-cell align-middle border-y border-neutral-450">
-                <span className="inline-block h-4 mx-4 bg-neutral-450 rounded-3xl opacity-20 w-28"></span>
+                <span className="inline-block h-3 bg-neutral-450 rounded-3xl opacity-20 w-28"></span>
+                <span className="inline-block w-16 h-3 bg-neutral-450 rounded-3xl opacity-20"></span>
               </div>
               <div className="table-cell py-1 space-y-1 text-right border-y border-neutral-450">
-                <span className="block w-12 h-3 ml-auto mr-0 bg-neutral-450 rounded-3xl opacity-10"></span>
-                <span className="block w-16 h-3 ml-auto mr-0 bg-neutral-450 rounded-3xl opacity-20"></span>
+                <span className="block w-16 h-3 ml-auto mr-0 bg-neutral-450 rounded-3xl opacity-10"></span>
+                <span className="block w-12 h-3 ml-auto mr-0 bg-neutral-450 rounded-3xl opacity-20"></span>
                 <span className="block w-24 h-3 ml-auto mr-0 bg-neutral-450 rounded-3xl opacity-10"></span>
               </div>
               <div className="table-cell w-5 text-center align-middle border-y border-neutral-450">
-                <span className="inline-block w-3 h-3 bg-neutral-450 rounded-3xl opacity-20"></span>
+                <span className="inline-block w-4 h-4 bg-neutral-450 rounded-3xl opacity-20"></span>
               </div>
             </div>
           ))}
