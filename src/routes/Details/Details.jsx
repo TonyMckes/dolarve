@@ -70,7 +70,7 @@ function Details() {
           <DetailsContainer>
             <GapSelector gap={gap} handler={gapHandler} loading={loading} />
 
-            <TableList variant prices={prices} currency={currency} />
+            <TableList currency={currency} prices={prices} rounded />
           </DetailsContainer>
         </div>
       )}
