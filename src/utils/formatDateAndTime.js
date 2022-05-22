@@ -1,15 +1,14 @@
-function formatDateAndTime(data) {
+function formatDateAndTime(date) {
   const options = {
-    weekday: "short",
-    day: "numeric",
-    month: "long",
+    day: "2-digit",
+    month: "2-digit",
     year: "numeric",
-    hour: "numeric",
+    hour: "2-digit",
     hour12: true,
-    minute: "numeric",
+    minute: "2-digit",
   };
 
-  return new Date(data).toLocaleDateString("es", options);
+  return new Date(date).toLocaleDateString("es", options);
 }
 
 export default formatDateAndTime;

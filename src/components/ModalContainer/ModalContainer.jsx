@@ -22,9 +22,12 @@ function ModalContainer({ children }) {
       className="fixed top-0 left-0 z-50 flex items-center justify-center w-screen h-screen bg-black/50"
       onClick={handleClick}
     >
-      <div className="w-4/5 p-4 text-sm rounded-lg bg-neutral-100 dark:bg-neutral-800 md:max-w-md">
+      <div className="w-10/12 p-4 text-sm rounded-lg bg-neutral-100 dark:bg-neutral-800 md:max-w-md">
         <div className="flex flex-row-reverse mb-2">
-          <button className="outline-none" onClick={handleClick}>
+          <button
+            className="duration-200 outline-none hover:text-red-500 hover:scale-110"
+            onClick={handleClick}
+          >
             <AiOutlineCloseCircle className="w-6 h-6" pointerEvents="none" />
           </button>
         </div>

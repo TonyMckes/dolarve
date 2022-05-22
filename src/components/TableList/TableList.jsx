@@ -6,12 +6,12 @@ function TableList({ currency, prices, rounded }) {
     : "";
 
   return prices?.length > 0 ? (
-    <div className={`relative overflow-x-auto ${roundedStyles}`}>
-      <table className="w-full">
+    <div className={`overflow-x-auto ${roundedStyles}`}>
+      <table className="w-full text-left md:text-center">
         <thead>
           <tr className="text-xs uppercase duration-500 border-b bg-neutral-100/75 dark:bg-neutral-800/75 border-neutral-450">
             <th className="px-2 py-3 ">Dia</th>
-            <th className="px-2 py-3 ">Valor</th>
+            <th className="w-6 px-2 py-3 text-left md:w-auto">Valor</th>
           </tr>
         </thead>
         <tbody>

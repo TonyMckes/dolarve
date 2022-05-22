@@ -5,7 +5,7 @@ function CurName({
   custom = "",
   variant,
 }) {
-  const displayStyle = variant ? "inline" : " block";
+  const displayStyle = variant ? "inline" : "block";
 
   return (
     <span

@@ -1,8 +1,8 @@
 import { formatCur } from "utils";
 
-function CurPrice({ currency, price }) {
+function CurPrice({ currency, price, size = "base" }) {
   return (
-    <span className="font-medium text-lg md:text-xl align-middle">
+    <span className={`font-medium align-middle text-${size}`}>
       {currency && formatCur(price, currency)}
     </span>
   );
