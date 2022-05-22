@@ -9,5 +9,6 @@ export function formatCur(price, code, chart) {
   if (chart) {
     return new Intl.NumberFormat(options).format(price);
   }
-  return new Intl.NumberFormat(navigator.language, options).format(price);
+
+  return new Intl.NumberFormat("es-VE", options).format(price);
 }
