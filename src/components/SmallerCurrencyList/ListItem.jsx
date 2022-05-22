@@ -3,7 +3,7 @@ import CurName from "components/CurName";
 import { Link } from "react-router-dom";
 import { urlPath } from "../../constants";
 
-function ListItem({ _id, name, icon, slug, symbol, type }) {
+function ListItem({ _id, name, icon, slug, type }) {
   return (
     <li className="w-full transition-colors hover:bg-neutral-100 dark:hover:bg-neutral-700 rounded-2xl ">
       <Link
@@ -11,7 +11,7 @@ function ListItem({ _id, name, icon, slug, symbol, type }) {
         to={`/${urlPath[type]}/${slug ? slug : _id}`}
       >
         <CurIcon name={name} icon={icon} size="6" />{" "}
-        <CurName name={name} size="xs" variant />
+        <CurName name={name} size="sm" variant />
       </Link>
     </li>
   );

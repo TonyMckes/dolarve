@@ -24,25 +24,25 @@ function SessionLinks() {
   };
 
   return authState ? (
-    <div className="flex justify-end space-x-2 md:justify-start ">
+    <div className="flex space-x-2 text-sm font-medium md:text-xs lg:text-base ">
       <button
-        className="px-4 py-2 my-3 ring-1 ring-neutral-450 hover:bg-neutral-100 dark:hover:bg-neutral-700 rounded-xl"
+        className="px-4 py-2 my-3 md:px-2 md:py-1 ring-1 ring-neutral-450 hover:bg-neutral-100 dark:hover:bg-neutral-700 rounded-xl"
         onClick={handleLogout}
       >
         <HiOutlineLogout /> Logout
       </button>
     </div>
   ) : (
-    <div className="flex justify-end space-x-2 md:justify-start">
+    <div className="flex space-x-2 text-sm font-medium md:text-xs lg:text-base ">
       <Link
-        className="px-4 py-2 my-3 ring-1 ring-neutral-450 hover:bg-neutral-100 dark:hover:bg-neutral-700 rounded-xl"
+        className="px-4 py-2 my-3 md:px-2 md:py-1 ring-1 ring-neutral-450 hover:bg-neutral-100 dark:hover:bg-neutral-700 rounded-xl"
         state={{ backgroundLocation: location }}
         to="/login"
       >
         <HiOutlineLogin /> Log In
       </Link>
       <Link
-        className="px-4 py-2 my-3 ring-1 ring-neutral-450 hover:bg-neutral-100 dark:hover:bg-neutral-700 rounded-xl"
+        className="px-4 py-2 my-3 md:px-2 md:py-1 ring-1 ring-neutral-450 hover:bg-neutral-100 dark:hover:bg-neutral-700 rounded-xl"
         state={{ backgroundLocation: location }}
         to="/register"
       >
