@@ -1,6 +1,6 @@
 function DetailsContainer({ children }) {
   return (
-    <div className="p-2 border rounded-lg border-neutral-450">{children}</div>
+    <div className="p-2 space-y-2 border rounded-lg border-neutral-450">{children}</div>
   );
 }
 

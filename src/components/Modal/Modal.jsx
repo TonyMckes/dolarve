@@ -1,29 +1,15 @@
-import CurIcon from "components/CurIcon";
-import CurName from "components/CurName";
-import CurPrice from "components/CurPrice";
-import CurSymbol from "components/CurSymbol";
+import CurHeader from "components/CurHeader";
 import FavoriteButton from "components/FavoriteButton";
 import LoadingSpinner from "components/LoadingSpinner";
 import ModalContainer from "components/ModalContainer";
 import TableList from "components/TableList";
-import TrendingIcon from "components/TrendingIcon";
 import useCurrency from "hooks/useCurrency";
 import DetailsButton from "./DetailsButton";
 
 function Modal() {
   const { data, error, loading } = useCurrency();
-  const {
-    _id,
-    currency,
-    icon,
-    name,
-    price,
-    price24h,
-    prices,
-    slug,
-    symbol,
-    type,
-  } = data || {};
+  const { _id, currency, name, price, price24h, prices, slug, type } =
+    data || {};
 
   const bgColor =
     price24h < price
@@ -35,21 +21,7 @@ function Modal() {
   return !loading ? (
     <ModalContainer>
       <div className={`${bgColor}`}>
-        <div className="flex items-center justify-between gap-2 p-2 border-b border-neutral-450 text-neutral-700 ">
-          <CurIcon name={name} icon={icon} size="14" />
-          <div className="flex flex-col grow ">
-            <div className="tracking-tighter ">
-              <CurName name={name} size="lg" weight="bold" />
-            </div>
-            <div className="flex items-center justify-between">
-              <div>
-                <TrendingIcon price={price} price24h={price24h} />
-                <CurSymbol darker size="xs" symbol={symbol} />
-              </div>
-              <CurPrice currency={currency} price={price} size="lg" />
-            </div>
-          </div>
-        </div>
+        <CurHeader {...data} modal />
 
         <div className="px-2 mx-2 my-4">
           <p className="dark:text-gray-800">

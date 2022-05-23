@@ -11,7 +11,7 @@ function ListItem({ _id, name, icon, slug, type }) {
         to={`/${urlPath[type]}/${slug ? slug : _id}`}
       >
         <CurIcon name={name} icon={icon} size="6" />{" "}
-        <CurName name={name} size="sm" variant />
+        <CurName name={name} variant />
       </Link>
     </li>
   );
