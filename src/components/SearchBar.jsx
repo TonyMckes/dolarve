@@ -47,14 +47,8 @@ function SearchBar({ currencies, onFilterCur, variant, placeholder }) {
           <MdSearch className="absolute w-6 h-6 mx-2 " />
         )}
         <input
-          // TODO: Check if I can bring back loading props
-          // disabled={loading}
-          // className={` w-full md:my-1 dark:border-neutral-700 focus:border-neutral-500 focus:ring-2 hover:bg-neutral-50 duration-500 dark:bg-neutral-800 hover:dark:bg-neutral-700 px-3 py-1 pl-8 outline-none border shadow-inner rounded-xl ${
-          //   loading
-          //     ? "disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
-          //     : ""
-          // }`}
-          className="w-full px-3 py-1 pl-8 duration-500 border shadow-inner outline-none md:my-1 border-neutral-450 focus:ring-2 hover:bg-neutral-50 dark:bg-neutral-800 hover:dark:bg-neutral-700 rounded-xl"
+          disabled={currencies?.length <= 0}
+          className="w-full px-3 py-1 pl-8 duration-500 border shadow-inner outline-none md:my-1 disabled:bg-neutral-450/50 disabled:cursor-not-allowed border-neutral-450 focus:ring-2 bg-inherit hover:bg-neutral-100 hover:dark:bg-neutral-700 rounded-xl"
           type="text"
           value={searchFilter}
           placeholder={placeholder}
