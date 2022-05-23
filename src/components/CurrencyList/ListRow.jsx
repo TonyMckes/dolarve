@@ -41,20 +41,21 @@ function ListRow({
 
   return (
     <div
-      className={`table-row transition cursor-pointer md:hover:scale-105 ${bgColor}`}
+      className={`table-row transition cursor-pointer divide-y divide-neutral-450 md:hover:scale-105 ${bgColor}`}
       onClick={handleClick}
     >
-      <div className="table-cell text-center align-middle w-14 border-y border-neutral-450">
-        <CurIcon icon={icon} name={name} />
+      <div className="table-cell w-0"></div>
+      <div className="table-cell w-16 py-1 ">
+        <CurIcon icon={icon} name={name} size="12" />
       </div>
 
-      <div className="table-cell align-middle border-y border-neutral-450">
+      <div className="table-cell align-middle">
         <CurName name={name} size="sm" weight="medium" custom="truncate" />
         <TrendingIcon price={price} price24h={price24h} size="4" />
         <CurSymbol symbol={symbol} size="xs" />
       </div>
 
-      <div className="table-cell w-32 text-right align-middle border-y border-neutral-450">
+      <div className="table-cell w-32 text-right align-middle">
         <Prices
           currency={currency}
           price={price}
@@ -63,7 +64,7 @@ function ListRow({
         />
       </div>
 
-      <div className="table-cell w-6 text-center align-middle border-y border-neutral-450">
+      <div className="table-cell w-6 text-center align-middle">
         <FavoriteButton _id={_id} size="5" />
       </div>
     </div>
