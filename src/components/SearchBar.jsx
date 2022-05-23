@@ -15,12 +15,12 @@ function SearchBar({ currencies, onFilterCur, variant, placeholder }) {
 
     setSearchFilter(value);
 
+    if (!value && variant) return onFilterCur(currencies);
     if (!value) return onFilterCur([]);
 
     onFilterCur(filtered);
   };
 
-  // BUG: currencies dont appear after deleting the search
   const handleClear = () => {
     setSearchFilter("");
     if (variant) return onFilterCur(currencies);
