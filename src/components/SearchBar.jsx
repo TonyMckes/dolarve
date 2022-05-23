@@ -5,6 +5,10 @@ import { MdClose, MdSearch } from "react-icons/md";
 function SearchBar({ currencies, onFilterCur, variant, placeholder }) {
   const [searchFilter, setSearchFilter] = useState("");
 
+  const containerStyles = variant
+    ? "sticky z-10 top-3 md:top-0 md:m-0  w-auto ml-16 mr-6"
+    : "";
+
   const handleSubmit = (e) => {
     if (e) e.preventDefault();
 
@@ -35,20 +39,16 @@ function SearchBar({ currencies, onFilterCur, variant, placeholder }) {
   useDebounce(handleSubmit, 600, [searchFilter]);
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label
-        className={`flex items-center w-full ${
-          variant ? "sticky z-10 ml-16 mr-6 top-3 md:top-0 md:m-0 w-auto" : ""
-        }`}
-      >
+    <form className={containerStyles} onSubmit={handleSubmit}>
+      <label className="flex items-center w-full">
         {searchFilter.length > 0 ? (
-          <MdClose className="absolute w-6 h-6 mx-2 " onClick={handleClear} />
+          <MdClose className="absolute w-6 h-6 mx-2" onClick={handleClear} />
         ) : (
-          <MdSearch className="absolute w-6 h-6 mx-2 " />
+          <MdSearch className="absolute w-6 h-6 mx-2" />
         )}
         <input
           disabled={currencies?.length <= 0}
-          className="w-full px-3 py-1 pl-8 duration-500 border shadow-inner outline-none md:my-1 disabled:bg-neutral-450/50 disabled:cursor-not-allowed border-neutral-450 focus:ring-2 bg-inherit hover:bg-neutral-100 hover:dark:bg-neutral-700 rounded-xl"
+          className="w-full px-3 py-1 pl-8 duration-500 bg-white border shadow-inner outline-none md:my-1 disabled:bg-neutral-450/50 disabled:cursor-not-allowed border-neutral-450 focus:ring-2 dark:bg-neutral-900 hover:bg-neutral-100 hover:dark:bg-neutral-700 rounded-xl"
           type="text"
           value={searchFilter}
           placeholder={placeholder}
