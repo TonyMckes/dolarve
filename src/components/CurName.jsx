@@ -8,7 +8,9 @@ function CurName({
   const displayStyle = variant ? "inline" : "block";
 
   return (
-    <span className={`${displayStyle} font-${weight} text-${size} ${custom}`}>
+    <span
+      className={`align-middle ${displayStyle} font-${weight} text-${size} ${custom}`}
+    >
       {name}
     </span>
   );
