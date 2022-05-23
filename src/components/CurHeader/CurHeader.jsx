@@ -11,6 +11,8 @@ function CurHeader({ name, icon, price, price24h, symbol, currency, modal }) {
 
   const iconStyles = modal ? "" : "hidden md:block";
 
+  const fontColor = modal ? "text-neutral-700" : "";
+
   const fontSize = modal ? "base" : "lg";
 
   return (
@@ -18,14 +20,14 @@ function CurHeader({ name, icon, price, price24h, symbol, currency, modal }) {
       <div className={iconStyles}>
         <CurIcon name={name} icon={icon} size="14" />
       </div>
-      <header className="grow">
+      <header className={`grow ${fontColor}`}>
         <h1 className="tracking-tighter">
           <CurName name={name} size={fontSize} weight="bold" />
         </h1>
         <div className="flex items-center justify-between">
           <div>
             <TrendingIcon price={price} price24h={price24h} />
-            <CurSymbol darker size="xs" symbol={symbol} />
+            <CurSymbol darker={modal} size="xs" symbol={symbol} />
           </div>
 
           <CurPrice currency={currency} price={price} size={fontSize} />
