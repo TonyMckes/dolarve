@@ -2,7 +2,7 @@ import Layout from "components/Layout";
 import Modal from "components/Modal";
 import AuthProvider from "context/AuthContext";
 import FavoritesProvider from "context/FavoritesContext";
-import { ThemeProvider } from "context/ThemeContext";
+import ThemeProvider from "context/ThemeContext";
 import { IconContext } from "react-icons";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Banks from "routes/Banks";

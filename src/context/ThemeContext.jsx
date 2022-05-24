@@ -1,64 +1,35 @@
 import { createContext, useEffect, useState } from "react";
 
-// if (
-//   localStorage.theme === "dark" || (!("theme" in localStorage) && window.matchMedia("(prefers-color-scheme: dark)").matches)
-// ) {
-//   document.documentElement.classList.add("dark");
-// } else {
-//   document.documentElement.classList.remove("dark");
-// }
-
-// // Whenever the user explicitly chooses light mode
-// localStorage.theme = "light";
-
-// // Whenever the user explicitly chooses dark mode
-// localStorage.theme = "dark";
-
-// // Whenever the user explicitly chooses to respect the OS preference
-// localStorage.removeItem("theme");
-
-const getInitialTheme = () => {
-  if (typeof window !== "undefined" && window.localStorage) {
-    const storedPref = window.localStorage.getItem("color-theme");
-    if (typeof storedPref === "string") {
-      return storedPref;
-    }
-
-    const userMedia = window.matchMedia("(prefers-color-scheme: dark)");
-    if (userMedia.matches) {
-      return "dark";
-    }
-  }
-
-  return "light"; // light theme as the default;
-};
-
 export const ThemeContext = createContext();
 
-export const ThemeProvider = ({ initialTheme, children }) => {
-  const [theme, setTheme] = useState(getInitialTheme);
+const getInitialTheme = () => {
+  if (typeof window !== "undefined" && localStorage) {
+    const storedPref = localStorage.getItem("color-theme");
+    if (storedPref) return storedPref;
 
-  const rawSetTheme = (rawTheme) => {
-    const root = window.document.documentElement;
-    const isDark = rawTheme === "dark";
-
-    root.classList.remove(isDark ? "light" : "dark");
-    root.classList.add(rawTheme);
-
-    localStorage.setItem("color-theme", rawTheme);
-  };
-
-  if (initialTheme) {
-    rawSetTheme(initialTheme);
+    const userMedia = matchMedia("(prefers-color-scheme: dark)");
+    if (userMedia.matches) return "dark";
   }
 
+  return "light";
+};
+
+const ThemeProvider = ({ children }) => {
+  const [theme, setTheme] = useState(getInitialTheme);
+
   useEffect(() => {
-    rawSetTheme(theme);
+    const root = document.documentElement;
+    const isDark = theme === "dark";
+
+    root.classList.remove(isDark ? "light" : "dark");
+    root.classList.add(theme);
+
+    localStorage.setItem("color-theme", theme);
   }, [theme]);
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
-      <div className="min-h-full transition-colors duration-500 dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300">
+      <div className="min-h-full transition-colors duration-500 bg-neutral-50 dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300">
         {children}
       </div>
     </ThemeContext.Provider>
