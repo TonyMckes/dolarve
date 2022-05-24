@@ -48,7 +48,7 @@ function SearchBar({ currencies, onFilterCur, variant, placeholder }) {
         )}
         <input
           disabled={currencies?.length <= 0}
-          className="w-full px-3 py-1 pl-8 duration-500 bg-white border shadow-inner outline-none md:my-1 disabled:bg-neutral-450/50 disabled:cursor-not-allowed border-neutral-450 focus:ring-2 dark:bg-neutral-900 hover:bg-neutral-100 hover:dark:bg-neutral-700 rounded-xl"
+          className="w-full px-3 py-1 pl-8 duration-500 bg-white border shadow-inner outline-none md:my-1 disabled:!bg-neutral-450/50 disabled:cursor-not-allowed border-neutral-450 focus:ring-2 dark:bg-neutral-900 hover:bg-neutral-100 hover:dark:bg-neutral-700 rounded-xl"
           type="text"
           value={searchFilter}
           placeholder={placeholder}
