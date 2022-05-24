@@ -34,9 +34,9 @@ function FavoritesProvider({ children }) {
   }, [authState]);
 
   useEffect(() => {
-    if (!authState) return;
-
     (async () => {
+      if (!authState) return;
+
       const { docRef, docSnap } = await getDocSnap(authState.uid);
 
       if (docSnap.exists()) {
