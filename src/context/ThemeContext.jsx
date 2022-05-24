@@ -1,4 +1,7 @@
+import { doc, getDoc, setDoc } from "firebase/firestore";
 import { createContext, useEffect, useState } from "react";
+import { db } from "utils/firebase";
+import { useAuthContext } from "./AuthContext";
 
 export const ThemeContext = createContext();
 
@@ -16,6 +19,7 @@ const getInitialTheme = () => {
 
 const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState(getInitialTheme);
+  const { authState } = useAuthContext();
 
   useEffect(() => {
     const root = document.documentElement;
@@ -25,7 +29,40 @@ const ThemeProvider = ({ children }) => {
     root.classList.add(theme);
 
     localStorage.setItem("color-theme", theme);
+
+    if (!authState) return;
+
+    (async () => {
+      const docRef = doc(db, "users", authState.uid);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        const dbTheme = docSnap.get("color-theme");
+        if (dbTheme === theme) return;
+
+        await setDoc(docRef, { "color-theme": theme }, { merge: true });
+      }
+    })();
   }, [theme]);
+
+  useEffect(() => {
+    if (!authState) return;
+
+    (async () => {
+      const docRef = doc(db, "users", authState.uid);
+      const docSnap = await getDoc(docRef);
+
+      if (docSnap.exists()) {
+        const dbTheme = docSnap.get("color-theme");
+        if (dbTheme === theme) return;
+
+        setTheme(dbTheme);
+        localStorage.setItem("color-theme", dbTheme);
+      } else {
+        await setDoc(docRef, { "color-theme": theme });
+      }
+    })();
+  }, [authState]);
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
@@ -35,3 +72,5 @@ const ThemeProvider = ({ children }) => {
     </ThemeContext.Provider>
   );
 };
+
+export default ThemeProvider;
