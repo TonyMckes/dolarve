@@ -14,7 +14,12 @@ function SearchCard() {
         onFilterCur={setSearchResults}
         placeholder="Buscar..."
       />
-      <SmallerCurrencyList currencies={searchResults} />
+
+      <div className="relative bg-neutral-450 ">
+        <div className="absolute w-full -translate-y-3 rounded-lg dark:bg-neutral-800">
+          <SmallerCurrencyList currencies={searchResults} />
+        </div>
+      </div>
     </>
   );
 }
