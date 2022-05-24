@@ -10,8 +10,8 @@ function ListItem({ _id, name, icon, slug, type }) {
         className="block p-1 my-1 truncate"
         to={`/${urlPath[type]}/${slug ? slug : _id}`}
       >
-        <CurIcon name={name} icon={icon} size="7" />{" "}
-        <CurName name={name} variant />
+        <CurIcon name={name} icon={icon} size="6" />{" "}
+        <CurName name={name} size="sm" variant />
       </Link>
     </li>
   );
