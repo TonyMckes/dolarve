@@ -1,7 +1,7 @@
 import { useAuthContext } from "context/AuthContext";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { setDoc } from "firebase/firestore";
 import { createContext, useContext, useEffect, useState } from "react";
-import { db } from "utils/firebase";
+import { getDocSnap } from "utils/firebase";
 
 const FavoritesContext = createContext();
 
@@ -20,8 +20,7 @@ function FavoritesProvider({ children }) {
     if (!authState) return;
 
     (async () => {
-      const docRef = doc(db, "users", authState.uid);
-      const docSnap = await getDoc(docRef);
+      const { docRef, docSnap } = await getDocSnap(authState.uid);
 
       if (docSnap.exists()) {
         const dbFavorites = docSnap.get("favorites");
@@ -35,11 +34,10 @@ function FavoritesProvider({ children }) {
   }, [authState]);
 
   useEffect(() => {
-    (async () => {
-      if (!authState) return;
+    if (!authState) return;
 
-      const docRef = doc(db, "users", authState.uid);
-      const docSnap = await getDoc(docRef);
+    (async () => {
+      const { docRef, docSnap } = await getDocSnap(authState.uid);
 
       if (docSnap.exists()) {
         await setDoc(docRef, { favorites }, { merge: true });

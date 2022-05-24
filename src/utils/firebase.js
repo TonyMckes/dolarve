@@ -1,6 +1,11 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { enableIndexedDbPersistence, getFirestore } from "firebase/firestore";
+import {
+  doc,
+  enableIndexedDbPersistence,
+  getDoc,
+  getFirestore,
+} from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCIUDfBCyPaKQVsv6Fp2CNhT1RLS8ia-N8",
@@ -29,6 +34,13 @@ enableIndexedDbPersistence(db).catch((err) => {
     // ...
   }
 });
+
+export async function getDocSnap(uid) {
+  const docRef = doc(db, "users", uid);
+  const docSnap = await getDoc(docRef);
+
+  return { docRef, docSnap };
+}
 
 // Subsequent queries will use persistence, if it was enabled successfully
 

@@ -1,6 +1,6 @@
-import { doc, getDoc, setDoc } from "firebase/firestore";
+import { setDoc } from "firebase/firestore";
 import { createContext, useEffect, useState } from "react";
-import { db } from "utils/firebase";
+import { getDocSnap } from "utils/firebase";
 import { useAuthContext } from "./AuthContext";
 
 export const ThemeContext = createContext();
@@ -33,8 +33,7 @@ const ThemeProvider = ({ children }) => {
     if (!authState) return;
 
     (async () => {
-      const docRef = doc(db, "users", authState.uid);
-      const docSnap = await getDoc(docRef);
+      const { docRef, docSnap } = await getDocSnap(authState.uid);
 
       if (docSnap.exists()) {
         const dbTheme = docSnap.get("color-theme");
@@ -49,8 +48,7 @@ const ThemeProvider = ({ children }) => {
     if (!authState) return;
 
     (async () => {
-      const docRef = doc(db, "users", authState.uid);
-      const docSnap = await getDoc(docRef);
+      const { docRef, docSnap } = await getDocSnap(authState.uid);
 
       if (docSnap.exists()) {
         const dbTheme = docSnap.get("color-theme");
