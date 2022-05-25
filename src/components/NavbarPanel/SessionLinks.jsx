@@ -28,11 +28,11 @@ function SessionLinks() {
   const bgLocation = { backgroundLocation: location };
 
   return authState ? (
-    <div className="flex space-x-2 text-sm font-medium md:text-xs lg:text-base ">
+    <div className="flex py-2 space-x-2 text-sm font-medium md:text-xs lg:text-base">
       <Button icon={<HiOutlineLogout />} onClick={handleLogout} text="Logout" />
     </div>
   ) : (
-    <div className="flex py-2 space-x-2 text-sm font-medium md:text-xs lg:text-base ">
+    <div className="flex py-2 space-x-2 text-sm font-medium md:text-xs lg:text-base">
       <Anchor
         href="/login"
         icon={<HiOutlineLogin />}
