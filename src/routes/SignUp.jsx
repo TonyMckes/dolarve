@@ -95,6 +95,7 @@ function SignUp() {
             Ya tienes una cuenta?
             <Link
               className="text-blue-500 duration-300 hover:text-blue-700"
+              replace
               state={{ backgroundLocation }}
               to="/login"
             >
