@@ -1,3 +1,5 @@
+import Anchor from "components/Anchor";
+import Button from "components/Button";
 import { useAuthContext } from "context/AuthContext";
 import { useFavoritesContext } from "context/FavoritesContext";
 import {
@@ -5,7 +7,7 @@ import {
   HiOutlineLogout,
   HiOutlinePencilAlt,
 } from "react-icons/hi";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { auth } from "utils/firebase";
 
 function SessionLinks() {
@@ -23,31 +25,26 @@ function SessionLinks() {
     auth.signOut();
   };
 
+  const bgLocation = { backgroundLocation: location };
+
   return authState ? (
     <div className="flex space-x-2 text-sm font-medium md:text-xs lg:text-base ">
-      <button
-        className="px-4 py-2 my-3 md:px-2 md:py-1 ring-1 ring-neutral-450 hover:bg-neutral-100 dark:hover:bg-neutral-700 rounded-xl"
-        onClick={handleLogout}
-      >
-        <HiOutlineLogout /> Logout
-      </button>
+      <Button icon={<HiOutlineLogout />} onClick={handleLogout} text="Logout" />
     </div>
   ) : (
-    <div className="flex space-x-2 text-sm font-medium md:text-xs lg:text-base ">
-      <Link
-        className="px-4 py-2 my-3 md:px-2 md:py-1 ring-1 ring-neutral-450 hover:bg-neutral-100 dark:hover:bg-neutral-700 rounded-xl"
-        state={{ backgroundLocation: location }}
-        to="/login"
-      >
-        <HiOutlineLogin /> Log In
-      </Link>
-      <Link
-        className="px-4 py-2 my-3 md:px-2 md:py-1 ring-1 ring-neutral-450 hover:bg-neutral-100 dark:hover:bg-neutral-700 rounded-xl"
-        state={{ backgroundLocation: location }}
-        to="/register"
-      >
-        <HiOutlinePencilAlt /> Sign Up
-      </Link>
+    <div className="flex py-2 space-x-2 text-sm font-medium md:text-xs lg:text-base ">
+      <Anchor
+        href="/login"
+        icon={<HiOutlineLogin />}
+        state={bgLocation}
+        text="Login"
+      />
+      <Anchor
+        href="/register"
+        icon={<HiOutlinePencilAlt />}
+        state={bgLocation}
+        text="Sign up"
+      />
     </div>
   );
 }

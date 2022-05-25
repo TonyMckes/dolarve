@@ -21,7 +21,7 @@ function NavLinks() {
       <li key={i}>
         <NavLink
           className={({ isActive }) =>
-            `px-2 py-1 align-middle whitespace-nowrap hover:bg-neutral-100 dark:hover:bg-neutral-700 rounded-xl ${
+            `px-2 py-1 font-medium rounded-xl whitespace-nowrap hover:bg-neutral-100 dark:hover:bg-neutral-700 ${
               isActive ? "font-bold ring-1 ring-neutral-450" : ""
             }`
           }

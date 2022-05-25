@@ -1,9 +1,7 @@
 import ModalContainer from "components/ModalContainer";
-import { GoogleAuthProvider } from "firebase/auth";
+import ProviderButton from "components/ProviderButton";
 import { useState } from "react";
-import { FcGoogle } from "react-icons/fc";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import userSignInWithProvider from "services/userSignInWithProvider";
 import userSignUp from "services/userSignUp";
 
 function SignUp() {
@@ -14,12 +12,6 @@ function SignUp() {
   const location = useLocation();
   const { backgroundLocation } = location.state || {};
   const navigate = useNavigate();
-
-  const googleHandler = () => {
-    userSignInWithProvider(new GoogleAuthProvider())
-      .then(() => navigate("/"))
-      .catch(console.log);
-  };
 
   const handleInput = (e) => {
     const value = e.target.value;
@@ -76,15 +68,11 @@ function SignUp() {
               </button>
             </form>
           </div>
-          <div className="p-4">
-            <button
-              className="p-2 border outline-none rounded-xl hover:bg-gray-100"
-              onClick={googleHandler}
-            >
-              <FcGoogle />{" "}
-              <span className="font-bold">Sign in with Google</span>
-            </button>
-          </div>
+
+        <div className="p-4 space-y-2">
+          <ProviderButton provider="google" text="Sign up with Google" />
+          <ProviderButton provider="facebook" text="Sign up with Facebook" />
+        </div>
 
           <p className="p-4">
             Already have an account?{" "}

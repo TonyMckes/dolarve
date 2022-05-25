@@ -1,15 +1,18 @@
+import Anchor from "components/Anchor";
 import CurHeader from "components/CurHeader";
 import FavoriteButton from "components/FavoriteButton";
 import LoadingSpinner from "components/LoadingSpinner";
 import ModalContainer from "components/ModalContainer";
 import TableList from "components/TableList";
+import { urlPath } from "constants";
 import useCurrency from "hooks/useCurrency";
-import DetailsButton from "./DetailsButton";
 
 function Modal() {
   const { data, error, loading } = useCurrency();
   const { _id, currency, name, price, price24h, prices, slug, type } =
     data || {};
+
+  const href = `/${urlPath[type]}/${slug || _id}`;
 
   const bgColor =
     price24h < price
@@ -33,7 +36,12 @@ function Modal() {
 
         <div className="flex justify-around m-4">
           <FavoriteButton _id={_id} size="9" variant />
-          <DetailsButton _id={_id} details={data} slug={slug} type={type} />
+
+          <Anchor
+            href={href}
+            state={{ details: data }}
+            text="Ver mas detalles"
+          />
         </div>
       </div>
     </ModalContainer>
