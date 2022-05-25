@@ -1,3 +1,5 @@
+import Button from "components/Button";
+import Fieldset from "components/Fieldset/Fieldset";
 import ModalContainer from "components/ModalContainer";
 import ProviderButton from "components/ProviderButton";
 import { useState } from "react";
@@ -17,13 +19,18 @@ function Login() {
     const value = e.target.value;
     const name = e.target.name;
 
-    if (name === "password" && value.length >= 6) setError("");
+    setError("");
 
     setInputValue({ ...inputValue, [name]: value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!email || !password) {
+      return setError("Todos los campos son obligatorios");
+    }
+    if (error) return;
 
     userSignIn(email, password)
       .then(() => navigate("/"))
@@ -32,60 +39,58 @@ function Login() {
 
   return (
     <ModalContainer>
-      <div className="flex flex-col items-center p-4 divide-y-2 divide-gray-300">
-        <div className="pb-4">
-          <h2 className="text-lg font-bold text-center">Login</h2>
-          <form className="flex flex-col ">
-            <label className="py-2 ">
-              Email
-              <input
-                className="block px-4 py-1 border rounded outline-gray-300 hover:bg-gray-50"
-                type="email"
-                name="email"
-                value={email}
-                onChange={handleInput}
-                required
-              />
-            </label>
+      <div className="p-4 mx-auto space-y-4 divide-y divide-neutral-450">
+        <h1 className="text-xl font-bold text-center">Iniciar sesión</h1>
 
-              <label className={`py-2 ${error ? "text-red-600" : ""} `}>
-                Password{" "}
-                {error && <span className="text-red-600">{error}</span>}
-                <input
-                  className="block px-4 py-1 border rounded outline-gray-300 hover:bg-gray-50"
-                  type="password"
-                  name="password"
-                  value={password}
-                  onChange={handleInput}
-                  required
-                />
-              </label>
-              <button
-                onClick={handleSubmit}
-                className="px-2 py-3 mt-4 font-semibold rounded-2xl bg-neutral-200 hover:bg-neutral-300 dark:bg-neutral-700 dark:hover:bg-neutral-600"
-              >
-                Sign up
-              </button>
-            </form>
+        <form
+          className="flex flex-col items-center gap-4 pt-4 "
+          onSubmit={handleSubmit}
+        >
+          <Fieldset
+            name="email"
+            onChange={handleInput}
+            text="Email"
+            type="email"
+            value={email}
+          />
+          <Fieldset
+            name="password"
+            onChange={handleInput}
+            text="Password"
+            type="password"
+            value={password}
+            min="6"
+          />
+
+          <span className="h-4 text-red-500">{error}</span>
+
+          <Button disabled={error} text="Inicia sesión" />
+        </form>
+
+        <div className="flex justify-center pt-4">
+          <div className="flex flex-col items-stretch gap-2 max-w-fit ">
+            <ProviderButton provider="google" text="Inicia sesión con Google" />
+            <ProviderButton
+              provider="facebook"
+              text="Inicia sesión con Facebook"
+            />
           </div>
-
-        <div className="p-4 space-y-2">
-          <ProviderButton provider="google" text="Sign ip with Google" />
-          <ProviderButton provider="facebook" text="Sign ip with Facebook" />
         </div>
 
-          <p className="p-4">
-            Dont have an account?
+        <div className="pt-4">
+          <p className="text-center">
+            Aun no tienes una cuenta?
             <Link
               className="text-blue-500 duration-300 hover:text-blue-700"
               state={{ backgroundLocation }}
               to="/register"
             >
               {" "}
-              Register
+              Regístrate
             </Link>
           </p>
         </div>
+      </div>
     </ModalContainer>
   );
 }
