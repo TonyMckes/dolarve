@@ -10,6 +10,7 @@ import Sidebar from "components/Sidebar";
 import SidebarCard from "components/SidebarCard";
 import TableList from "components/TableList";
 import useCurrency from "hooks/useCurrency";
+import useTitle from "hooks/useTitle";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import formatDateAndTime from "utils/formatDateAndTime";
@@ -21,6 +22,8 @@ function Details() {
 
   const params = useParams();
   const loadingScreen = (slug || _id) !== params.slug;
+
+  useTitle(`${name} - DolarVE`);
 
   const gapHandler = (gap) => {
     setGap(gap);
