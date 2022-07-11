@@ -15,7 +15,7 @@ function Modal() {
 
   const href = `/${urlPath[type]}/${slug || _id}`;
 
-  useTitle(`${name} - DolarVE`);
+  useTitle(`${name} - DólarVE`);
 
   const bgColor =
     price24h < price

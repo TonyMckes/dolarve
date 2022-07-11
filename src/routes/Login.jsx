@@ -16,7 +16,7 @@ function Login() {
   const { backgroundLocation } = location.state || {};
   const navigate = useNavigate();
 
-  useTitle(`Inicio de sesión - DolarVE`);
+  useTitle(`Inicio de sesión - DólarVE`);
 
   const handleInput = (e) => {
     const value = e.target.value;
@@ -52,14 +52,14 @@ function Login() {
           <Fieldset
             name="email"
             onChange={handleInput}
-            text="Email"
+            text="Correo electrónico"
             type="email"
             value={email}
           />
           <Fieldset
             name="password"
             onChange={handleInput}
-            text="Password"
+            text="Contraseña"
             type="password"
             value={password}
             min="6"

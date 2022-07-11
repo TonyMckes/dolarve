@@ -20,7 +20,7 @@ function SignUp() {
   const { backgroundLocation } = location.state || {};
   const navigate = useNavigate();
 
-  useTitle(`Regístrate en DolarVE`);
+  useTitle(`Regístrate en DólarVE`);
 
   const handleInput = (e) => {
     const value = e.target.value;
@@ -57,7 +57,7 @@ function SignUp() {
           <Fieldset
             name="email"
             onChange={handleInput}
-            text="Email"
+            text="Correo electrónico"
             type="email"
             value={email}
           />

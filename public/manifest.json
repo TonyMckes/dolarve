@@ -1,12 +1,12 @@
 {
   "$schema": "https://json.schemastore.org/web-manifest-combined.json",
   "background_color": "#171717",
-  "description": "",
+  "description": "Mantente informado de las últimas referencias de tipo de cambio del dólar al bolívar venezolano, también podrás monitorear las fluctuaciones en las diferentes criptomonedas.",
   "display": "standalone",
   "lang": "es",
-  "name": "DolarVE",
+  "name": "DólarVE",
   "orientation": "portrait",
-  "short_name": "DolarVE",
+  "short_name": "DólarVE",
   "start_url": ".",
   "theme_color": "#171717",
   "icons": [

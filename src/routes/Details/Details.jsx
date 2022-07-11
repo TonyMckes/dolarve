@@ -23,7 +23,7 @@ function Details() {
   const params = useParams();
   const loadingScreen = (slug || _id) !== params.slug;
 
-  useTitle(`${name} - DolarVE`);
+  useTitle(`${name} - DólarVE`);
 
   const gapHandler = (gap) => {
     setGap(gap);

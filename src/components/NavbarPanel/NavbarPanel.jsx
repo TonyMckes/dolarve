@@ -32,7 +32,7 @@ function NavbarPanel() {
                 className="px-2 py-1 font-bold align-middle whitespace-nowrap hover:bg-neutral-100 dark:hover:bg-neutral-700 rounded-xl"
                 to="/"
               >
-                <FcCurrencyExchange /> DolarVE
+                <FcCurrencyExchange /> DólarVE
               </Link>
             </li>
 
