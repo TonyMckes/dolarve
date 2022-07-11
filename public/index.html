@@ -49,6 +49,16 @@
       media="(prefers-color-scheme: dark)"
       content="#171717"
     />
+    <script>
+      const THEME_COLOR = localStorage.getItem("theme-color");
+      const OS_COLOR_SCHEME = window.matchMedia("(prefers-color-scheme: dark)");
+
+      if (THEME_COLOR === "dark" || (!THEME_COLOR && OS_COLOR_SCHEME.matches)) {
+        document.documentElement.classList.add("dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+      }
+    </script>
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,600;1,100;1,200;1,300;1,400;1,600&display=swap"
       rel="stylesheet"
