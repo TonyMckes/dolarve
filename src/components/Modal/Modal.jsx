@@ -6,6 +6,7 @@ import ModalContainer from "components/ModalContainer";
 import TableList from "components/TableList";
 import { urlPath } from "constants";
 import useCurrency from "hooks/useCurrency";
+import useTitle from "hooks/useTitle";
 
 function Modal() {
   const { data, error, loading } = useCurrency();
@@ -13,6 +14,8 @@ function Modal() {
     data || {};
 
   const href = `/${urlPath[type]}/${slug || _id}`;
+
+  useTitle(`${name} - DolarVE`);
 
   const bgColor =
     price24h < price

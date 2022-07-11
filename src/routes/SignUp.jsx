@@ -2,6 +2,7 @@ import Button from "components/Button";
 import Fieldset from "components/Fieldset/Fieldset";
 import ModalContainer from "components/ModalContainer";
 import ProviderButton from "components/ProviderButton";
+import useTitle from "hooks/useTitle";
 import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import userSignUp from "services/userSignUp";
@@ -18,6 +19,8 @@ function SignUp() {
   const location = useLocation();
   const { backgroundLocation } = location.state || {};
   const navigate = useNavigate();
+
+  useTitle(`Regístrate en DolarVE`);
 
   const handleInput = (e) => {
     const value = e.target.value;
