@@ -1,8 +1,8 @@
-import { PLACEHOLDER_URL } from "../constants";
+import PLACEHOLDER_IMG from "assets/images/placeholder_50x50.png";
 
-function CurIcon({ icon = PLACEHOLDER_URL, name, size = "14" }) {
+function CurIcon({ icon = PLACEHOLDER_IMG, name, size = "14" }) {
   const handleOnError = (e) => {
-    e.target.src = PLACEHOLDER_URL;
+    e.target.src = PLACEHOLDER_IMG;
   };
 
   const handleOnLoad = (e) => {
