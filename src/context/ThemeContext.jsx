@@ -6,15 +6,11 @@ import { useAuthContext } from "./AuthContext";
 export const ThemeContext = createContext();
 
 const getInitialTheme = () => {
-  if (typeof window !== "undefined" && localStorage) {
-    const storedPref = localStorage.getItem("color-theme");
-    if (storedPref) return storedPref;
+  if (typeof window !== "undefined") {
+    if (document.documentElement.classList.contains("dark")) return "dark";
 
-    const userMedia = matchMedia("(prefers-color-scheme: dark)");
-    if (userMedia.matches) return "dark";
+    return "light";
   }
-
-  return "light";
 };
 
 const ThemeProvider = ({ children }) => {
@@ -28,7 +24,7 @@ const ThemeProvider = ({ children }) => {
     root.classList.remove(isDark ? "light" : "dark");
     root.classList.add(theme);
 
-    localStorage.setItem("color-theme", theme);
+    localStorage.setItem("theme-color", theme);
 
     if (!authState) return;
 
@@ -36,10 +32,10 @@ const ThemeProvider = ({ children }) => {
       const { docRef, docSnap } = await getDocSnap(authState.uid);
 
       if (docSnap.exists()) {
-        const dbTheme = docSnap.get("color-theme");
+        const dbTheme = docSnap.get("theme-color");
         if (dbTheme === theme) return;
 
-        await setDoc(docRef, { "color-theme": theme }, { merge: true });
+        await setDoc(docRef, { "theme-color": theme }, { merge: true });
       }
     })();
   }, [theme]);
@@ -51,13 +47,13 @@ const ThemeProvider = ({ children }) => {
       const { docRef, docSnap } = await getDocSnap(authState.uid);
 
       if (docSnap.exists()) {
-        const dbTheme = docSnap.get("color-theme");
+        const dbTheme = docSnap.get("theme-color");
         if (dbTheme === theme) return;
 
         setTheme(dbTheme);
-        localStorage.setItem("color-theme", dbTheme);
+        localStorage.setItem("theme-color", dbTheme);
       } else {
-        await setDoc(docRef, { "color-theme": theme });
+        await setDoc(docRef, { "theme-color": theme });
       }
     })();
   }, [authState]);

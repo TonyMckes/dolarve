@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 
 function NavLinks() {
   const navItems = [
-    [<MdOutlineFavorite />, "Favorites", "/"],
+    [<MdOutlineFavorite />, "Favoritas", "/"],
     [<RiBillFill />, "Cotizaciones", "/cotizaciones"],
     [<BsCurrencyBitcoin />, "Criptomonedas", "/criptomonedas"],
     [<AiTwotoneBank />, "Tasas de bancos", "/tasas-de-bancos"],

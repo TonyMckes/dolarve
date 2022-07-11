@@ -9,3 +9,40 @@ body,
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   -webkit-tap-highlight-color: transparent;
 }
+
+/* Scrollbar Styles */
+@layer utilities {
+  html {
+    scrollbar-color: theme(colors.neutral.300) theme(colors.neutral.300);
+  }
+  body::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+  body::-webkit-scrollbar-track {
+    background-color: theme(colors.neutral.200);
+  }
+  body::-webkit-scrollbar-thumb {
+    background-color: theme(colors.neutral.300);
+    border: 0.15rem solid theme(colors.neutral.100);
+    border-radius: 0.75rem;
+  }
+  body::-webkit-scrollbar-thumb:hover {
+    background-color: theme(colors.neutral.400);
+    border: 0.15rem solid theme(colors.neutral.200);
+  }
+
+  html.dark {
+    scrollbar-color: theme(colors.neutral.700) theme(colors.neutral.800);
+  }
+  html.dark body::-webkit-scrollbar-track {
+    background-color: theme(colors.neutral.800);
+  }
+  html.dark body::-webkit-scrollbar-thumb {
+    background-color: theme(colors.neutral.700);
+    border-color: theme(colors.neutral.800);
+  }
+  html.dark body::-webkit-scrollbar-thumb:hover {
+    background-color: theme(colors.neutral.600);
+    border-color: theme(colors.neutral.700);
+  }
+}

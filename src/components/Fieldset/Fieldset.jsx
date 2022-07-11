@@ -8,7 +8,6 @@ function Fieldset({ name, onChange, text, type, value, min }) {
           minLength={min}
           name={name}
           onChange={onChange}
-          placeholder={text}
           required
           type={type}
           value={value}

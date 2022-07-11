@@ -16,7 +16,7 @@ function SearchCard() {
       />
 
       <div className="relative bg-neutral-450 ">
-        <div className="absolute w-full -translate-y-3 rounded-lg dark:bg-neutral-800">
+        <div className="absolute w-full duration-500 -translate-y-3 rounded-lg bg-neutral-50 dark:bg-neutral-800">
           <SmallerCurrencyList currencies={searchResults} />
         </div>
       </div>
