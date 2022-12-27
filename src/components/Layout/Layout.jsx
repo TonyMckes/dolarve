@@ -9,7 +9,7 @@ import { routes } from "routes";
 function Layout({ children, currencyPath }) {
   return (
     <div className="lg:mx-auto lg:container">
-      <div className="grid grid-cols-1 md:grid-cols-layout md:grid-rows-layout">
+      <div className="grid grid-cols-1 lg:grid-cols-desktop lg:grid-rows-desktop md:grid-cols-tablet md:grid-rows-tablet">
         <NavbarPanel />
         {children}
         <Sidebar>

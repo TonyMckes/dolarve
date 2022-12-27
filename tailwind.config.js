@@ -4,10 +4,12 @@ module.exports = {
   theme: {
     extend: {
       gridTemplateColumns: {
-        layout: "25% 1fr 25%",
+        tablet: "33% 1fr",
+        desktop: "25% 1fr 25%",
       },
       gridTemplateRows: {
-        layout: "auto 1fr",
+        tablet: "auto 1fr",
+        desktop: "auto 1fr",
       },
       colors: {
         neutral: {
