@@ -10,8 +10,8 @@ function LoadingSpinner({ loading }) {
 
   return (
     loading && (
-      <div className="fixed top-0 left-0 z-50 flex items-center justify-center w-full h-screen bg-black/50">
-        <ImSpinner className="w-12 h-12 animate-spin" />
+      <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm bg-black/50">
+        <ImSpinner className="w-16 h-16 text-white animate-spin" />
       </div>
     )
   );
