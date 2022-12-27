@@ -1,7 +1,6 @@
 import Anchor from "components/Anchor";
 import CurHeader from "components/CurHeader";
 import FavoriteButton from "components/FavoriteButton";
-import LoadingSpinner from "components/LoadingSpinner";
 import ModalContainer from "components/ModalContainer";
 import TableList from "components/TableList";
 import { urlPath } from "constants";
@@ -24,8 +23,8 @@ function Modal() {
       ? "bg-gradient-to-b from-red-400"
       : "bg-gradient-to-b from-neutral-450";
 
-  return !loading ? (
-    <ModalContainer>
+  return (
+    <ModalContainer isLoading={loading}>
       <div className={`${bgColor}`}>
         <CurHeader {...data} modal />
 
@@ -48,8 +47,6 @@ function Modal() {
         </div>
       </div>
     </ModalContainer>
-  ) : (
-    <LoadingSpinner loading={loading} />
   );
 }
 
