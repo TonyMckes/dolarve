@@ -1,7 +1,4 @@
 import CurrencyList from "components/CurrencyList";
-import SearchCard from "components/SearchCard";
-import Sidebar from "components/Sidebar";
-import SidebarCard from "components/SidebarCard";
 import { useFavoritesContext } from "context/FavoritesContext";
 import useCurrencies from "hooks/useCurrencies";
 import useDebounce from "hooks/useDebounce";
@@ -32,16 +29,6 @@ function Favorites() {
   return (
     <>
       <CurrencyList currencies={favList} error={error} loading={loading} />
-
-      <Sidebar>
-        <SidebarCard title="Buscar...">
-          <SearchCard />
-        </SidebarCard>
-
-        <SidebarCard title="Tips...">
-          <p>Agrega favoritos para verlos en un solo lugar</p>
-        </SidebarCard>
-      </Sidebar>
     </>
   );
 }

@@ -1,13 +1,9 @@
 import CurHeader from "components/CurHeader";
 import CurIcon from "components/CurIcon";
 import DetailsContainer from "components/Details/DetailsContainer";
-import DiscoverOthers from "components/Details/DiscoverOthers";
 import GapSelector from "components/Details/GapSelector";
 import LineChart from "components/LineChart";
 import LoadingSpinner from "components/LoadingSpinner";
-import SearchCard from "components/SearchCard";
-import Sidebar from "components/Sidebar";
-import SidebarCard from "components/SidebarCard";
 import TableList from "components/TableList";
 import useCurrency from "hooks/useCurrency";
 import useTitle from "hooks/useTitle";
@@ -57,16 +53,6 @@ function Details() {
           </DetailsContainer>
         </div>
       )}
-
-      <Sidebar>
-        <SidebarCard title="Buscar monedas...">
-          <SearchCard />
-        </SidebarCard>
-
-        <SidebarCard title="Descubre otras...">
-          <DiscoverOthers />
-        </SidebarCard>
-      </Sidebar>
     </>
   );
 }
