@@ -24,7 +24,7 @@ function ModalContainer({ children, isLoading }) {
       onClick={handleClick}
     >
       {isLoading ? (
-        <ImSpinner className="w-16 h-16 text-white animate-spin" />
+        <ImSpinner className="text-white w-14 h-14 animate-spin" />
       ) : (
         <div className="w-10/12 p-4 text-sm rounded-lg bg-neutral-100 dark:bg-neutral-800 md:max-w-md">
           <div className="flex flex-row-reverse mb-2">
