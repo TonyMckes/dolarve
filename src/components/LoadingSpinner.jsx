@@ -11,7 +11,7 @@ function LoadingSpinner({ loading }) {
   return (
     loading && (
       <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm bg-black/50">
-        <ImSpinner className="text-white w-14 h-14 animate-spin" />
+        <ImSpinner className="text-white !w-14 !h-14 animate-spin" />
       </div>
     )
   );
