@@ -1,70 +1,70 @@
-# Getting Started with Create React App
+# DolarVE
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Stay informed of the latest exchange rate references from the dollar to the Venezuelan bolivar, you can also monitor fluctuations in the different cryptocurrencies.
 
-## Available Scripts
+## Demo
 
-In the project directory, you can run:
+Visit the [website](https://dolarve.netlify.app/), it is hosted on Netlify.
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Monitor the history (daily, weekly and monthly) of currency exchange rates.
+- Find all your of preferred currencies in one place.
+- Easy access to a calculator.
+- Can be install as a Progressive Web App (PWA).
+- Sync user preferences between devices (requires to be authenticated).
+- Light/dark mode toggle.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Tech Stack
 
-### `npm test`
+- React (This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).)
+- Firebase
+- TailwindCSS
+- Chart.js
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Installation
 
-### `npm run build`
+Clone the project:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+  git clone https://github.com/TonyMckes/dolarve.git
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Go to the project directory:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+  cd dolarve
 
-### `npm run eject`
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Install the project dependencies:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+  npm install
+  # or
+  npm i
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Run Locally
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+To start the development server, run the following command:
 
-## Learn More
+```bash
+  npm run start
+  # or
+  npm start
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+While the server is running, you can open [http://localhost:3000](http://localhost:3000) with your browser to see the website.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Running Tests
 
-### Code Splitting
+To run tests, run the following command:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```bash
+  npm run test
+  # or
+  npm test
+```
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Launches the test runner in the interactive watch mode.
