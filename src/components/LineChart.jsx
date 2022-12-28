@@ -1,62 +1,66 @@
-import "chart.js/auto";
+import {
+  CategoryScale,
+  Chart,
+  Filler,
+  LinearScale,
+  LineElement,
+  PointElement,
+  Title,
+  Tooltip,
+} from "chart.js";
 import { Line } from "react-chartjs-2";
 import { formatCur, formatTime } from "utils";
 
-function LineChart({ currencyCode, prices }) {
-  return (
-    prices?.length > 0 && (
-      <Line
-        className="border-t border-neutral-450"
-        data={{
-          labels: prices.map(({ updatedAt }) => formatTime("", updatedAt)),
-          datasets: [
-            {
-              data: prices.map(({ price }) =>
-                formatCur(price, currencyCode, true),
-              ),
-              backgroundColor: ["#00d48780"],
-              borderColor: ["#00d487"],
-              borderWidth: 1,
-              fill: "origin",
-            },
-          ],
-        }}
-        options={{
-          plugins: {
-            legend: {
-              display: false,
-            },
-            tooltip: {
-              titleAlign: "center",
-              displayColors: false,
-              // callbacks: {
-              //   label: function (context) {
-              //     let label = context.dataset.label || "";
+Chart.register(
+  CategoryScale,
+  Filler,
+  LinearScale,
+  LineElement,
+  PointElement,
+  Tooltip,
+  Title
+);
 
-              //     if (label) label += ": ";
+Chart.defaults.color = "#8B8B8B";
+const chartOptions = {
+  responsive: true,
+  scales: {
+    y: { grid: { color: "#8B8B8B40" } },
+    x: { grid: { color: "#8B8B8B40" } },
+  },
+  plugins: {
+    legend: {
+      display: false,
+    },
+    tooltip: {
+      titleAlign: "center",
+      displayColors: false,
+    },
+  },
+};
 
-              //     if (context.parsed.y !== null) {
-              //       const list = {
-              //         USD: { operation: (a, b) => (b < 0.0 ? a : b / a) },
-              //         VES: { operation: (a, b) => a / b },
-              //       };
-              //       const value = list[currencyCode].operation(
-              //         context.parsed.y,
-              //         1,
-              //       );
+function LineChart({ currencyCode, prices, price, price24h }) {
+  const colors =
+    price24h > price ? "#F87171" : price24h < price ? "#4ADE80" : "#8B8B8B";
 
-              //       label += formatCur(value, currencyCode, true);
-              //     }
+  const chartData = {
+    labels: prices.map(({ updatedAt }) => formatTime("", updatedAt)),
+    datasets: [
+      {
+        backgroundColor: `${colors}20`,
+        borderColor: `${colors}`,
+        borderWidth: 1,
+        data: prices.map(({ price }) => formatCur(price, currencyCode, true)),
+        fill: true,
+        pointHitRadius: 6,
+        pointHoverBorderWidth: 2,
+        pointHoverRadius: 6,
+        pointRadius: 4,
+      },
+    ],
+  };
 
-              //     return label;
-              //   },
-              // },
-            },
-          },
-        }}
-      />
-    )
-  );
+  return prices?.length > 0 && <Line data={chartData} options={chartOptions} />;
 }
 
 export default LineChart;
