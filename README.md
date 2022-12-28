@@ -6,6 +6,11 @@ Stay informed of the latest exchange rate references from the dollar to the Vene
 
 Visit the [website](https://dolarve.netlify.app/), it is hosted on Netlify.
 
+![image](https://user-images.githubusercontent.com/78808163/209884084-92997620-de7e-4c7a-9e74-221959e81aa7.png)
+![image](https://user-images.githubusercontent.com/78808163/209884155-50c088e3-f153-44e4-a61d-90a2c3c62539.png)
+![image](https://user-images.githubusercontent.com/78808163/209884201-0137893b-43d2-4001-b978-42a2e2e63c43.png)
+
+
 ## Features
 
 - Monitor the history (daily, weekly and monthly) of currency exchange rates.
