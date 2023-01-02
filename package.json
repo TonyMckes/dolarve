@@ -9,7 +9,7 @@
     "autoprefixer": "^10.4.2",
     "axios": "^1.2.2",
     "chart.js": "^4.1.1",
-    "firebase": "^9.6.10",
+    "firebase": "^9.15.0",
     "postcss": "^8.4.20",
     "react": "^17.0.2",
     "react-chartjs-2": "^5.0.0",
