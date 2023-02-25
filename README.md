@@ -2,74 +2,97 @@
 
 Stay informed of the latest exchange rate references from the dollar to the Venezuelan bolivar, you can also monitor fluctuations in the different cryptocurrencies.
 
-## Demo
-
-Visit the [website](https://dolarve.netlify.app/), it is hosted on Netlify.
-
-![image](https://user-images.githubusercontent.com/78808163/209884084-92997620-de7e-4c7a-9e74-221959e81aa7.png)
-![image](https://user-images.githubusercontent.com/78808163/209884155-50c088e3-f153-44e4-a61d-90a2c3c62539.png)
-![image](https://user-images.githubusercontent.com/78808163/209884201-0137893b-43d2-4001-b978-42a2e2e63c43.png)
-
-
 ## Features
 
-- Monitor the history (daily, weekly and monthly) of currency exchange rates.
-- Find all your of preferred currencies in one place.
-- Easy access to a calculator.
-- Can be install as a Progressive Web App (PWA).
-- Sync user preferences between devices (requires to be authenticated).
-- Light/dark mode toggle.
+- Monitor the history (daily, weekly and monthly) of currency exchange rates
+- Search currencies functionality
+- Find all your of favorites currencies in one place
+- Easy access to a calculator
+- Can be install as a Progressive Web App (PWA)
+- User registration and login
+- Responsive design for mobile and desktop devices
+- User authentication and authorization
+- Sync user preferences between devices (requires to be authenticated)
+- Light/Dark mode toggle
 
-## Tech Stack
+## Technologies Used
 
 - React (This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).)
+- Tailwind CSS
 - Firebase
-- TailwindCSS
 - Chart.js
 
-## Installation
+## Demo
 
-Clone the project:
+Visit the [Web App site](https://dolarve.netlify.app/) hosted on Netlify.
 
-```bash
-  git clone https://github.com/TonyMckes/dolarve.git
-```
+![dolarve](https://user-images.githubusercontent.com/78808163/221333737-bdcc8844-7d1e-4e32-b60e-b2a49f907db6.gif)
 
-Go to the project directory:
+---
 
-```bash
-  cd dolarve
+## Getting Started
 
-```
+These instructions will help you install and run the project on your local machine for development and testing.
 
-Install the project dependencies:
+### Prerequisites
 
-```bash
-  npm install
-  # or
-  npm i
-```
+Before you run the project, make sure that you have the following tools and software installed on your computer:
 
-## Run Locally
+- Text editor/IDE (e.g., VS Code, Sublime Text, Atom)
+- [Git](https://git-scm.com/downloads)
+- [Node.js](https://nodejs.org/en/download/) `v16.16.0+`
+- [NPM](https://www.npmjs.com/) (usually included with Node.js)
+
+### Installation
+
+To install the project on your computer, follow these steps:
+
+1. Clone the repository to your local machine.
+
+   ```bash
+   git clone https://github.com/TonyMckes/dolarve.git
+   ```
+
+2. Navigate to the project directory.
+
+   ```bash
+   cd dolarve
+   ```
+
+3. Install project dependencies by running the command:
+
+   ```bash
+   npm install
+   ```
+
+### Usage
 
 To start the development server, run the following command:
 
+#### Development Server
+
+To run the project, follow these steps:
+
+1. Start the development server by executing the command:
+
+   ```bash
+   npm run start
+   ```
+
+2. Open a web browser and navigate to [`http://localhost:3000`](https://localhost:3000/) to view the project's home page.
+
+#### Running Tests
+
+To run tests, simply run the following command:
+
 ```bash
-  npm run start
-  # or
-  npm start
+npm run test
 ```
 
-While the server is running, you can open [http://localhost:3000](http://localhost:3000) with your browser to see the website.
+## Acknowledgements
 
-## Running Tests
+- [How to write a Good readme](https://bulldogjob.com/news/449-how-to-write-a-good-readme-for-your-github-project)
 
-To run tests, run the following command:
+## Contact Info
 
-```bash
-  npm run test
-  # or
-  npm test
-```
-
-Launches the test runner in the interactive watch mode.
+Created by @TonyMckes - feel free to contact me!
